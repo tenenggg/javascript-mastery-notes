@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagation & Delegation Notes</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>JavaScript Event Propagation & Delegation</h1>
+        <h3>This file covers things NOT shown in basic event examples</h3>
+        <h4>Focus: bubbling, capturing, target vs currentTarget, delegation</h4>
+    </div>
+
+    <hr> <!-- btw hr is horizontal line spacer -->
+
+    
+
+    <h2>1️⃣ Event Propagation (Bubbling vs Capturing)</h2>
+
+
+    <div id="outer" style="padding:30px; background:#ddd;">
+        Outer Div
+       
+        <div id="inner" style="padding:30px; background:#aaa;">
+            Inner Div
+            <button id="btn">Click Me</button>                 <!--the button-->
+        </div>
+
+    </div>
+
+    <p id="log"></p>
+
+    <script>
+        const outer = document.getElementById("outer");
+        const inner = document.getElementById("inner");
+        const btn   = document.getElementById("btn");
+        const log   = document.getElementById("log");
+
+        // bubbling phase (default)
+        outer.addEventListener("click", function () {
+            log.innerHTML += "Outer clicked (bubble)<br>";
+            console.log("Outer div clicked");
+        });
+
+        inner.addEventListener("click", function () {
+            log.innerHTML += "Inner clicked (bubble)<br>";
+            console.log("Inner div clicked");
+        });
+
+        btn.addEventListener("click", function () {
+            log.innerHTML += "Button clicked (bubble)<br>";
+            console.log("Button clicked");
+        });
+
+        // what happens here:
+        // when button is clicked
+        // event goes: button → inner → outer
+        // this is called BUBBLING
+        // which means event goes from target UP to parents
+        // in more detail, it goes:
+        // target phase: button
+        // bubbling phase: inner → outer
+        // capturing phase: outer → inner → button
+
+        // in more easy terms:
+        // if the event is inner, outer also gets it
+        // if the event is button, inner and outer also get it
+        // the parents will ALWAYS get the event too
+    </script>
+
+
+
+
+
+
+
+  
+
+    <h2>2️⃣ stopPropagation()</h2>
+
+    <p> this process stops the event from bubbling up to parent elements</p>
+
+    <script>
+        // event.stopPropagation():
+        // stops event from going to parent elements
+        // does NOT stop browser default behavior
+
+        // YOU CAN TRY TO PUT THE LINE "event.stopPropagation();" INSIDE THE FUNCTION ABOVE TO SEE IT IN ACTION
+        // PUT IT INSIDE THE FUNCTION FOR THE btn.addEventListener before THE log.innerHTML LINE
+        // thus you can see it no longer bubbles up to inner and outer divs
+        // and also dont forget to pass "event" as a parameter to the function, it will work just fine but, its more proper to pass it
+
+    </script>
+
+    <hr>
+
+   
+
+
+
+
+
+
+    <h2>3️⃣ event.target vs event.currentTarget</h2>
+
+    <ul id="list">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+    </ul>
+
+    <script>
+
+        const list = document.getElementById("list");
+
+        list.addEventListener("click", function (event) {         //try to click on any of the li items
+            console.log("target:", event.target);
+            console.log("currentTarget:", event.currentTarget);
+        });
+
+        // event.target:
+        // the element that was ACTUALLY clicked (li)
+        // so  if you click "Banana", event.target is that <li>
+
+        // event.currentTarget:
+        // the element that HAS the event listener (ul)
+        // regardless of which <li> you click, currentTarget is always the <ul> and all its properties, 
+        // which in this case is the list of fruits
+
+        // this difference is VERY important for delegation
+    </script>
+
+    <hr>
+
+   
+
+
+
+
+
+
+
+
+
+    <h2>4️⃣ Event Delegation</h2>
+    <p>One listener handles all child elements</p>
+
+    <ul id="menu">
+        <li data-id="1">Home</li>
+        <li data-id="2">About</li>
+        <li data-id="3">Contact</li>
+    </ul>
+
+    <p id="output"></p>
+
+    <script>
+        const menu = document.getElementById("menu");
+        const output = document.getElementById("output");
+
+        menu.addEventListener("click", function (event) {
+
+            if (event.target.tagName === "LI") {  // only if an <li> was clicked, not necessary but good practice
+                output.innerHTML =
+                    "Clicked item text: " + event.target.innerHTML +  // event's target innerHTML
+                    "<br>Data ID: " + event.target.dataset.id;          // data-id attribute accessed via dataset
+
+                    // so .dataset.id gets the value of data-id attribute of the clicked li item
+                    // while .innerHTML gets the text inside the clicked li item
+            }
+        });
+
+        // here we DO NOT add click listeners to each <li>
+        // instead, we add ONE listener to the <ul>
+
+        // why this works:
+        // events bubble up from li → ul
+        // event.target tells us which li was clicked
+
+        // benefits:
+        // less memory usage
+        // works for dynamically added items
+        // cleaner code
+
+
+        // btw .target and .currentTarget doesnt being use only for click events
+        // they can be used for any event type like mouseover, mouseout, keydown, keyup, change, input, submit, etc.
+
+    </script>
+
+    <hr>
+
+    
+
+
+
+
+
+
+
+    <h2>5️⃣ Capturing Phase</h2>
+
+    <button id="captureBtn">Capture Test</button>
+
+    <script>
+
+        const captureBtn = document.getElementById("captureBtn");
+
+        document.body.addEventListener("click", function () {
+            console.log("BODY - capture");
+        }, true); 
+
+        captureBtn.addEventListener("click", function () {
+            console.log("BUTTON - target");
+        });
+
+        // capturing:
+        // event goes from window → document → body → target
+        // rarely used, but important to understand
+
+        // kinda same like bubbling, but in reverse order
+        // where bubbling goes from target UP to parents
+        // capturing goes from parents DOWN to target
+        // so when the button is clicked
+        // first the body listener runs (capturing)
+        // then the button listener runs (target)
+
+        // you can't see the difference in display
+        // but in console you can see the order of logs
+        // which for capturing is:
+        // outer to inner
+        // while for bubbling is:
+        // inner to outer
+
+
+
+        // document.body is the parent of the button
+        // so when the button is clicked
+        // first the body listener runs (capturing)
+        // then the button listener runs (target)
+
+    </script>
+
+    <hr>
+
+   
+
+
+
+
+
+
+    <h2>6️⃣ Once-only Event Listener</h2>
+
+    <button id="onceBtn">Click once</button>
+
+    <script>
+
+        const onceBtn = document.getElementById("onceBtn");
+        onceBtn.addEventListener("click", function () {
+            alert("This will only run once");
+        }, { once: true });
+
+        // { once: true } automatically removes the listener
+        // no need for removeEventListener
+        // if you click the button again, nothing happens
+        
+
+        // if you don't put { once: true }
+        // the alert will show every time you click the button
+        // try removing it to see the difference
+
+
+        // and btw the thing still works even if u dont assign the button to a variable
+        // but its more proper to assign it to a variable
+        
+        
+    </script>
+
+    <hr>
+
+    <!-- ================= SUMMARY ================= -->
+
+    <!--
+        Summary of NEW concepts in this file:
+
+        1. Event propagation (bubbling & capturing)
+        2. stopPropagation()
+        3. event.target vs event.currentTarget
+        4. Event delegation
+        5. Capturing phase with addEventListener
+        6. Once-only listeners
+
+        These concepts go BEYOND basic onclick examples
+        and are used heavily in real-world apps.
+    -->
+
+</body>
+</html>

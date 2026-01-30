@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+
+    <h1 id="1" ></h1>
+    <h1 id="2" ></h1>
+    <h1 id="3" ></h1>
+
+    <script>
+
+        document.getElementById("1").innerHTML = 100 + 50 * 3 / 2 - 40;         // operator precedence, which means multiplication & division first then addition & subtraction
+        document.getElementById("2").innerHTML = (100 + 50) * 3 / (2 - 40);     // using parentheses to change the precedence order
+        document.getElementById("3").innerHTML = 100 / 5 * 2 + 4 - 1;                   // and when you have same precedence operators, the calculation will be from left to right
+    
+        
+        //      arithmetic operators includes :
+
+        //  +   Addition
+        //  -   Subtraction
+        //  *   Multiplication
+        //  **  Exponentiation (ES2016)
+        //  /   Division
+        //  %   Modulus (Remainder)
+        //  ++  Increment
+        //  --  Decrement
+    </script>
+
+
+
+
+</body>
+</html>

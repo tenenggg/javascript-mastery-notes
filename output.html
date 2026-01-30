@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  
+    <h2>JavaScript output method testing </h2>
+
+    <p id="1">this is the original text</p>
+
+    <button onclick="document.getElementById('1').innerHTML = 'HTML content changed by innerhtml!'">Click Me1</button>
+    <button onclick="document.getElementById('1').innerText = 'HTML content changed by innertext!'">Click Me2</button>
+    <button onclick="document.write('HTML content changed by document.write!')">Click Me3</button>
+    <button onclick="window.alert('This is an alert box! by method window.alert')">Click Me4</button>
+    <button onclick="console.log('This output is shown by console.log!')">Click Me5</button>
+    <button onclick="window.print()">Click Me6</button>
+
+
+<!--
+    Use innerHTML when you want to change an HTML element.
+    Use innerText when you only want to change the plain text.  
+    Using document.write() after an HTML document is loaded, will delete all existing HTML
+    document.write() is usually used for testing purposes
+    window.alert() displays an alert box with a specified message and an OK button
+    console.log() is used to debug JavaScript code, and code can be tested without displaying it on the web page
+    window.print() method prints the current window
+    -->
+
+<body>
+</html>

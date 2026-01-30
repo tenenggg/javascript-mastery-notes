@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    
+    <div>
+
+        <h1> Javascript Event Management</h1>
+        <h3> Event Management is about adding, removing and controlling events </h3>
+        <h4></h4> so there's 3 method in total which is : addEventListener, removeEventListener, and preventDefault</h4>
+
+    </div>
+    
+        <br>
+        <button id="add">Add</button>
+        <button id="remove">Remove</button>
+        <button id="test">Test click</button>              
+        <p id="demo"></p>
+
+        <!-- 3 buttons for adding, removing, and testing events -->
+        <!-- and one paragraph to display messages, for displaying output -->
+
+
+
+
+
+        <a href="https://www.w3schools.com" id="link">Go to W3Schools</a>
+        <p id="2"></p>
+
+
+
+    <div>
+
+    </div>
+
+
+
+
+
+    <script>
+
+        const test = document.getElementById("test");
+        const remove = document.getElementById("remove");
+        const add = document.getElementById("add");
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML += "Hello!"; // function to be called when test button is clicked
+        }
+
+        
+        add.addEventListener("click", function () {         // adding event listener to add button
+            test.addEventListener("click", myFunction);     // adding event listener to test button
+        });
+
+       
+        remove.addEventListener("click", function () {     // adding event listener to remove button
+            test.removeEventListener("click", myFunction); // removing event listener from test button
+        });
+
+
+
+        // the flow here is we created 3 buttons and a paragraph
+        // then we created a function that adds "Hello!" to the paragraph
+        // then we added an event listener to the "add" button that adds a click event to the "test" button
+        // that calls the myFunction function
+        // then we added an event listener to the "remove" button that removes the click event from the "test" button
+        // thus when we click the "add" button, the "test" button will work
+        // and when we click the "remove" button, the "test" button will stop working
+
+
+        // so u can see there actually 1 process happening for myFunction 
+        // while theres 2 processes happening for add and remove buttons
+
+        // there's 2 process because we are adding event listeners to the add and remove buttons
+        // and also adding , an add or remove event listener to the test button
+        // for other 2 buttons 
+            
+
+
+        
+
+        // and as you can see we are using addEventListener and removeEventListener methods here
+        // to add and remove events respectively by " .addEventListener() " and " .removeEventListener() " 
+        // on variables
+                
+    </script>
+
+
+    <script>
+
+
+        const link = document.getElementById("link");       // so we get the link element by its id
+
+        link.addEventListener("click", function (event) {       // we pass an event object to the function which contains info about the event
+            event.preventDefault();                        // we use preventDefault() method to prevent the default action of the link
+            document.getElementById("2").innerHTML = "Link blocked!";
+        });
+
+        // here we use .preventDefault() method to prevent the default action of the link
+        // so when the link is clicked it will not navigate to the href url
+        // instead it will display "Link blocked!" in the paragraph with id "2"
+
+        // also we can't apply preventDefault to links without passing event object
+        // because we need the event object to call preventDefault() method, the event object is what carries the info about the event that occurred
+   
+        
+
+
+
+        // from here i think u already start to wander, when is it i need to pass the event object to the function?
+        // when should i, and when i shouldn't?
+        // so the simple conclusion is :
+
+        // If you need information about the action → pass event object
+        // If you just need to react → ignore it
+
+        // example :
+
+        /*
+
+            input.addEventListener("keydown", function (event) {
+            console.log(event.key);                                         here u need event object to get info about the key pressed
+            });         
+
+
+            document.addEventListener("mousemove", function (event) {
+            console.log(event.clientX, event.clientY);                        here u need event object to get info about the mouse position
+            });
+
+
+
+            form.addEventListener("submit", function (event) {
+            event.preventDefault();                                     here u need event object to prevent the default form submission
+            });
+
+
+
+            btn.addEventListener("click", sayHi);       
+
+            function sayHi() {                                  here u don't need event object because u just need to react to the click
+            alert("Hello");
+            }
+
+        */
+
+   
+   </script>
+
+</body>
+</html>

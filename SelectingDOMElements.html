@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+<div>
+    <h1>Selecting DOM Elements</h1>
+
+    <h3> Often, with JavaScript, you want to manipulate HTML elements. To do so, you have to find the elements first. There are several ways to do this: </h3>
+
+    <ul>
+        <li>Finding HTML elements by id</li>
+        <li>Finding HTML elements by class name</li>
+        <li>Finding HTML elements by tag name</li>
+        <li>Finding HTML elements by CSS selector</li>
+        <li>Finding HTML elements by HTML object collections</li>
+
+    </ul>
+</div>
+
+<div>
+    <p><br></p>
+
+    <p id="1"><br> The paragraph is added by both hardcoding, and getElementById</p>
+    <p id="2"></p>
+
+    <p><br><br><br></p>
+    
+    <p> <br>This Paragraph is added by both hardcoding, and getElementsByTagName </p>
+    <p id="3"></p>
+
+
+
+</div>
+
+<div id="main">
+
+    <br><br><br>
+
+    <p> this is first p of main div</p>
+    <p> this is second p of main div</p>
+
+</div>
+
+    <p id="4"></p>
+    <p id="5"></p>
+
+
+    <br><br><br>
+    <p class="example"> this is getElementsByClassName example 1</p>
+    <p class="example"> this is getElementsByClassName example 2</p>
+
+    <p id="6"></p>
+
+
+
+
+    <br><br><br>
+    <p class="example2"> original</p>
+ 
+    
+    <p class="example3"> original</p>
+    <p class="example3"> original</p>    
+
+
+
+
+
+    <form id="frm1" action="/action_page.php">
+        First name: <input type="text" name="fname" value="Donald"><br>
+        Last name: <input type="text" name="lname" value="Duck"><br><br>
+        <input type="submit" value="Submit">
+    </form> 
+
+    <p>These are the values of each element in the form:</p>
+
+    <p id="7"></p>
+
+
+
+
+
+
+
+    
+    <script>
+
+
+
+
+    /* Selecting DOM Elements Methods
+        Method	                                Description
+        document.getElementById(id)	            Find an element by element id
+        document.getElementsByTagName(name)	    Find elements by tag name
+        document.getElementsByClassName(name)	Find elements by class name
+        document.querySelector(selector)	    Find the first element that matches a CSS selector
+        document.querySelectorAll(selector)	    Find all elements that match a CSS selector
+    */
+
+
+
+
+
+
+    // getElementById
+
+    const element = document.getElementById("1");
+
+    document.getElementById("2").innerHTML = element.innerHTML;
+
+    // first example is assigning getElementById to a variable which can be used later, and the value is from HTML
+    // second example is directly using getElementById without assigning to a variable, and the value is set in Javascript
+
+
+    
+
+
+
+
+
+    // getElementsByTagName
+
+    const tagElements = document.getElementsByTagName("p");
+
+    document.getElementById("3").innerHTML =  tagElements[4].innerHTML;
+
+    
+    // first example is assigning getElementsByTagName to a variable which can be used later, and the value is from HTML
+    // second example is directly using getElementById without assigning to a variable, and the value is set in Javascript
+
+    // but the difference is getElementsByTagName returns a collection of elements, so we need to specify the index of the element we want to access
+    // and we have used index 4 to access the fifth <p> element in the HTML
+
+    
+
+
+
+
+    const x = document.getElementById("main");
+    const y = x.getElementsByTagName("p");
+    const z = document.getElementById("main").getElementsByTagName("p")[1];
+
+    
+    document.getElementById("4").innerHTML = "<br>" + y[1].innerHTML;
+    document.getElementById("5").innerHTML += "<br>" + z.innerHTML;
+    
+    // here we first get the div with id "main" and then get all the <p> elements inside that div
+    // finally we access the second <p> element inside the "main" div using index 1 
+    // or u can just do it in one line without assigning to variables as shown in the z variable example above
+    
+
+
+    
+
+    const classElements = document.getElementsByClassName("example");
+
+    document.getElementById("6").innerHTML = classElements[1].innerHTML;
+
+    // first example is assigning getElementsByClassName to a variable which can be used later, and the value is from HTML
+    // second example is directly using getElementById without assigning to a variable, and the value is set in Javascript
+
+    
+
+    
+
+
+    const constquery1 = document.querySelector(".example2");
+    const constquery2 = document.querySelectorAll(".example3");   // can also use ("p.example3") to be more specific
+
+    constquery1.innerHTML = " Changed using querySelector ";
+   
+
+    constquery2[0].innerHTML = " Changed using querySelectorAll ";
+    constquery2[1].innerHTML = " Changed using querySelectorAll ";
+
+
+    // in this case, the querySelector method returns the first element that matches the CSS selector
+    // while the querySelectorAll method returns a collection of all elements that match the CSS selector with index access
+    // if u do the same with querySelector it will only change the first element and not the second one and also will give error if u try to access index 1 on it
+    
+    // if you want to use querySelector ALL without using index, and want all elements, u can use a loop like this:
+    /*
+
+    const allQuery = document.querySelectorAll(".example3");
+    allQuery.forEach((element, index) => {
+        element.innerHTML = ` Changed using querySelectorAll in loop for element ${index + 1} `;
+    });
+
+    */
+
+
+
+
+
+
+
+    const x2 = document.forms["frm1"];
+    let text = "";
+
+    for (let i = 0; i < x2.length ;i++) {
+      text += x2.elements[i].value + "<br>";
+    }
+    document.getElementById("7").innerHTML = text;
+
+    // here we access the form by its name using document.forms
+    // then we loop through all the elements in the form and get their values
+    // finally we display the values in the paragraph with id "7"
+
+    // for the elements.value is a property that returns the value of the form element
+    // in syllabus its mentioned as element.value but both works here as x2 is the form object and x2.elements[i] is the form element object
+    // there's also other HTML Object Collections like document.images, document.links, document.anchors etc.
+
+
+
+
+
+
+
+
+
+
+    // and as you can see all the methods above have the same concept, but different ways to used them on different types of requirements
+    // which getElementById is for single element with specific id
+    // getElementsByTagName is for multiple elements with same tag name
+    // getElementsByClassName is for multiple elements with same class name
+    // querySelector and querySelectorAll are more versatile as they can use any CSS selector to find elements, the tag, class, id, attribute etc.
+    // and HTML Object Collections are for accessing specific collections of HTML elements like forms, images, links etc.
+
+
+
+    </script>
+
+
+
+
+</body>
+    
+
+
+</html>

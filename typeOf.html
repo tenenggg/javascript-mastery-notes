@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    
+    
+
+
+
+    <h1>JavaScript typeof Operator</h1>
+   
+    <p id="demo"></p>
+
+
+
+
+
+    <!-- Void is a javascript operator that runs a given expression and returns undefined -->
+    <!-- used in href to prevent default link behavior -->
+    <!-- mostly old school and today we use buttons or even event listeners -->
+
+    <p>
+        <a href="javascript:void(0);">Useless link</a>          <!-- javascript:void(0); prevents page reload on click -->
+    </p>
+
+    <p>
+        <a href="javascript:void(document.body.style.backgroundColor='red');">     
+         Click me to change the background color of body to red.</a>
+    </p>
+ 
+
+
+
+
+    <script>
+
+        // =========================
+        // JAVASCRIPT typeof OPERATOR
+        // =========================
+
+        // typeof returns the data type of a value
+
+        // Primitive types ----------
+        typeof "Hello";             // "string"
+        typeof 123;                 // "number"
+        typeof 12.5;                // "number"
+        typeof true;                // "boolean"
+        typeof undefined;           // "undefined"
+        typeof Symbol("id");        // "symbol"
+        typeof 10n;                 // "bigint"
+        typeof car;                 // "undefined" variable without value 
+        typeof "";                  // "string" empty string
+
+        // Objects ------------------
+        typeof {name: "Imam"};     // "object"
+        typeof [1,2,3];             // "object" (arrays are objects)
+        typeof function(){};        // "function"
+
+        // Weird but IMPORTANT ------
+        typeof null;                // "object" (JS bug, remember this!)
+
+        // Use case -----------------
+        let value = 100;
+
+        if (typeof value === "number") {
+        console.log("It's a number");
+        }
+
+        // Checking array correctly -
+        Array.isArray([1,2,3]);     // true
+
+        // NOTE:
+        // typeof is best for primitives
+        // Use Array.isArray() for arrays
+        // Use instanceof for objects
+
+        // you can also use null to empty an object reference
+        let obj = {name: "Imam"};
+        obj = null;                 // now obj is empty reference, but still of type object
+
+        console.log(typeof obj);   // "object"
+        console.log(obj);          // null
+
+        // same goes to undefined
+        let data = 123;
+        data = undefined;          // now data is undefined
+        console.log(typeof data);  // "undefined"
+        console.log(data);         // undefined
+
+        typeof undefined      // undefined
+        typeof null           // object
+
+        null === undefined    // false                  equal in value but not in type
+        null == undefined     // true
+
+
+        // before i we go to instanceof, let me show u what is class, constructor and object :
+
+        // Class = blueprint/template (like a recipe)
+        // Constructor = the function that runs to create the object
+        // Instance = the actual object made from the class
+
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+        }
+
+        const john = new Person("John");
+
+        // john is an instance (object) of Person class
+        console.log(john.name);          // "John"
+        console.log(john instanceof Person); // true
+
+
+        const time = new Date();
+        console.log(time instanceof Date);    // true
+        console.log(time instanceof Object);  // true
+
+        const fruits = ["apples", "bananas", "oranges"];
+        console.log(fruits instanceof Array); // true
+        console.log(fruits instanceof Object); // true
+        console.log("apple" instanceof String); // false (primitive string is not an instance of String object)
+
+        const fruits2 = new Map([
+            ["apples", 500],
+            ["bananas", 300],
+            ["oranges", 200]
+            ]);
+        
+        console.log(fruits2 instanceof Map);    // true
+        console.log(fruits2 instanceof Object); // true
+
+
+        const fruits3 = new Set(["apples", "bananas", "oranges"]);
+        console.log(fruits3 instanceof Set);    // true
+        console.log(fruits3 instanceof Object); // true
+
+
+
+        // now there's constructor property too
+        
+        document.getElementById("demo").innerHTML = 
+            "john".constructor           + "<br>" +      // function String () { [native code] }
+            (3.14).constructor           + "<br>" +      // function Number () { [native code] }
+            false.constructor            + "<br>" +     // function Boolean () { [native code] }
+            1234n.constructor            + "<br>" +     // function BigInt () { [native code] }
+            {}.constructor               + "<br>" +     // function Object () { [native code] }
+            [].constructor               + "<br>" +     // function Array () { [native code] }
+            new Date().constructor       + "<br>" +    // function Date () { [native code] }
+            new Set().constructor        + "<br>" +     // function Set () { [native code] }
+            new Map().constructor        + "<br>" +     // function Map () { [native code] }
+            function () {}.constructor;                 // function Function () { [native code] }    
+
+        // which it’s showing the constructor function that was used to create that value.
+        // its printing function instead of what type it is, because constructor is a function itself.
+        // and u can use constructor to check the type too :
+        console.log(john.constructor === Person); // true
+        console.log(fruits.constructor === Array); // true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>

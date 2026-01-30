@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    
+    
+
+
+
+
+
+    <script>
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        console.log(fruits.sort());                             // Sorts the array alphabetically
+
+        const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+        console.log(fruits2.reverse());                         // Reverses the order of the array 
+
+        const fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits3.sort();                                         // Sorts the array
+        fruits3.reverse();                                      // Then reverses it
+        console.log(fruits3);                                   // by combining sort() and reverse() we can sort an array in descending order of alphabetical order
+
+
+        const months = ["Jan", "Feb", "Mar", "Apr"];
+        const sorted = months.toSorted();
+        console.log(sorted);                                    // creates a sorted copy of the array without modifying the original array
+        console.log(months);                                   // original array remains unchanged
+
+        const months2 = ["Jan", "Feb", "Mar", "Apr"];
+        const reversed = months2.toReversed();              // creates a reversed copy of the array without modifying the original array    
+        console.log(reversed);
+        console.log(months2);                                // original array remains unchanged
+
+        // and also if you combine both, it doesnt sort an array in descending order of alphabetical order, it just creates a sorted then reversed copy of the original array
+       
+        
+
+        /* 
+           By default, the sort() function sorts values as strings.
+           This works well for strings ("Apple" comes before "Banana").
+           If numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
+           Because of this, the sort() method will produce incorrect result when sorting numbers.
+           You can fix this by providing a compare function:
+        */
+
+
+        const points = [40, 100, 1, 5, 25, 10];
+        points.sort(function(a, b){return a - b});
+        console.log(points);                                   // Sorts numbers in ascending order
+        console.log(points.sort((a,b)=>b-a));                  // Sorts numbers in descending order using arrow function
+
+
+        // the sort() runs first and compare 2 values (a and b) and then sends the values to the function
+        // and then the function subtracts a from b
+        // if the result is negative, a is sorted before b
+        // if the result is positive, b is sorted before a
+        // if the result is 0, no changes are made with the sort order of the two values
+
+
+
+        // sorting array in random order
+        // using fisher-yates method
+
+        const points2 = [40, 100, 1, 5, 25, 10];
+
+        for (let i = points2.length -1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i+1));
+            let k = points2[i];
+            points2[i] = points2[j];
+            points2[j] = k;
+        }
+
+        console.log(points2);                                   // array sorted in random order (everytime you run the code, the order will be different)
+
+
+
+
+
+        // finding lowest and highest number in an array
+        // there are not built-in methods for finding the lowest or highest number in an array
+        // u can use 3 ways to do it
+
+        const numbers = [40, 100, 1, 5, 25, 10];
+        
+        console.log(Math.min(...numbers));                      // using spread operator to pass array elements as individual arguments to Math.min() method
+        console.log(Math.max(...numbers));                      // using spread operator to pass array elements as individual arguments to Math.max() method
+
+        function findlowest(numberss){
+            return Math.min.apply(null, numberss);            // using apply() method to pass array elements as individual arguments to Math.min() method
+        }
+        console.log(findlowest(numbers));
+
+        function findhighest(numberss){
+            return Math.max.apply(null, numberss);           // using apply() method to pass array elements as individual arguments to Math.max() method
+        }
+
+        numbers.sort((a,b)=>a-b);                           // sorting the array in ascending order
+        console.log(numbers[0]);                             // first element is the lowest number
+        console.log(numbers[-1]);                            // last element is the highest number
+
+        numbers.sort((a,b)=>b-a);                           // sorting the array in descending order
+        console.log(numbers[0]);                             // first element is the highest number
+        console.log(numbers[-1]);                            // last element is the lowest number
+
+
+
+
+        // or you can use home made function with loops to find lowest and highest number
+        // which is more lengthy but gives u more control and hardcore coding practice
+        
+        function findLowestNumber(arr) {
+            let lowest = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < lowest) {
+                    lowest = arr[i];
+                }
+            }
+            return lowest;
+        }
+
+        function findHighestNumber(arr) {
+            let highest = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] > highest) {
+                    highest = arr[i];
+                }
+            }
+            return highest;
+        }
+
+        // thought process:
+        // 1. assume the first element is the lowest/highest
+        // 2. loop through the array starting from the second element
+        // 3. compare each element with the current lowest/highest
+        // 4. if the current element is lower/higher, update the lowest/highest
+
+        // so there 2 variables that is lowest/highest and arr[i] that is current element in the loop
+
+        console.log(findLowestNumber(numbers));              // using home made function to find lowest number
+        console.log(findHighestNumber(numbers));             // using home made function to find highest number
+
+
+
+        // what if the array contains objects?
+        const items = [
+            { name: 'apple', price: 50 },
+            { name: 'banana', price: 20 },
+            { name: 'cherry', price: 30 }
+        ];
+
+        items.sort((a, b) => a.price - b.price);            // sorting objects based on price in ascending order
+        console.log(items[0]);                               // object with lowest price
+        console.log(items[items.length - 1]);                // object with highest price
+        
+        // if u want to sort the string also alphabetically, u cant use sort() directly
+        // because it only works on primitive values, not on objects
+        // so u need to access the property of the object that u want to sort by
+        // this is an example of sorting objects based on name property alphabetically,and price property numerically
+      
+        
+        
+        const cars = [
+            {type:"Volvo", year:2016},
+            {type:"Saab", year:2001},
+            {type:"BMW", year:2010}
+        ];
+
+        cars.sort((a, b) => {
+            if (a.type < b.type) {
+                return -1;
+            }
+            if (a.type > b.type) {
+                return 1;
+            }
+            return 0;
+        });
+
+        console.log(cars);                                   // sorts cars based on type property alphabetically
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // overall you can see that to use all these methods u ahve different ways of writing it:
+        // using expression or arrow function which can directly passed inside the method:
+        
+        console.log(fruits.find((value) => value === "Apple"));   // returns "Apple"
+        
+        
+        
+        
+        // or you can create a normal function and then just pass the function name inside the method:
+        
+        function findApple(value) {
+            return value === "Apple";
+        }
+        console.log(fruits.find(findApple));   // returns "Apple"
+        
+        
+        
+        
+        // or you can just use loops to do the same thing without any method or function:
+        
+        for (let i = 0; i < fruits.length; i++) {
+            if (fruits[i] === "Apple") {
+                console.log(fruits[i]);          // returns "Apple"
+                break;
+            }
+        }
+        
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

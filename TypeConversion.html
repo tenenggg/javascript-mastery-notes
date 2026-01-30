@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    <h1>JavaScript Type Conversion</h1>
+
+        <p id="demo"></p>
+
+
+ 
+    
+<script>
+
+
+            
+        // =========================
+        // JAVASCRIPT TYPE CONVERSION
+        // =========================
+
+        // 1. String Conversion ------
+        String(123);                // "123"
+        String(true);               // "true"
+        String(false);              // "false"
+        String(null);               // "null"
+        String(undefined);          // "undefined"
+        String(100 + 23);            // "123"    it first evaluates the expression then converts to string
+        String(Date())              // "Sat Jan 25 2026 15:33:31 GMT+0800 (Malaysia Time)" converts current date to string
+
+        // all same as toString() method
+
+
+
+
+
+        // Using + operator
+        123 + "";                  // "123"
+        // + with a string will automatically convert other types to string
+        // but javascript also evaluates from left to right
+        // so if the first operand is not a string it will not convert the second operand to string
+
+        let x = 16 + 4 + "Volvo"; // "20Volvo"
+        let y = "Volvo" + 16 + 4; // "Volvo164"
+
+        // means after it meets a string it converts all the next operands to string
+        // but not before that
+
+        
+
+
+
+
+
+        // 2. Number Conversion ------
+        Number("123");             // 123
+        Number("John");            // NaN
+        Number("123abc");          // NaN
+        Number("  ");               // 0  
+        Number(true);               // 1
+        Number(false);              // 0
+        Number(null);               // 0
+        Number(undefined);          // NaN
+
+        d = new Date();
+        Number(d)                    // returns 1404568027739
+
+        d = new Date();
+        d.getTime()                 // returns 1404568027739
+
+
+        // parseInt / parseFloat ----
+        parseInt("10.5");          // 10      converts or parses string to integer and returns whole number
+        parseFloat("10.5");        // 10.5    converts or parses string to floating point number and returns decimal number
+
+
+
+
+
+
+        // 3. Boolean Conversion ---- there are only two boolean values: true and false, no undefined or null
+        Boolean(1);                 // true
+        Boolean(0);                 // false
+        Boolean("hello");          // true
+        Boolean("");               // false
+        Boolean(null);              // false
+        Boolean(undefined);         // false
+        Boolean(NaN);               // false
+
+        // Truthy / Falsy ------------
+        // falsy: 0, "", null, undefined, NaN, false
+
+
+
+
+
+
+        // 4. Automatic Conversion --
+        "5" + 2;                    // "52" (string)
+        "5" - 2;                    // 3 (number)
+        "5" * 2;                    // 10
+        "5" / 2;                    // 2.5
+        // all strings are converted to number except for + operator, when there's arithmetic operations
+
+        // NOTE:
+        // + prefers string
+        // -, *, / force number
+
+        // Best practice -------------
+        // Always convert explicitly
+
+
+
+
+
+        var myVar = {name:"Fjohn"}
+
+        document.getElementById("demo").innerHTML = myVar;
+
+        // if myVar = {name:"Fjohn"}  // toString converts to "[object Object]"
+        // if myVar = [1,2,3,4]       // toString converts to "1,2,3,4"
+        // if myVar = new Date()      // toString converts to "Fri Jul 18 2014 09:08:55 GMT+0200"
+        // if myVar = 123             // toString converts to "123"
+        // if myVar = true            // toString converts to "true"
+        // if myVar = false           // toString converts to "false"
+
+
+
+
+
+
+
+
+
+        /*
+            Original Value     | To Number | To String           | To Boolean
+            -------------------|-----------|---------------------|-----------
+            false              | 0         | "false"             | false
+            true               | 1         | "true"              | true
+            0                  | 0         | "0"                 | false
+            1                  | 1         | "1"                 | true
+            "0"                | 0         | "0"                 | true
+            "000"              | 0         | "000"               | true
+            "1"                | 1         | "1"                 | true
+            NaN                | NaN       | "NaN"               | false
+            Infinity           | Infinity  | "Infinity"          | true
+            -Infinity          | -Infinity | "-Infinity"         | true
+            ""                 | 0         | ""                  | false
+            "20"               | 20        | "20"                | true
+            "twenty"           | NaN       | "twenty"            | true
+            []                 | 0         | ""                  | true
+            [20]               | 20        | "20"                | true
+            [10, 20]           | NaN       | "10,20"             | true
+            ["twenty"]         | NaN       | "twenty"            | true
+            ["ten","twenty"]   | NaN       | "ten,twenty"        | true
+            function(){}       | NaN       | "function(){}"      | true
+            {}                 | NaN       | "[object Object]"   | true
+            null               | 0         | "null"              | false
+            undefined           | NaN       | "undefined"         | false
+*/
+
+
+        
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>

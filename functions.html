@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Functions Notes</title>
+
+    <style>
+        h1 {
+            color: navy;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 25px;
+        }
+        p {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+    <h1>Functions are fundamental building blocks in all programming.</h1>
+    <h1>Functions are reusable block of code designed to perform a particular task.</h1>
+    <h1>Functions are executed when they are "called" or "invoked".</h1>
+
+    <ul>    
+        <li><p id="demo1"></p></li>
+        <li><p id="demo2"></p></li>
+        <li><p id="demo3"></p></li>
+        <li><p id="demo4"></p></li>
+    </ul>
+    <script>
+      
+
+
+
+        // ---- Function Declaration ----
+        function greet() {
+            return "Hello World";                                       // function returns a value
+        }
+
+        document.getElementById("demo1").innerHTML = greet();       
+        console.log(greet());                                           // calling (invoking) the function using operator ()
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+        // ---- Function with Parameters ----
+        function multiply(a, b) {                                       // parameters that receive values (arguments)
+            return a * b;                                               // returns the product
+        }
+
+        document.getElementById("demo2").innerHTML = multiply(4, 5);
+        console.log(multiply(4, 5));                                     // arguments are passed when calling
+
+
+        /* 
+            function greet(name, age){
+                console.log("Hello " + name + ", you are " + age + " years old.");
+            }
+
+                greet is a function name
+                name and age are parameters (placeholders)
+                greet("Imam", 25); "Imam" and 25 are arguments
+                () operator is called parentheses operator 
+                acessing a function without parentheses '()' will returns the function and NOT execute it.
+                the order of arguments matters 
+        
+        */
+
+           console.log(multiply);                  // calling a function without parentheses will return the function's execution code, not executing it
+        // console.log(multiply2(4, 5));              calling a function with wrong name will cause an error
+           console.log(multiply());                // calling a function without or wrong arguments will return NaN
+           console.log(multiply(4));               // calling a function with missing arguments will return NaN
+
+           // multiply refers to the function object, while multiply() refers to the function result.
+
+
+
+
+
+
+
+
+
+        
+
+
+
+        // ---- Function Expression ---- 
+        const add = function(x, y) {
+            return x + y;                                                // function stored in a variable
+        };
+
+        document.getElementById("demo3").innerHTML = add(10, 20);
+        console.log(add(10, 20));
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+        // ---- Arrow Function (ES6) ----
+        // a simpler syntax for writing function expressions
+
+        const power1 = function(c,d) { return c ** d ; };
+        const power2 = (a,b) =>  a ** b;                                          
+        
+        
+        // you can remove the "function" keyword, curly braces and return keyword for single expression functions 
+        // but not for multiple expression functions
+        // you can also remove the parentheses around parameters if there is only one parameter
+
+        let hello = val => "Hello " + val;
+        console.log(hello("Alice"));                                
+
+        // same as :
+        // let hello = function(val) { return "Hello " + val; };
+        // let hello = (val) => "Hello " + val;
+        // so hello("Alice"); will return "Hello Alice"
+
+
+        // You can only omit the return keyword and the curly brackets if the function is a single statement. 
+        // Because of this, it might be a good habit to always keep them:
+
+        /* When to Use Arrow Functions
+            For short functions
+            For callbacks and array methods
+            When you do not need your own this
+
+            When Not to Use Arrow Functions
+            As object methods
+            When you need your own this
+            When using function declarations
+        */
+
+
+
+
+
+
+
+        // ---- Functions are Objects ----
+        console.log(typeof greet);                                      // functions have type "function"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ---- Local Variables ----
+        function testScope() {
+            let x = 10;                                                  // local variable
+            console.log(x);
+        }
+        testScope();
+        // console.log(x);                                                // ❌ error (x not accessible outside)
+
+        // Since local variables are only recognized inside their functions, variables with the same name can be used in different functions.
+        // Local variables are created when a function starts, and deleted when the function is completed.
+        // has the same concept as block scope with let and const.
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+        // functions used as variables
+        // Instead of using a variable to store the return value of a function
+        // You can use the function directly, as a variable value
+
+        function toCelsius(fahrenheit) {
+            return (5/9) * (fahrenheit-32);
+        } 
+
+        let x = toCelsius(77);                                                // function used as variable value                                 
+        let text = "The temperature is " + x + " Celsius";
+        let text2 = "The temperature is " + toCelsius(77) + " Celsius.";   // function called directly not needed to store in variable 'x'
+        console.log(text);
+        console.log(text2);
+
+
+
+        let a1 = 5;
+        let b2 = 6;
+
+        function multiply(a, b) {
+        return a * b;
+        }
+
+        console.log(multiply(a1, b2));                           // or u can also use variables as arguments when calling functions
+        // arguments doesnt have to be values, can also be variables
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+        // ---- Global Variable ----
+        let globalVar = 100;
+
+        function showGlobal() {
+            console.log(globalVar);                                                 // global variable accessible
+        }
+        showGlobal();
+
+
+
+
+
+
+
+
+
+
+
+
+        // ---- Default Parameters ----
+        function myFunction(x, y) {
+            if (y === undefined) {                             // its better to assign default values to prevent undefined and crashes
+                y = 2;
+            }  
+            return x * y;
+        }
+        console.log(myFunction(5));              // y is undefined, so default to 2, so result is 10
+      
+        
+        
+        function myFunction2(x, y = 2) {                     // or easier way using default parameter syntax
+            return x * y;
+        }
+
+        console.log(myFunction2(5));             // y defaults to 2, so result is 10
+
+
+
+
+
+
+
+
+
+
+
+        // ---- Function Return ----
+
+        function testReturn() {
+            return "Done";
+            console.log("This will never run");              // code after return won't execute 
+        }
+
+
+
+        function add2(a, b) {
+        return a + b;
+        }
+        let total = add2(2, 3) * 10;                     // function return used in expression           
+        console.log(total);                                      
+
+        
+        
+        function noReturn() {
+        let x = 10;
+        }
+        let result = noReturn();                      // function with no return returns undefined      
+        console.log(result);                                      
+
+
+
+
+
+
+        // ---- javascript this in functions----
+
+        /* 
+            What is this?
+            In JavaScript, the this keyword refers to an object.
+
+            The this keyword refers to different objects depending on how it is used:
+
+            Alone, this refers to the global object.
+            In a function, this refers to the global object.
+            In a function, in strict mode, this is undefined.
+            In an object method, this refers to the object.
+            In an event, this refers to the element that received the event.
+            Methods like call(), apply(), and bind() can refer this to any object.
+            
+            this is not a variable.
+            this is a keyword.
+            You cannot change the value of this.
+        */
+
+
+        // Example of this refers to the person object when used in a method ( method is a function inside an object )
+        const person = {
+        firstName: "John",
+        lastName: "Doe",
+        fullName: function() {
+            return this.firstName + " " + this.lastName;
+        }
+        };
+        console.log(person.fullName());                       
+
+
+
+        // this alone
+        let x2 = this;
+        console.log(x2);                                        // outside of any object, this refers to the global object
+        // which in browsers the global object is 'window'
+
+        
+        // in a regular function 
+        function showThis() {
+        return this;                                // in a regular function, this refers to the global object(in non-strict mode)  
+        }
+        console.log(showThis());
+        
+        
+        function showThis() {
+        "use strict";                              // in strict mode, this is undefined    
+        return this;
+        }
+
+       
+        // <button onclick="this.innerHTML='Clicked!'">Click Me</button>     // In an HTML event handler, this refers to the HTML element that received the event.
+
+        
+        const person2 = {
+        firstName: "John",
+        sayHello: () => {
+            return this.firstName;
+        }
+        };
+        console.log(person2.sayHello());                       // arrow functions do not have their own this. 
+
+        // In the example above, this refers to the global object, not the person2 object.
+        // Therefore, person2.sayHello() returns undefined.
+
+
+
+        // arrow function inside methods
+        const person3 = {
+            firstName: "John",
+            sayHello: function() {
+                return () => this.firstName;
+        }
+        };
+
+        let hello2 = person3.sayHello();
+        console.log(hello2());                               // here, the arrow function inherits this from the method, so this refers to person3 object.
+
+        
+
+
+
+
+
+
+
+        
+
+
+        //--------Functionn IIFE (Immediately Invoked Function Expression)--------
+
+
+        //  An IIFE is a function that invokes itself when defined.
+        // Normally, a function runs only when it is called.
+        // An IIFE runs automatically when the JavaScript engine reads it (compiles it).
+
+
+        (function () {
+            let text = "Hello! I called myself.";             // the function is defined and executed at the same time
+            console.log(text);
+            })();
+
+
+        // IIFE is used to create a private scope to avoid polluting the global scope (also cant be accessed from outside)
+        // also to run setip code once without leaving variables behind
+        // runs in older browsers that do not support block scope with let and const
+
+        (function () {
+            let x = 10;
+            })();
+
+            // x is not accessible here
+
+        (function () {
+            let hidden = 42;
+            })();
+
+        // let result2 = hidden; // ⛔ Error: hidden is not defined (uncomment to see the error)
+
+
+        /*   How an IIFE Works
+
+            The parentheses tell JavaScript to treat the function as an expression. (function () { ... }).
+            The final () runs the function immediately.
+            Function expressions can be made self-invoking.
+            A self-invoking expression is invoked (started) automatically, without being called.
+            Function expressions will execute automatically if the expression is followed by ().
+            You have to add parentheses around the function to indicate that it is an expression:
+
+        */
+
+
+        (function (name) {
+            let text4 = "Hello " + name;
+            console.log(text4);  
+        })("John Doe");                                         // IIFE with parameter passed as argument
+        
+       
+
+
+
+
+        let result2 = (function () {                            // IIFE that returns a value and stored in a variable
+            return 5 + 5;
+        })();
+        console.log(result2);                                   // then the variable can be used later
+
+
+
+
+
+
+
+        (() => {
+            let text = "Hello! I called myself.";          // IIFE using arrow function syntax
+        })();
+
+
+
+
+
+
+        ((name) => {
+            let text = "Hello " + name;                 // IIFE using arrow function with parameter
+        })("John Doe");
+
+
+
+
+
+        const naming = ((name) => {
+            let text6 = "Hello " + name;                 
+            return text6;
+        })("John Doe");
+
+        console.log(naming);                               // arrow function IIFE that returns a value and stored in a variable
+
+
+
+
+        
+
+        // IIFE in Modern JavaScript
+        // Today, JavaScript modules often replace the need for IIFEs.
+        // Modules have their own scope by default.
+
+        /*
+            <script type="module">
+            let x = 10;                                         The variable x is scoped to the module and not global.
+            </scrip----
+
+        */
+
+                                     
+        
+
+        /// named function expression IIFE
+
+        (function greet() {
+            let text = "Hello! I called myself."; 
+        })();
+
+        // greet(); // ⛔ ReferenceError: greet is not defined (uncomment to see the error)
+        // so why used a named function expression IIFE?
+        // A named function expression IIFE can be useful for debugging purposes, as the function name will appear in stack traces.
+        // However, the name is not accessible outside the function itself.
+        // also can be used for recursion within the IIFE itself.
+        
+        (function countdown(n) {
+            console.log(n);
+            if (n > 0) countdown(n - 1);             // needs to call itself
+        })(3);
+
+    </script>
+
+
+
+</body>
+</html>

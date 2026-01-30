@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    
+    <h1></h1>
+
+
+
+
+
+    <script>
+
+        {
+
+            const cars = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];          // loops through the array
+
+            let text = "";
+
+            for (let i = 0; i < cars.length; i++) {                                 // method .length returns the length of the array or you can just set a number too (eg: i<6)
+                text += cars[i] + "\n";
+            }
+
+            console.log(text);                                                     // also this is for loop example
+
+
+            // for loop format ( declaration and initialization; condition; increment(or decrement) )
+           
+            // you can also assign the length method to a variable :
+
+	        // const cars = ["BMW", "Volvo", "Saab", "Ford"];
+        	// let len = cars.length;
+            // and use for condition i < len
+
+
+            /*
+            	let i = 2;
+                let text = "";                                   this is an example of omitting the three statements in the for loop
+                                                                 but you have to declare and initialize the variable before the loop
+
+                for ( ; ; ) {                                    leaving all three statements empty creates an infinite loop
+                                                                    so you have to create a break condition inside the loop
+                    text += cars[i] + "<br>";
+                    i++ ;                                        you have to increment the variable inside the loop
+                    break;                                       have to put a break condition since there is no condition in the for loop
+                }
+          */
+        }
+
+
+        
+
+
+
+
+
+
+
+
+        {
+
+            let text = "";
+            let i = 0;
+
+            while (i < 10) {                                                     // while loop example                  
+                text += "The number is " + i + "\n";                           // runs AGAIN and AGAIN while condition stays true
+                i++;                                                             // don't forget to increase the variable used in the condition
+            }
+
+            console.log(text);                                        // in this case the text accumulates the result from the loop, not it displays and loop 10 times
+                                                                      // it displays only once after the loop ends and the text already has all the values from the loop 
+
+        }
+
+        // If you forget to increase the variable used in the condition, the loop will never end. This will crash your browser. 
+
+       
+
+
+
+
+
+
+
+
+        {
+
+            let text = "";
+            let i = 0;
+
+            do {                                                   // do...while loop example
+                text += "\nThe number is " + i;                  // runs ONCE, and then repeats AS LONG AS the condition is true
+                i++;  // increament
+                }
+
+            while (i < 10);                                       // anything outside the do {...} will not be part of the loop
+        
+
+                console.log(text);               
+
+        }
+
+            // so the statement inside the do {...} block is executed at least once before the condition is tested
+            // and then it will keep executing the block as long as the condition is true
+    </script>
+
+
+
+
+
+
+    <!--
+         also dont forget that keyword also importants in loop
+        let and var have different scopes in loops
+        
+        for (let i = 0; i < 5; i++) {
+            // i is only accessible here
+        }
+        
+        for (var j = 0; j < 5; j++) {
+            // j is accessible here and outside the loop
+        }
+    -->
+
+
+
+
+
+
+
+
+    <!-- 
+
+        there are 4 main types of for loops in javascript
+
+        1. traditional for loop
+        2. for...in loop
+        3. for...of loop
+        4. forEach loop (array method)
+        5. also there is for await...of loop (for asynchronous iteration)
+
+
+
+
+
+        1. TRADITIONAL FOR LOOP
+            for (let i = 0; i < array.length; i++) {            for index controlled loop
+                // code to be executed
+            }
+
+
+
+
+        2. FOR...IN LOOP
+            for (let [key] in [object]) {                         for looping through properties of an object
+                // code to be executed                              used for objects
+            }
+
+
+            
+        3. FOR...OF LOOP
+            for (let [value] of [array]) {                for looping through values directly
+                // code to be executed                           used for arrays, strings, maps, sets, etc.
+            }
+
+
+
+
+        4. FOREACH LOOP
+            array.forEach(function(element, index) {            for looping through values directly used for arrays only
+                // code to be executed                           can't use break or continue or return statements 
+            });                                                 
+
+
+
+
+        5. FOR AWAIT...OF LOOP
+            (async function() {
+                for await (let element of asyncIterable) {
+                    // code to be executed
+                }
+            })();
+
+
+
+
+    -->
+
+
+
+
+
+</body>
+</html>

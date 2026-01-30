@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+
+        <p id="2"> <br></p>
+
+        <script>
+
+          
+            {
+            
+                y = "Tom Smith";
+                let y = "John Doe";
+
+          
+            }                         
+            
+            document.getElementById("2").innerHTML = y;
+
+
+            // In JavaScript, a variable can be declared after it has been used.
+            // In other words; a variable can be used before it has been declared.
+            // Hoisting is JavaScript's default behavior of moving all declarations 
+            // to the top of the current scope (to the top of the current script or the current function).
+            // Variables defined with let and const are hoisted to the top of the block, but not initialized.
+            // meaning they cannot be used until they have been declared.
+            // but if you try to use a let variable before it is initialized, you will get a ReferenceError (undefined).
+            // but why error? because only the declaration is hoisted, not the initialization.
+
+            // so in conclusion let and const's declaration is hoisted but not the initialization. 
+            // while also var's declaration is hoisted but for the initialization It is automatically initialized to 'undefined' during hoisting.
+        
+
+
+
+
+            // console.log(a);   ❌ ReferenceError                             and same for const
+            // let a = 10;          declaration is hoisted BUT uninitialized          
+
+
+
+            // console.log(b);   ✅ hoisted + initialized to undefined      
+            // var b = 10;
+
+
+
+
+
+
+
+            
+
+
+            // let a        this is declaration ( creating a identifier 'a' using a keyword 'let' )
+            // a = 10       this is initialization ( assigning a value or literal value of '10' to the identifier 'a' )
+            // let a = 10   this is declaration + initialization ( both in one line )
+            //              same applied to const and var.
+            // You CANNOT successfully use let or const before initialization.
+
+            
+        </script>
+        
+
+
+    </body>
+</html>

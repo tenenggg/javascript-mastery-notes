@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <h1 > These file page is notes for Assignment Operators and Logical Assignment Operators</h1>
+
+    <h2 id="1"></h2>
+    <h2 id="2"></h2>
+    <h2 id="3"></h2>
+    <h2 id="4"></h2>
+    <h2 id="5"></h2>
+    <h2 id="6"></h2>
+    <h2 id="7"></h2>
+    <h2 id="8"></h2>
+    <h2 id="9"></h2>
+
+
+
+    <script>
+
+            //      Assignment Operators  :
+            
+            //      =	    x = y	    x = y	        x = 5
+            //      +=	    x += y	    x = x + y	    x = 15
+            //      -=	    x -= y	    x = x - y	    x = 5
+            //      *=	    x *= y	    x = x * y	    x = 50
+            //      **=	    x **= y	    x = x ** y	    x = 100000
+            //      /=	    x /= y	    x = x / y	    x = 2
+            //      %=	    x %= y	    x = x % y	    x = 0
+            //      :	    x: 45	    size.x = 45	    x = 45
+
+            //      x: 45 here means to assign value 45 to the property x 
+            //      so size.x = 45 is the same as x:45 which is assigning value 45 to the property x of object size
+            //      "size.x = 45" ,  size is object, x is property of object, 45 is value or property value
+
+
+
+            //      these assignment operators can be used to all data types including string
+            //      eg :
+
+            //      let text = "Hello "
+
+            //      text += "World!"    // now text is "Hello World!"
+            //      text -= "o"          // now text is NaN because subtraction is not defined for strings
+            //      text *= 3           // now text is NaN because multiplication is not defined for strings
+            //      text /= 2           // now text is NaN because division is not defined
+            //      text %= 2           // now text is NaN because modulus is not defined for strings
+            //      text **= 2         // now text is NaN because exponentiation is not defined for strings
+
+            
+
+
+
+
+
+            //      Logical Assignment Operators (ES2021) :
+
+            //      ||=	    x ||= y	    x = x || y        
+            //      &&=	    x &&= y	    x = x && y        
+            //      ??=	    x ??= y	    x = x ?? y       
+
+            //      || is logical OR operator meaning if the first operand is 'truthy', it returns the 'first' operand, otherwise it returns the second operand
+            //      && is logical AND operator meaning if the first operand is 'falsy', it returns the 'first' operand, otherwise it returns the second operand
+            //      ?? is nullish coalescing operator meaning if the first operand is 'null or undefined', it returns the 'second' operand, otherwise it returns the first operand
+
+
+            {
+                let x = true;
+                let y = x &&= 10;          // so  y = x = x && 10 and result is y = 10 because x is truthy so it returns the second operand 10
+                
+                document.getElementById("1").innerHTML = "Value of y: " + y;
+            }
+
+
+            {
+                let x = false;
+                let y = x ||= 5;           //      so  y = x = x || 5 and result is y = 5 because x is falsy so it returns the second operand 5
+
+                document.getElementById("2").innerHTML += "\nValue of y: " + y;
+            }    
+
+            {
+                let x = null;
+                let y = x ??= 10;          //      so  y = x = x ?? 10 and result is y = 10 because x is null so it returns the second operand 10
+
+                let a = undefined;         //      so  a = a ?? 10 and result is a = 10 because a is undefined so it returns the second operand 10
+                    a ??= 10;
+                
+                let b = 0;                 //      so  b = b ?? 10 and result is b = 0 because b is neither null nor undefined so it returns the first operand 0
+                    b ??= 10;
+                
+                let c ;                    //      so  c = c ?? 10 and result is 10 because c is either null or undefined so it returns the second operand 10
+                    c ??= 10;
+
+                let d = 5;                 //      so  d = d ?? 10 and result is d = 5 because d is neither null nor undefined so it returns the first operand 5
+                    d ??= 10;
+                
+                document.getElementById("3").innerHTML += "\nValue of y: " + y;
+                document.getElementById("4").innerHTML += "\nValue of a: " + a;
+                document.getElementById("5").innerHTML += "\nValue of b: " + b;
+                document.getElementById("6").innerHTML += "\nValue of c: " + c;
+                document.getElementById("7").innerHTML += "\nValue of d: " + d;
+            
+            }
+
+
+            {
+                let text = "12345";                          // is a string of numeric characters
+                let min = Math.min(...text);                 
+                let max = Math.max(...text);
+                let wrongmin = Math.min(text);
+                let wrongmax = Math.max(text);
+
+                // spread operator ... is used to spread the string into individual characters which is "1", "2", "3", "4", "5"
+                // then Math.min() and Math.max() functions are used to find the minimum and maximum numeric values among those characters
+                // so  ... operator are used so math min can treat them as individual numeric values
+                // because if we dont use ... operator then the result will be the string "12345" itself 
+                // but ... is used for string of course, if its an array of numbers then we can directly use Math.min() and Math.max() without using spread operator
+                // and also .. cant be used for non-iterable objects like numbers or booleans
+
+
+                document.getElementById("8").innerHTML = "Minimum is: " + min +  "<br> Maximum is: " + max + 
+                "<br> Wrong Minimum is: " + wrongmin +  "<br> Wrong Maximum is: " + wrongmax;
+            }
+ 
+
+    </script>
+    
+
+
+</body>
+
+
+</html>
+
+

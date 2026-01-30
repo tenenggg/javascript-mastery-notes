@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+<body>
+
+<h1>Array Iterations</h1>
+
+<p id="1"></p>
+<p id="2"></p>
+<p id="3"></p>
+<p id="4"></p>
+<p id="5"></p>
+<p id="6"></p>
+
+
+
+
+
+
+<script>
+
+
+    const numbers = [45, 4, 9, 16, 25];
+
+
+    let txt = "";
+    numbers.forEach(myFunction);                          // calls the function once for each array element
+
+    function myFunction(value, index, array) {            // only the value parameter is required can also just use value alone myFunction(value)
+      txt += value + "<br>"; 
+    }
+
+    document.getElementById("1").innerHTML = txt;
+
+
+
+
+
+
+
+
+
+
+
+    const numbers1 = [45, 4, 9, 16, 25];
+
+
+    function myFunction(value) {
+      return value * 2;
+    }
+
+    const numbers2 = numbers1.map(myFunction);               // creates a new array by performing a function on each array element
+    console.log(numbers2);                                  
+    
+    // but you have to assign the result to a new array, as map() does not change the original array
+    console.log(numbers1);
+
+
+    // if you try to use forEach() instead of map(), it will not work as forEach() does not return a new array eventhough the function returns a value
+    // as its the method itself that does not return anything
+
+    const numbers3 = numbers1.forEach(myFunction);         // returns undefined
+    console.log(numbers3);                                  // Output: undefined
+    console.log(numbers1);                                  // original array remains unchanged
+
+
+    const newArr = numbers1.flatMap((value)=> value*2);     // flatMap() first maps each element using a mapping function, then flattens the result into a new array
+    console.log(newArr);                                  
+
+    // the process is like, first flat map take all the elemets of the original array
+    // and then it applies the function to each element (*2)
+    // and then it makes a new array with the results but also flattens it (if there are nested arrays)
+
+    console.log(numbers1);                                  // original array remains unchanged
+
+
+
+
+
+    function myFunction2(value) {
+      return value > 18;
+    } 
+
+    const over18 = numbers1.filter(myFunction2);                   // creates a new array with all elements that pass the test implemented by the provided function
+
+    console.log(over18);                                 
+    console.log(numbers1);                                  // original array remains unchanged
+
+    // we cant use the function directly without filter method bacause the numbers1 is an array, and the function is designed to work with individual elements
+    // so we need to use filter method to apply the function to each element of the array
+
+    const overr18 = myFunction(numbers2)                // this will not work as myFunction is not designed to handle arrays
+    console.log(overr18);                                // value > 18  makes no sense when applied to an array as a whole, therefore it will return NaN or error depending on the context
+
+
+    
+    
+
+    const numbers4 = [45, 4, 9, 16, 25];
+    let sum = numbers4.reduce(myFunction3);               // applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value
+
+    function myFunction3(total, value, index, array) {   // total is the accumulator, value is the current element(index and array parameters are optional)
+      return total + value;
+    }
+    console.log(sum);                                    // Output: 99
+    // so the process is like this :
+    // step 1: total = 45, value = 4  => return 45 + 4 = 49
+    // step 2: total = 49, value = 9  => return 49 + 9 = 58
+    // step 3: total = 58, value = 16 => return 58 + 16 = 74
+    // step 4: total = 74, value = 25 => return 74 + 25 = 99
+    // final result is 99
+
+    // you can also provide an initial value for the accumulator as the second argument to reduce() method
+    // let sum2 = numbers4.reduce(myFunction3, 10); // initial value is 10
+    // console.log(sum2); // Output: 109
+
+    // there is also reduceRight() method that works the same way but from right to left for the value's index, while accumulator still goes from left to right
+    // so reduce() will start the process from index's value from 0 to last which is from left to right
+    // while reduceRight() will start the process from index's value from last to 0 which is from right to left 
+
+
+
+    let allOver18 = numbers4.every(myFunction4);         // tests whether all elements in the array pass the test implemented by the provided function
+    function myFunction4(value) {       
+      return value > 18;                               
+    }
+    console.log(allOver18);                            // Output: false
+
+
+    // you might be thinking, there is some method that kinda same which is find() and findIndex(), and filter() too
+    // but those methods are used to find specific elements that match a condition, while every() checks if all elements match a condition
+    // so they have different purposes, even though they might seem similar at first glance
+
+
+    /* =========================================================
+        JavaScript Array Test Methods – Full Comparison Table
+      =========================================================
+
+      ---------------------------------------------------------
+      | Method       | Purpose / Question It Answers           |
+      ---------------------------------------------------------
+      | every()      | Do ALL elements pass the test?          |
+      | some()       | Do AT LEAST ONE element pass the test?  |
+      | find()       | What is the FIRST element that passes?  |
+      | findIndex()  | What is the INDEX of first pass?        |
+      | filter()     | Which elements pass the test (ALL)?     |
+      ---------------------------------------------------------
+
+      ---------------------------------------------------------
+      | Method       | Return Value                           |
+      ---------------------------------------------------------
+      | every()      | Boolean (true / false)                 |
+      | some()       | Boolean (true / false)                 |
+      | find()       | Element or undefined                   |
+      | findIndex()  | Index number or -1                     |
+      | filter()     | NEW array (empty if no match)          |
+      ---------------------------------------------------------
+   */
+
+
+    let someOver18 = numbers4.some(myFunction5);         // tests whether at least one element in the array passes the test implemented by the provided function
+    function myFunction5(value, index, array) {
+      return value > 18;
+    }
+    console.log(someOver18);                           // Output: true
+
+
+
+    let text = "ABCDEFG";
+    const myArr = Array.from(text);                 // creates a new array from an array-like or iterable object
+    console.log(myArr);                                // Output: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    console.log(text);                                 // original string remains unchanged
+
+    // same as numbers array
+
+    const myNumbers = [1,2,3,4];
+    const myArr3 = Array.from(myNumbers, (x) => x * 2);    // creates a new array from an array-like or iterable object, with a map function applied to each element
+    console.log(myArr3);                                    // Output: [2, 4, 6, 8]
+    // we have to display at html to see the output
+    document.getElementById("1").innerHTML += "<br>" + myArr3;  // dont have to do loop to display each element, just display the array directly
+    console.log(myNumbers);                                  // original array remains unchanged
+
+
+    /* 
+
+      Array.from() = 
+      1. take something iterable / array-like
+      2. loop through it
+      3. (optional) apply function
+      4. return a NEW array
+
+    */
+
+    //som notes :
+
+    /*
+        | Term                  | Meaning                             |
+        | --------------------- | ----------------------------------- |
+        | key                   | Index number (0, 1, 2...)           |
+        | keys()                | Method that returns indexes         |
+        | Array Iterator object | Object that gives values one-by-one |
+        | iterable              | Can be looped with `for...of`       |
+        | object with length    | Looks like array but isn’t one      |
+    */
+
+
+
+
+    const fruits = ["Banana", "Orange", "Apple", "Mango"];
+    const keys = fruits.keys();
+
+    let text2 = "";
+    for (let x of keys) {
+      text2 += x + "<br>";
+    }
+
+    document.getElementById("2").innerHTML += "<br>" + text2;
+
+    // the process is like this :
+    // step 1: keys() method returns an Array Iterator object that contains the keys (indexes) of the fruits array
+    // step 2: for...of loop iterates over the keys (indexes) of the Array Iterator object
+    // step 3: each key (index) is added to the text2 string with a line break
+    // final result is the indexes of the fruits array displayed in the html element with id "2"
+
+    // and inside the for of loop, x represents the current key (index) of the fruits array during each iteration
+    // so in the first iteration, x is 0, in the second iteration, x is 1, and so on
+    // while keys is the Array Iterator object that contains all the keys (indexes) of the fruits array
+    // so we are looping through the keys object to get each key (index) one by one
+
+    // same concept like when :
+
+    const numbers5 = [10, 20, 30];
+    const iterator = numbers5.values();          // values() method returns an Array Iterator object that contains the values of the numbers5 array
+    let text3 = "";
+    for (let x of iterator) {
+      text3 += x + "<br>";
+    }
+
+    document.getElementById("3").innerHTML += "<br>" + text3;
+
+      // the difference is that here we are using values() method instead of keys() method
+      // so the x  represents the current value of the numbers5 array during each iteration
+      // so in the first iteration, x is 10, in the second iteration, x is 20, and so on
+      // while iterator is the Array Iterator object that contains all the values of the numbers5 array
+      // so we are looping through the iterator object to get each value one by one
+
+
+        //      for (let x of something) {                x = each value produced by "something"
+        //         text += x ;
+        //      }
+
+      // 👉 x is whatever the iterator yields
+      // 👉 What gets yielded depends entirely on something
+
+
+
+
+
+
+
+
+
+
+
+    const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+    const f = fruits2 .entries();               // entries() method returns an Array Iterator object that contains key/value pairs for each index in the array
+
+    let text4 = "";
+    for (let x of f) {
+      text4 += x + "<br>";
+    }
+
+    document.getElementById("4").innerHTML += "<br>" + text4;
+
+    // which is the same as keys() and values() method combined
+    // keys() gives the indexes
+    // values() gives the values
+    // entries() gives both in an array [index, value]
+
+    console.log(fruits2);                               // original array remains unchanged
+
+    const fruitUpdated = fruits2.with(2, "Lemon");    // with() method creates a new array with a modified element at the specified index
+    console.log(fruitUpdated);                       
+    console.log(fruits2);                            // original array remains unchanged
+
+    // this method is kinda same as splice() method, but with() does not modify the original array, it returns a new array with the modified element
+    // while splice() method modifies the original array directly
+    // and tosplice() can also add or remove elements, while with() can only modify 1 element at a time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const q1 = ["Jan", "Feb", "Mar"];
+    const q2 = ["Apr", "May", "Jun"];
+    const q3 = ["Jul", "Aug", "Sep"];
+    const q4 = ["Oct", "Nov", "Des"];
+
+    const year = [...q1, ...q2, ...q3, ...q4];          // using spread operator to join multiple arrays into one array
+    console.log(year);
+    document.getElementById("5").innerHTML += "<br>" + year;
+
+    const qCopy = [...q1];                             // using spread operator to copy an array
+    console.log(qCopy);
+    document.getElementById("6").innerHTML += "<br>" + qCopy;
+
+
+
+    const numbersss = [23,55,21,87,56];
+
+    let minValue = Math.min(...numbersss);          // using spread operator to find the minimum and maximum value in an array
+    let maxValue = Math.max(...numbersss);          
+    let minValue2 = Math.min.apply(null, numbersss);   // alternative way to find the minimum value using apply() method
+    let maxValue2 = Math.max.apply(null, numbersss);   // alternative way to find the maximum value using apply() method
+
+    console.log("Min Value: " + minValue);           
+    console.log("Max Value: " + maxValue);           
+    console.log("Min Value2: " + minValue2);
+    console.log("Max Value2: " + maxValue2);
+    
+
+    // spread is like unpacking the array into individual elements, like if you use spread on any array, it will read each element one by one
+    // so Math.min(...numbersss) is like Math.min(23,55,21,87,56)
+    // while apply() method is used to call a function with a given this value and arguments provided as an array
+    // so Math.min.apply(null, numbersss) is like Math.min(23,55,21,87,56) as well
+
+    // thats why when u createda new variable and assign a spread operator of an array, it creates a new array with the same elements as the original array
+
+    // rest operator is used to collect multiple elements into an array
+    // while spread operator is used to unpack elements from an array into individual elements 
+    // they are opposite of each other but look the same (three dots ...)
+
+
+    // BUT BOTH HAVE THE SAME FORMAT NAMING, WHICH IS [...SOMETHING]
+    // AND THE DIFFERENCE IS WHERE YOU USE IT, INSIDE A FUNCTION PARAMETER OR IDE INSIDE AN ARRAY LITERAL, which indicates whether its rest or spread operator
+    // and of course their purpose is different too
+
+
+
+    // example of rest operator :
+    
+    const arr4 = [1, 2, 3, 4, 5];
+    const [a, b, ...rest] = arr4;        // here ...rest is used to collect the remaining elements of the array into a new array called rest
+    console.log(a);                   
+    console.log(b);
+    console.log(rest);                  // Output: [3, 4, 5]
+
+
+    /*
+
+      --------------- REST vs SPREAD POSITION---------------
+      
+      | Context                     | Position     | Meaning |
+      |----------------------------|--------------|---------|
+      | Function parameters        | LEFT         | REST    |
+      | Array destructuring        | LEFT         | REST    |
+      | Object destructuring       | LEFT         | REST    |
+      | Function call              | RIGHT        | SPREAD  |
+      | Array literal              | RIGHT        | SPREAD  |
+      | Object literal             | RIGHT        | SPREAD  |
+*/
+
+    
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

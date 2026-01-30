@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="domanimation.css">     <!-- Linking the CSS file for styling -->
+
+    <!-- or u can put the css code inside a style tag here
+        or use inline styles by adding style attribute to the elements -->
+</head>
+
+
+
+<body>
+
+    
+
+
+<h2>My First JavaScript Animation</h2>
+
+<button onclick="move()">Start Animation</button>
+
+<div id="container">
+    <div id="animate"></div>
+</div>
+
+<!-- 
+    there's 2 div(wrapper) which is animate and container
+    the container is the outer div which holds the inner div animate
+    the animate div is the one which will be animated using javascript  
+-->
+
+
+
+
+
+
+
+
+
+
+<script>
+    function move () {
+
+        let id = null;                                          // to store the interval ID returned by setInterval
+        const elem = document.getElementById("animate");        // get the element 'animate'
+        let pos = 0;                                            // initial position of the element and current position during animation
+        clearInterval(id);                                   // method to clear any previous interval to avoid multiple animations                    
+        id = setInterval(frame, 5);                         // setInterval call the frame function every 5 milliseconds
+        
+        function frame() {                                   // function to update the position of the element
+            if (pos == 350) {                                // check if the element has reached 350px
+            clearInterval(id);                              // stop the animation by clearing the interval
+            } else {
+                pos++;                                   // increment the position if it hasn't reached 350px
+                elem.style.top = pos + "px";             // update the top position of the element
+                elem.style.left = pos + "px";             // update the left position of the element
+                }
+        }
+    }
+
+    // setInterval() method is a built-in JavaScript function that repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+    // the format syntax for setInterval is setInterval(callbackFunction, delayInMilliseconds)
+    // and it keeps running until it's stopped using clearInterval() method
+
+
+    // why used id=null?
+    // because null is clearer and safer way to initialize a variable that will later hold an interval ID.
+    // its used by clearInterval() to stop the interval when needed.
+    // initializing id to null indicates that there is currently no active interval.
+    // why 0 is not used?
+    // because 0 is a valid interval ID that could be returned by setInterval, using null avoids any confusion between an uninitialized state and a valid interval ID.
+    // because we dont actually know what value is id, the browser is the one who knows, so its better to use null to indicate that id is not yet assigned any interval ID.
+
+
+    // so use null when something doesnt exist yet or is empty
+    // use numbers when you are sure about the value or want to assign a specific numeric value
+
+
+    // and then you might be wondering, how the hell pos knows the position of the element? eventhough u dont assign it to any element's position
+    // initially pos is assigned to 0, and then in the frame function, pos is incremented by 1 in each call
+    // and then the updated pos value is assigned to elem.style.top and elem.style.left
+    // which updates the position of the element on the screen
+    // and this process continues until pos reaches 350, at which point the animation stops
+    
+</script>
+
+
+</body>
+</html>

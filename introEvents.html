@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+
+
+
+
+<body>
+ 
+    
+    <div>    
+        <h1>HTML Events</h1>
+        <h3>HTML events are "things" that happen to HTML elements.</h3>
+        <p>exmple of events :</p>
+        <ul>
+            <li>An HTML button is clicked</li>
+            <li>A web page has finished loading</li>
+            <li>The mouse moves over an element</li>
+            <li>A keyboard key is pressed</li>
+            <li>An HTML input field is changed</li>
+        </ul>
+    </div>
+
+
+    <div>
+        <p>often, when events happen u may want to do something, when javascript lets you execute code in response to events. HTML allows event handler attributes, with JavaScript code, to be added to HTML elements.</p>
+    </div>
+
+
+
+
+
+    <div>
+
+        <button onclick="document.getElementById('1').innerHTML=Date()">The time is?</button>
+        <!-- using the onclick event  to display the current date and time by changing the innerHTML of the paragraph by the element with id "1" -->
+
+        <p id="1"></p>
+
+
+
+
+
+
+        <button onclick="this.innerHTML=Date()">The time is?</button>
+        <!-- using the onclick event to change the button text itself to the current date and time -->
+        <!-- by using "this" keyword -->
+
+
+        <br><br>
+
+
+
+
+
+
+
+        <button onclick="displayDate()">The time is?</button>
+        <!-- using the onclick event to call the displayDate function when the button is clicked -->
+
+        <p id="2"></p>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+        <script>
+
+
+            function displayDate(){
+
+                document.getElementById("2").innerHTML = Date();
+            }
+
+        
+            /*
+                
+                    Event        Description
+                    -----------------------------------------------
+                    onchange    An HTML element has been changed
+                    onclick     The user clicks an HTML element
+                    onmouseover The user moves the mouse over an HTML element
+                    onmouseout  The user moves the mouse away from an HTML element
+                    onkeydown   The user pushes a keyboard key
+                    onload      The browser has finished loading the page
+
+
+            */
+
+            
+            /*
+            
+                all these examples is what we called event handlers, which runs a specific code when an event occurs
+                Event handlers can be used to handle and verify user input, user actions, and browser actions:
+
+                -Things that should be done every time a page loads
+                -Things that should be done when the page is closed
+                -Action that should be performed when a user clicks a button
+                -Content that should be verified when a user inputs data
+                -And more ...
+
+                Many different methods can be used to let JavaScript work with events:
+
+                -HTML event attributes can execute JavaScript code directly
+                -HTML event attributes can call JavaScript functions
+                -You can assign your own event handler functions to HTML elements
+                -You can prevent events from being sent or being handled
+                -And more ...
+
+            */
+
+
+
+            // so below is an example of addeventlistener method :
+
+
+        </script>
+
+    
+    <button id="mybtn">Time is : </button>
+
+    <p id="3"></p>
+
+    <script>
+
+        const mybutton = document.getElementById("mybtn");
+
+        mybutton.addEventListener("click", () =>document.getElementById("3").innerHTML = Date());
+
+        /* 
+        
+        
+            so this addeventlistener here does exactly the same thing as the previous examples above
+            but the difference is that here we are using addEventListener method to attach an event handler to the button element
+            so its actually more flexible and powerful way to handle events in javascript
+
+            KEY DIFFERENCES: addEventListener vs HTML Event Handler (onclick, etc.)
+
+            1) Function type
+            - addEventListener does NOT require arrow functions or function expressions.
+            - It works with ANY function (named function, function expression, arrow function).
+
+            2) Separation of concerns
+            - Event handler: HTML calls JavaScript (onclick="myFunc()").
+            - addEventListener: JavaScript selects HTML and controls behavior.
+            → Cleaner, more professional, and scalable.
+
+            3) Code organization
+            - Event handler mixes HTML and JS.
+            - addEventListener keeps HTML for structure, JS for logic.
+
+            4) Multiple events
+            - Event handler: only ONE event per element per event type.
+            - addEventListener: allows MULTIPLE listeners on the same element.
+
+            5) Best practice
+            - addEventListener is the modern, preferred approach.
+            - Used in real-world projects, frameworks, and backend-driven apps.
+                    
+
+
+
+            conclusion:
+
+            Event handler: HTML calls JavaScript to run event code directly in the HTML element . 
+            Event listener: JavaScript selects the HTML element and attaches a listener to it, so HTML stays clean.
+        */
+
+
+
+    </script>
+
+</body>
+
+
+</html>

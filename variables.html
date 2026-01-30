@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+
+        <p id="1"> </p>
+        <p id="2"> <br></p>
+
+        <script>
+
+            {
+                let x = 3;
+            }                                                 
+                 document.getElementById("1").innerText = x;          // ❌ Error: x is not defined and x exists only inside {}
+                                                                 // because let can become global or block scoped with {}
+           
+                                                                //But with var:
+
+            {
+                 var x = 2;
+            }
+
+                 document.getElementById("1").innerText = x;         // ✅ x is defined 2: and  x still exists outside the block
+                                                                    // var always have global scope if its not inside a function
+           
+           
+           
+            
+        </script>
+
+
+
+
+    </body>
+</html>

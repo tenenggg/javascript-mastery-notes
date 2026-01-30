@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        #box {                                         
+            width:200px;
+            height:100px;
+            padding:16px;
+            border:1px solid #000;
+        }
+    </style>                                                    <!-- styling for the box element, u can also use inline styling rather than using external css or at head-->
+
+</head>
+
+
+<body>
+
+    <div>
+
+            <h1> Mouse Event happen when the user interact with mouse</h1>
+            <h3> Comon Mouse Events : </h3>
+        
+
+            <ul>
+                <li>click</li>
+                    <p>Fires after both a mousedown and mouseup event occur on the same element with the main mouse button (usually the left).</p>
+                <li>dblclick</li>
+                    <p>Fires after two rapid clicks on the same element.</p>
+                <li>mousedown/mouseup</li>
+                    <p>These events fire when a mouse button is pressed down (mousedown) or released (mouseup) over an element, respectively.</p>
+                <li>mouseenter</li>
+                    <p>Similar to mouseover, but fire when the pointer enters an element, not its descendants, making it more sensible for use cases like CSS :hover behavior.</p>
+                <li>mouseleave</li>
+                    <p>Similar to mouseout, but fire when the pointer leaves an element, not its descendants, making it more sensible for use cases like CSS :hover behavior.</p>
+                <li>mousemove</li>
+                    <p>Fires continuously as the mouse pointer moves over an element, providing positional information (coordinates) about the cursor.</p>
+                <li>mouseout</li>
+                    <p>Fires when the pointer leaves an element.</p>
+                <li>mouseover</li>
+                    <p>Fires when the pointer moves over an element (or one of its children).</p>
+                <li>wheel</li>
+                    <p>Fires when the mouse wheel is rotated, commonly used for scrolling or zooming functionality.</p>
+                <li>contextmenu</li>
+                    <p>Fires when the user attempts to open the context menu, typically by right-clicking.</p>
+                <li>drag events</li>
+                    <p>A series of events (dragstart, dragend, dragover, etc.) used for implementing drag-and-drop interfaces.</p>
+            </ul>
+
+    </div>
+
+
+
+    <div id="box">Move Mouse over this box ! </div>                <!-- u can also use inline styling rather tha using external css or at head-->
+
+    <!-- 
+    
+    if you ure using inline styling it would be 
+     <div id ="box" style="width:200px; height:100px; padding:16px; border:1px solid #000;">Move Mouse over this box !</div> 
+     
+     -->
+
+    
+     
+
+
+
+
+    <script>
+
+
+        const box = document.getElementById("box");                            
+
+
+
+        box.addEventListener("mouseover", ()=> { 
+            box.innerHTML = "Mouse Over Event Triggered!";      
+        })
+
+        box.addEventListener("mouseout", function () {                             // like is said for addeventlistener method u can use  normal function, expression or arrow function
+            box.innerHTML = "Move Mouse over this box !";      
+        })
+
+
+        // and this is for event mouseover and mouseout
+        // u can try other mouse events by replacing the event name in addeventlistener method
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <div>
+
+        <p id="1"> Move the mouse into this window</p>
+
+
+    </div>
+
+
+
+
+    <script>
+
+        document.addEventListener("mousemove", (event) => { 
+            document.getElementById("1").innerHTML = 
+            "X: " + event.clientX + " Y: " + event.clientY});
+
+        
+        // here we use mousemove event to track the mouse position within the window
+        // and display the x and y coordinates of the mouse pointer inside the paragraph with id "1"
+
+        // and as you can see we used event parameter to access the mouse position properties clientX and clientY
+        // which it return the horizontal and vertical coordinates of the mouse pointer relative to the viewport
+        
+        // "event" initially represents the event object that is automatically passed to the event handler function when the event is triggered
+        // also u can name it anything else rather than "event" like e or evt or anything else
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

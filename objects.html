@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+    <h1>JavaScript Objects</h1>
+    <h2>An Object is a variable that can hold many variables.</h2>
+    <h2>Objects are collections of key-value pairs, where each key (known as property names) has a value.</h2>
+    <h2>Objects can describe anything like houses, cars, people, animals, or any other subjects.</h2>
+    
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+    <p id="4"></p>
+    <p id="5"></p>
+    <p id="6"></p>
+    <p id="7"></p>
+    <p id="8"></p>  
+    <p id="9"></p>
+    <p id="10"></p>
+
+
+
+
+
+    <script>
+
+        const car = {type:"Fiat", model:"500", color:"white"};
+        // car is an object
+        // type, model, and color are properties
+        // Fiat, 500, and white are property values
+
+        console.log(car);
+        console.log(car.type);
+        console.log(car.model);
+        console.log(car.color);
+
+
+
+        // Create an Object
+        const person = {
+            firstName: "John",              // spaces and line breaks are not important, since an object literal can span multiple lines
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        };
+
+
+
+
+        // Create an empty Object
+        const person2 = {};                         // you can also create an empty object, and then add properties:
+
+        // Add Properties
+        person2.firstName = "John";
+        person2.lastName = "Doe";
+        person2.age = 50;
+        person2.eyeColor = "blue";
+
+
+
+        // Create an Object
+        const person3 = new Object({            // using new Object() syntax, which is the same as above examples
+            firstName: "John",                      // but there is no practical reason to use this syntax
+            lastName: "Doe",                        // for simplicity, readability, and performance, use the object literal syntax {} like above
+            age: 50,
+            eyeColor: "blue"
+        });
+
+        let x2 = "firstName";
+
+
+        // you can access object properties in two ways: dot notation and bracket notation
+        console.log(person3.firstName);    // Dot Notation               '.'
+        console.log(person3["firstName"]);  // bracket notation         '[""]'
+
+        console.log(person3[x2]);              // bracket notation with expression (after assigning property name to variable x2)
+
+        // since property are a string, u need to use quotes when using bracket notation
+        // while expression is a variable that holds a string value, so no quotes needed when using bracket notation with expression
+        // which is let x2 = "firstName";
+
+
+
+
+
+
+
+
+        // this refers to the person object:
+        const person4 = {
+            firstName: "John",
+            lastName : "Doe",
+            id       : 5566,
+            fullName : function() {
+                return this.firstName + " " + this.lastName;   // refers to property firstName and lastName
+        }
+        };
+
+        console.log(person4)    ;                                   // displaying the object in console will show all properties and methods
+        document.getElementById("1").innerHTML = person4;           // displaying object in HTML will show [object Object]
+        
+        
+        document.getElementById("2").innerHTML = person4.firstName + "," + person4.lastName + "," + person4.id;  
+        // displaying individual properties in HTML will show their values
+
+
+
+        
+
+        // object constructor
+        // constructor function for person5 object
+        // same structure as normal function, but with capitalized name
+        function Person5(first, last, age, eye) {               // sometimes we need to create multiple objects of the same type
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;                                // these properties are default values for the object, if you don't specify otherwise
+        }
+
+        // create two person5 objects
+        const myFather = new Person5("John", "Doe", 50, "blue");
+        const myMother = new Person5("Sally", "Rally", 48, "green");
+
+        console.log(myFather);
+        console.log(myMother);
+        document.getElementById("3").innerHTML = myFather.firstName + "," + myFather.lastName + "," + myFather.age + "," + myFather.eyeColor;
+        document.getElementById("4").innerHTML = myMother.firstName + "," + myMother.lastName + "," + myMother.age + "," + myMother.eyeColor;
+
+
+        // In the constructor function, this has no value.
+        // The value of this will become the new object when a new object is created.
+        // Now we can use new Person() to create many new Person objects:
+
+        const person6 = {
+            firstname: "John",
+            lastname: "Doe",
+            age: 50,
+            eyecolor: "blue"
+        };
+
+        delete person6.age;                       //  this will delete both the value and property, and cannot be used again unless re-added
+        console.log(person6.age);               //  returns undefined because age property is deleted
+
+
+
+
+
+        // Nested Objects
+        // property Values in an object can be other objects:
+        myObj = {
+            name:"John",
+            age:30,
+            myCars: {
+                car1:"Ford",
+                car2:"BMW",
+                car3:"Fiat"
+        }
+        }
+        
+        console.log(myObj.myCars.car2);         // accessing nested object property using dot notation
+        console.log(myObj.myCars["car3"]);      // accessing nested object property using bracket notation
+        console.log(myObj["myCars"]["car1"]);   // accessing nested object property using bracket notation with expression
+
+        let p1 = "myCars";
+        let p2 = "car2";
+        console.log(myObj[p1][p2]);              // accessing nested object property using bracket notation with expressions
+
+
+
+
+
+
+
+
+        const person7 = {
+            firstName: "John",
+            lastName: "Doe",
+            id: 5566,
+            fullName: function() {                                    // this is a method of the object person7
+                return this.firstName + " " + this.lastName;          // which are actions that can be performed on objects
+            }                                                         // a method is a function definition stored as a property of an object
+        };
+
+
+        console.log(person7.fullName());     // calling the method fullName() of object person7 to return full name
+        console.log(person7.fullName);      // displaying the method fullName() without parentheses will show the function definition itself
+
+
+        // adding a method to an object
+        person7.getName = function() {                       // adding a new method getName to object person7
+            return person7.firstName;                       // use 'this' keyword to refer to the current object's properties
+        };
+        console.log(person7.getName());        
+
+        // there's also many other built-in methods for objects in JavaScript like .toUpperCase(), .toLowerCase(), .valueOf(), .hasOwnProperty(), etc.
+        // just use . and start typing after the object or property name to see the list of available methods in console
+        // example: person7.firstName.toUpperCase()  will return "JOHN"
+
+
+        // and you might ne wondering when to use 'this' and when to use the object name itself like person7.firstName
+        // well 'this' is used for object methods to refer to the current object, and for constructors to refer to the new object being created
+        // the reason we used "this" instead of person7 is because its more flexible, reliable and reusable in case the object name changes or if the method is used in another object
+
+
+
+
+
+
+
+
+
+
+
+
+        // javascript display object
+        
+
+        const person9 = {
+            name: "JohnDblend",
+            age: 67,
+            city: "Malaysia"
+        };
+
+
+
+
+
+
+
+        // display object properties using for...in loop
+        let text3 = "";
+        for (let x3 in person9) {                     // for...in loop to loop through the properties of the object
+        text3 += person9[x3] + " ";
+        };
+
+        document.getElementById("5").innerHTML = text3;
+
+        
+
+
+
+
+
+        //displaying object using object.values()
+        const myArray = Object.values(person9);                 // Object.values() method returns an array of a given object's property values
+        let arrayText = myArray.toString();                     // converting the array to string
+
+        console.log(myArray);                                    // displaying the array of property values in console
+        console.log(arrayText);                                   // displaying the string of property values in console
+        document.getElementById("6").innerHTML += myArray;      // displaying the array of property values in HTML
+        document.getElementById("7").innerHTML += arrayText;     // displaying the string of property values in HTML
+
+        // for html display, converting array to string is optional, as html will automatically convert array to string when displaying
+        // but for console display, converting array to string is necessary to see the values as a single string instead of array format
+
+
+
+
+
+
+        // displaying object using object.entries()
+        const myArray2 = Object.entries(person9);               // Use Object.entries() when you need both the property names and their values together
+        console.log(myArray2);                                  // displaying the array of [key, value] pairs in console
+
+
+        for( const[key,values] of myArray2 ) {                                        // looping through the array of [key, value] pairs using object.entries()
+            document.getElementById("8").innerHTML += key + ": " + values + "<br>";   // displaying each key-value pair in HTML
+        }
+
+
+        let text = ""   ;                                                           // or you can use this style 
+        for( const [key,values] of myArray2){                                  // which assigning the output to text variable first
+            text+= "<br>" + key + ": " + values + "\n";
+        }
+        document.getElementById("9").innerHTML = text;
+
+
+
+
+
+
+        
+
+
+
+        // displaying object using JSON.stringify()
+
+        const myJSON = JSON.stringify(person9);               // JSON.stringify() method converts a JavaScript object or value to a JSON string
+        console.log(myJSON);                                  // displaying the JSON string in console
+        document.getElementById("10").innerHTML += "<br>" + myJSON;   // displaying the JSON string in HTML
+
+        // but the output will be in JSON format, which is different from the previous methods shown above
+
+
+
+
+
+
+
+
+        /* 
+
+
+        /*
+                OBJECT DISPLAY METHODS - QUICK REFERENCE
+                ================================================================================
+                METHOD              | OUTPUT                          | BEST FOR
+                --------------------|--------------------------------|-------------------------
+                for...in loop       | Custom format per property     | Custom formatting & logic
+                Object.values()     | Array of values only           | Only need values
+                Object.entries()    | Array of [key, value] pairs    | Need both keys & values
+                JSON.stringify()    | Complete JSON string           | Save/send/debug object
+                ================================================================================
+
+
+                for...in = custom display with full control and can do everything
+                Object.values() = just the values as array, but quick and easy to do
+                Object.entries() = keys + values as array pairs and easy to do
+                JSON.stringify() = entire object as string for storage/transfer
+
+
+                */      
+    
+
+        
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    
+
+    <h1> API is Application Programming Interface </h1>
+
+    <h3> The DOM API (Application Programming Interface) is a set of Methods and
+         Properties that allow JavaScript to change the content, structure, and style of any HTML elements</h3>
+
+    <p> an API Method is an action that you can do on an HTML element</p>
+    <p> an API Property is a value that you can access on an HTML element</p>
+
+    <h3> The DOM API provides us with the ability to: </h3>
+    <ul>
+        <li>Find and select elements</li>
+        <li>Change element content and attributes</li>
+        <li>Add, remove, or modify elements</li>
+        <li>Change CSS styles</li>
+        <li>Add event listeners to react to user input</li>
+    </ul>
+    <h3> The DOM API is a standard for how to get, change, add, or delete HTML DOM elements.</h3>
+    <h3> JavaScript is the language used in browsers to access the DOM through the API.</h3>
+    
+
+    
+    <h2> <br><br><br> Selecting HTML Elements</h2>
+    <table border="1">
+        <thead>
+            <tr>
+            <th>Method</th>
+            <th>Description</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+            <tr>
+                <td>document.getElementById(id)</td>
+                <td>Find an element by element id</td>
+            </tr>
+            <tr>
+                <td>document.getElementsByTagName(name)</td>
+                <td>Find elements by tag name</td>
+            </tr>
+            <tr>
+                <td>document.getElementsByClassName(name)</td>
+                <td>Find elements by class name</td>
+            </tr>
+            <tr>
+                <td>document.querySelector(selector)</td>
+                <td>Find the first element that matches a CSS selector</td>
+            </tr>
+            <tr>
+                <td>document.querySelectorAll(selector)</td>
+                <td>Find all elements that match a CSS selector</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    <h2><br><br><br> Accessing Element Content</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>element.innerHTML</td>
+                <td>The HTML content of an element</td>
+            </tr>
+            <tr>
+                <td>element.textContent</td>
+                <td>The text content of an element</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2><br><br><br> Accessing Element Attributes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>element.attribute</td>
+                <td>Change the attribute value of an HTML element</td>
+            </tr>
+            <tr>
+                <td>element.style.property</td>
+                <td>The style of an HTML element</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2><br><br><br> Changing Element Attributes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>element.setAttribute()</td>
+                <td>Create or set a new attribute</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2><br><br><br> Manipulating Structure</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>document.createElement()</td>
+                <td>Creates a new HTML element</td>
+            </tr>
+            <tr>
+                <td>document.removeChild()</td>
+                <td>Remove an HTML element</td>
+            </tr>
+            <tr>
+                <td>document.appendChild()</td>
+                <td>Add an HTML element</td>
+            </tr>
+            <tr>
+                <td>document.replaceChild()</td>
+                <td>Replace an HTML element</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2><br><br><br> Adding Event Handlers</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>document.getElementById(id).onclick = function(){}</td>
+                <td>Add event handler code to an onclick event</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+        <script>
+
+
+            // Access a paragraph Element
+            const myPara = document.getElementById("demo");
+
+            // Change the content of the Element
+            myPara.innerHTML = "Hello World!";
+        
+        
+            /*
+                document is the HTML document.
+                getElementById() is a document method.
+                myPara = getElementById("demo") retrieves the "demo" element.
+                innerHTML is an element property.
+                myPara.innerHTML = "Hello World!" changes the property.
+            */
+        
+        
+            /*
+
+                there's alot of terms :
+
+                - element attribute    
+                - element property
+                - element content
+                - document method
+
+                so attributes are like javascript side DOM object properties like innerHTML, style, className etc when the html turns into DOM
+                properties are like html side attributes like id, class, href etc
+                content is the stuff inside an element like text or other elements
+                document methods are functions that you can use to access or manipulate elements in the DOM like getElementById(), querySelector() etc
+            */
+
+
+        
+        
+        
+        
+        
+        </script>
+
+
+    
+</body>
+</html>

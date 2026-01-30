@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    
+
+
+
+    <div>
+
+        <h1> Timing Events in JavaScript </h1>
+        <h3> Timing events are used to execute code at specified time intervals </h3>
+        <p> The two main timing events in JavaScript are: </p>
+        <ul>
+            <li>setTimeout(function, milliseconds)</li>
+            <p>Executes a function once after a specified number of milliseconds.</p>
+            <li>setInterval(function, milliseconds)</li>
+            <p>Executes a function repeatedly at specified intervals (in milliseconds) until stopped.</p>
+            <li>clearInterval(intervalID)</li>
+            <p>Stops the execution of a function that was started by setInterval.</p>
+            <li>clearTimeout(timeoutID)</li>
+            <p>Stops the execution of a function that was started by setTimeout.</p>
+        </ul>
+
+        <!-- so the difference between setTimeout and setInterval is that setTimeout executes a function once 
+         after a specified delay, while setInterval executes a function repeatedly at specified intervals -->
+    
+        <!-- The timer functions belong to the window object 
+             setTimeout is the same as Window.setTimeout 
+            setInterval is the same as Window.setInterval
+            clearTimeout is the same as Window.clearTimeout
+            clearInterval is the same as Window.clearInterval
+
+        
+        -->
+
+    </div>
+
+
+        
+
+
+
+
+    <div>
+
+        <p id="clock"></p>                <!-- first clock-->
+
+
+
+
+        <button id="btn">Click me</button>  <!-- button to show message after 2 seconds-->  
+        <p id ="1">Wait!</p>
+
+
+
+
+        <button id="start">Start Counter</button>           <!-- button to start and stop counter-->
+        <button id="stop">Stop</button>
+
+        <p id="counter">0</p>
+
+
+    </div>
+
+
+
+
+
+
+    <script>
+
+
+        // Call showTime every 1000 millisec
+        setInterval(showTime, 1000);
+
+        // Function to display the time
+        function showTime() {
+            const d = new Date();
+            document.getElementById("clock").innerHTML =
+            d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        }
+
+        // newdate() is used to create a new date object with the current date and time
+        // getHours(), getMinutes(), getSeconds() methods are used to get the current hours, minutes and seconds respectively
+        // so when u combine them all together u get the current time and display it in the paragraph with id "clock"
+        
+        // newinterval() method is used to call the showtime function every 1000 milliseconds (1 second) to update the time display every second
+        // so the clock refreshes every second to show the current time
+
+    </script>
+
+
+
+
+
+    <script>
+
+        const btn = document.getElementById("btn");
+
+        // Let btn listen for a click
+        btn.addEventListener("click", function () {
+            // Then call showMsg after 2 seconds
+            setTimeout(showMsg, 2000);
+        });
+
+        // Function to display message
+        function showMsg() {
+            document.getElementById("1").innerHTML = "Hello after 2 seconds!";
+        }
+
+
+        // here we use settimeout method to call the showMsg function 
+        // after 2000 milliseconds (2 seconds) when the button is clicked
+
+        // we also use click event to listen for the button click
+
+    </script>
+
+
+
+
+
+    <script>
+         
+        let myInterval;
+        let count = 0;
+
+        const btnStart = document.getElementById("start");
+        const btnStop = document.getElementById("stop");
+
+        // let btnStart listen for a click
+        btnStart.addEventListener("click", function () {
+            // Then start counter 
+            myInterval = setInterval(counter, 1000);   // call counter function every 1 second
+        });
+
+        // let btnStop listen for a click
+        btnStop.addEventListener("click", function () {
+            // Then stop counter
+            clearInterval(myInterval);              // stop the interval to stop calling counter function   
+        });
+
+        function counter() {
+            count++;                                    
+            document.getElementById("counter").innerHTML = count;  
+        }
+
+
+        // here we use setInterval method to call the counter function every 1000 milliseconds (1 second)
+        // when the start button is clicked
+        // we use clearInterval method to stop the interval when the stop button is clicked
+        // thus stopping the counter
+        // but the count variable retains its value until the page is refreshed
+
+        // also we assign the interval to a variable myInterval so that we can use it to clear the interval later
+        // we also assign a count variable to keep track of the count value and show it in the paragraph with id "counter"
+
+    </script>
+
+
+
+
+</body>
+</html>

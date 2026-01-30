@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+
+<body>
+
+
+
+    <div>
+
+
+        <h1>Load Events in JavaScript</h1>
+
+        <h3>load events happen when the browser has finished loading an element or the entire page</h3>
+        <p> the two most important load events: </p>
+        <ul>
+            <li>DOMContentLoaded(when HTML is ready)</li>
+            <li>load(wait for pages, images, CSS, etc.)</li>
+        </ul>
+    </div>
+
+    <div>
+        
+        
+        <p id = "1"></p>
+        <p id = "2"></p>
+        <p id = "3"></p>
+        <img id="myImg" src="https://www.w3schools.com/images/w3schools_green.jpg" width="120">
+        
+        <!-- 
+            image tag  to load an image
+            width is used to set the width of the image in pixels
+            src is used to specify the path to the image file
+            if u change the position of the whole tag it will affect when the image is loaded 
+        -->
+
+
+    </div>
+
+    
+
+
+
+
+
+
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function(){   // when html is loaded this event is triggered
+            document.getElementById("1").innerHTML = "HTML is loaded and parsed";   
+
+        });
+
+
+        /*
+            The DOMContentLoaded event fires when the browser has fully loaded the HTML and built the Document Object Model (DOM) tree, 
+            but has not necessarily finished loading external resources like images and stylesheets.
+
+            The DOMContentLoaded event is best for initializing the user interface, attaching event handlers, 
+            and performing actions that only require the DOM to be ready.
+
+        */
+
+    </script>
+
+
+
+    <script>
+
+        window.addEventListener("load",function(){              // when the entire page is loaded this event is triggered
+            document.getElementById("2").innerHTML = "Page is fully loaded";
+        })
+
+
+        // this is for load event for entire page, and the difference between this and DOMContentLoaded event is that 
+        // this event waits for the entire page to load including images, css files, etc.(window object is used here)
+
+    </script>
+
+
+    <!-- 
+
+            TAG             DESCRIPTION
+        ----------------  ---------------------------------------------------------------------
+            <img>	        Fires when an image has finished downloading.
+            <script>	    Fires when a script has been successfully loaded and executed.
+            <link>      	Fires when a stylesheet has been fully loaded and parsed.
+            <video>     	Fires a variety of media-specific loading events.
+
+
+    -->
+
+    <script>
+
+        const img = document.getElementById("myImg");
+
+        // Add Event Listener to img
+        img.addEventListener("load", function () {
+            document.getElementById("3").innerHTML = "Image loaded!";
+        });
+    
+    // this is for load event for image tag
+    // 
+    
+    
+    </script>
+
+
+
+
+
+</body>
+</html>

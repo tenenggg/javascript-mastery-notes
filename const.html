@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+
+        <p id="1"> </p>
+        <p id="2" ></p>
+        <p id="3" ></p>
+
+        <script>
+
+        {
+
+            const x = 3.14;                                               
+            // x = 3.15;                         This will give an error (x cannot be changed) *try removing the comment to see the error*
+
+            document.getElementById("1").innerHTML = x;
+
+        }
+            // if u put const x = 3.14 or 3.15 again it will give a syntax error because const cannot be redeclared.
+            // so they can't be declared or initialized more than once.
+            // they also need to be initialized when they are declared, if not syntax error will occur ( means need to initialize+declare ).
+            
+            // eg of an incorrect : const PI;
+            //                      PI = 3.14159265359;
+
+            // eg of a correct    : const PI = 3.14159265359;
+
+
+
+
+
+
+
+
+
+        // because of these, the same applied to array or object.
+        // we can 'modify' contents or properties of array and object but we can't 'reassign' the array or object itself.
+        // because the contents of the array and object are changeable but the reference to the array or object is locked.
+
+        {
+            const cars = ["Saab", "Volvo", "BMW"];    // You can create a constant array:
+            cars[0] = "Toyota";                     // You can change an element:
+            cars.push("Audi");                      // You can add an element:
+        
+            document.getElementById("2").innerHTML = cars;
+        }
+
+            // const cars = ["Saab", "Volvo", "BMW"];
+            // cars = ["Toyota", "Volvo", "Audi"];    // ERROR
+            // because we are trying to reassign the array itself which is not allowed.
+
+
+
+
+
+
+
+
+        {
+            
+            const car = {type:"Fiat", model:"500", color:"white"};            // You can create a const object:
+            car.color = "red";                                                // You can change a property:
+            car.owner = "Johnson";                                            // You can add a property:
+
+            document.getElementById("3").innerHTML = car.type + " " + car.model ;
+            document.getElementById("3").innerHTML += " " + car.color + " " + car.owner; 
+        }
+            // const car = {type:"Fiat", model:"500", color:"white"};           
+            // car = {type:"Volvo", model:"EX60", color:"red"}                   // but you can't reassign the object itself which is not allowed.
+
+
+
+            // SIMPLE WAYS TO REMEMBER DIFFERENCE BETWEEN 'MODIFY' AND 'REASSIGN' IS :
+            // MODIFY :  =" "     or     =' '  
+            // REASSIGN : = [ ] or = { } 
+            // reassign repeat the declaration but different value.
+            // modify use different method to change the content or property.
+
+        </script>
+
+    </body>
+</html>
+
+          

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    
+
+
+
+    <script>
+
+        // ------function declaration vs function declaration assignment(function used as a variable) vs function expression------
+        
+        
+
+        
+        // 1. FUNCTION DECLARATION (Hoisted)
+        
+        
+        function declarationFunc() {
+            return "I am a function declaration";
+        }
+        console.log("1. Declaration:", declarationFunc());
+        
+        
+        console.log("   Hoisted call:", hoistedDeclaration());    // Can call BEFORE declaration (hoisting)
+        function hoistedDeclaration() {
+            return "I was called before declaration";
+        }
+        
+
+
+
+
+
+
+
+
+
+        
+
+        // 2. FUNCTION DECLARATION + ASSIGNMENT (Hoisted but have 2 references)
+
+        
+        console.log(" \n2. I was called before declaration assignment", originalFunc());    // Can call BEFORE declaration (hoisting)
+
+        function originalFunc() {
+            return "I am the original function";
+        }
+        const aliasFunc = originalFunc;                                                     // Creates second reference
+        
+        console.log("   Declaration + Assignment:");
+        console.log("   Original:", originalFunc());
+        console.log("   Alias:", aliasFunc());
+        console.log("   Are they same function?", originalFunc === aliasFunc);              // true
+        
+        
+        console.log("   'originalFunc' in scope:", typeof originalFunc !== "undefined");
+        console.log("   'aliasFunc' in scope:", typeof aliasFunc !== "undefined");              // Both names exist in scope
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+        // 3. FUNCTION EXPRESSION (Not hoisted)
+
+
+
+        const expressionFunc = function() {               // the function does not have a name (anonymous function) and the one assigned to the variable is the variable name to be used to call the function
+            return "I am a function expression";
+        };
+        console.log("\n3. Expression:", expressionFunc());
+        
+        // Cannot call before initialization (no hoisting) unless using var (not recommended)
+        // console.log(temporalFunc()); // ❌ Would throw ReferenceError
+        const temporalFunc = function() {
+            return "I cannot be called before this line";
+        };
+        console.log("   After initialization:", temporalFunc());
+
+
+
+        
+        // With declaration + assignment
+        function processData() { /* complex logic */ }
+        const process = processData;
+
+        // Now BOTH 'processData' and 'process' exist in scope
+        // 'processData' might accidentally be called elsewhere
+        // this causes more chance of mistakes and scope pollution
+        // cause memory inefficiency and performance issues
+
+
+
+        
+        // With expression
+        const process2 = function() { /* complex logic */ };
+        // Only 'process2' exists - cleaner code and less chance of mistakes
+       
+
+
+
+
+
+        // Declaration - Can be re-declared (potentially confusing). This also applies to declaration + assignment
+        function logMessage() {
+        console.log("First");
+        }
+
+        function logMessage() {  // ✅ No error, silently overwrites!
+        console.log("Second");
+        }
+
+        logMessage(); // "Second"
+
+        
+
+
+        // Expression - Cannot be re-declared (safer) so easy to avoid mistakes
+        const logMessage2 = function() {
+        console.log("First");
+        };
+
+        // const logMessage2 = function() {  // ❌ SyntaxError: Identifier already declared( try uncommenting tp see the error)
+        // console.log("Second");
+        // };
+
+        
+
+
+
+        // PROBLEM with declarations in blocks (inconsistent!). While declarations+assignments have more typed behavior, they still have issues.
+        if (true) {
+            function sayHi() { return "Hi from block"; }    
+        }
+        // In non-strict mode: sayHi exists globally! 
+        // In strict mode: sayHi is undefined
+        console.log(typeof sayHi); //  Depends on environment!
+
+
+        // SOLUTION with expressions (predictable!)
+        if (true) {
+            const sayHi = function() { return "Hi from block"; };
+        }
+        console.log(typeof sayHi); // "undefined" ALWAYS ✅
+
+
+
+
+        // DECLARATION CAN'T DO THIS:
+        // function calculate; // ❌ SyntaxError - declarations need immediate body (uncomment to see error)
+
+        // EXPRESSIONS CAN:
+        let calculate; // ✅ Can declare first
+        const environment = "development";
+
+        if (environment === "development") {
+            calculate = function() { 
+                console.log("Dev mode calculation");
+                return mockData; 
+            };
+        } else {
+            calculate = function() { 
+                return realCalculation(); 
+            };
+        }
+
+        // can't do this with declarations - they need to be defined right away.
+        // example : 
+    
+        if (environment === "development") {
+            function calculate2() { 
+                console.log("Dev mode calculation");
+                return mockData; 
+            };
+        } else {
+            function calculate2() { 
+                return realCalculation();                                   
+            };
+        }
+
+        // ❌ This won't work as expected - 'calculate' is not conditionally defined
+        
+
+
+
+
+
+
+
+        // ------COMPARISON SUMMARY TABLE & PRACTICAL EXAMPLES------
+        
+        console.log("========== FUNCTION COMPARISON ==========");
+        console.log("");
+        
+        console.log("┌─────────────────────────────────────────────────────────────────────────────┐");
+        console.log("│ FEATURE                     │ DECLARATION │ DECL+ASSIGN │ EXPRESSION       │");
+        console.log("├─────────────────────────────────────────────────────────────────────────────┤");
+        
+        // 1. Hoisting
+        console.log("│ Hoisted (can call before)   │     ✅      │     ✅      │     ❌           │");
+        
+        // 2. Number of names in scope
+        console.log("│ Names in scope              │      1      │      2+     │      1           │");
+        
+        // 3. Can be re-declared
+        console.log("│ Can be re-declared          │     ✅      │     ✅      │     ❌           │");
+        
+        // 4. Block scope (predictable)
+        console.log("│ Block-scoped (predictable)  │     ❌      │     ❌      │     ✅           │");
+        
+        // 5. Assignment flexibility
+        console.log("│ Conditional assignment      │     ❌      │    Hard     │     ✅           │");
+        
+        // 6. As callback
+        console.log("│ Good for callbacks          │    Okay     │    Okay     │     ✅           │");
+        
+        // 7. Memory efficiency
+        console.log("│ Memory efficient            │    Good     │    Poor     │     ✅           │");
+        
+        console.log("└─────────────────────────────────────────────────────────────────────────────┘");
+        
+        console.log("");
+        console.log("========== PRACTICAL EXAMPLES ==========");
+        console.log("");
+        
+        // Show examples side by side
+        console.log("1. BASIC SYNTAX:");
+        console.log("   Declaration:      function greet() { return 'Hello'; }");
+        console.log("   Dec+Assign:       function greet() { return 'Hello'; }");
+        console.log("                     const alias = greet;");
+        console.log("   Expression:       const greet = function() { return 'Hello'; }");
+        console.log("");
+        
+        console.log("2. HOISTING DEMO:");
+        // Hoisting test
+        console.log("   Declaration:      Calling before works ->", hoistedDemo());
+        function hoistedDemo() { return "✅ Works"; }
+        
+        console.log("   Expression:      Cannot call before initialization");
+        console.log("                   (Would throw ReferenceError)");
+        console.log("");
+        
+        console.log("3. SCOPE POLLUTION:");
+        function pollute1() { return "func1"; }
+        const pollute2 = pollute1;
+        console.log("   Dec+Assign creates 2 names: pollute1, pollute2");
+        console.log("   Expression creates 1 name: pollute1");
+        console.log("");
+        
+        console.log("4. RE-DECLARATION:");
+        function redeclare() { return "First"; }
+        function redeclare() { return "Second"; } // Overwrites silently!
+        console.log("   Declaration:", redeclare(), "<- Second function wins");
+        
+        try {
+            const redeclareExpr = function() { return "First"; };
+            // const redeclareExpr = function() { return "Second"; }; // Would error
+            console.log("   Expression: Cannot re-declare (SyntaxError)");
+        } catch(e) {
+            // Continue
+        }
+        console.log("");
+        
+        console.log("5. CONDITIONAL ASSIGNMENT:");
+        console.log("   Declaration:      Not possible directly");
+        console.log("   Expression:       const func = condition ? () => 'A' : () => 'B';");
+        console.log("");
+        
+        console.log("========== BEST PRACTICES ==========");
+        console.log("");
+        console.log("✅ USE DECLARATION FOR:");
+        console.log("   - Main public API functions");
+        console.log("   - Recursive functions");
+        console.log("   - When you need hoisting");
+        console.log("");
+        console.log("✅ USE EXPRESSIONS FOR:");
+        console.log("   - Most internal/helper functions");
+        console.log("   - Callbacks and event handlers");
+        console.log("   - Object methods");
+        console.log("   - Arrow functions (must be expressions)");
+        console.log("   - Conditional assignments");
+        console.log("");
+        console.log("❌ AVOID DECLARATION + ASSIGNMENT:");
+        console.log("   - Creates unnecessary duplicate names");
+        console.log("   - Pollutes scope");
+        console.log("   - Can cause confusion");
+        console.log("");
+        
+        console.log("========== QUICK RULES ==========");
+        console.log("");
+        console.log("🔹 Declaration: function name() {}");
+        console.log("🔹 Expression: const name = function() {}");
+        console.log("🔹 Arrow: const name = () => {}");
+        console.log("");
+        console.log("💡 Expression > Declaration for most cases!");
+        console.log("💡 const > let > var for function expressions!");
+        console.log("");
+    </script>
+
+</body>
+</html>

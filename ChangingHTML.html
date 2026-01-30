@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+
+<body>
+
+    <div>
+        
+        
+        <h1> Changing HTML Content</h1>
+        <h3> the easiest way to modify the content is by using the innerHTML property</h3>
+        <h3> innerHTML is can be used to get, replace or change the content of an HTML element</h3>
+
+
+        <p id="p1">Hello World!</p>
+        <img id="myImage" src="smiley.gif">
+        <p id="p2"></p>
+        
+
+    </div>
+
+
+
+
+
+
+    <script>
+
+
+
+        document.getElementById("p1").innerHTML = "New text!";
+
+        /*
+           The HTML document above contains a <p> element with id="p1"
+            We use the HTML DOM to get the element with id="p1"
+            A JavaScript changes the content (innerHTML) of that element to "New text!"
+        */
+
+
+
+
+
+        document.getElementById("myImage").src = "landscape.jpg";
+
+        /*
+           The HTML document above contains an <img> element with id="myImage"
+            We use the HTML DOM to get the element with id="myImage"
+            A JavaScript changes the src attribute of that element from "smiley.gif" to "landscape.jpg"
+            using ".src"
+        */
+
+
+
+
+        document.getElementById("p2").innerHTML = "Date : " + Date();
+        // JavaScript can create dynamic HTML content
+
+
+
+        document.write(Date());
+        // In JavaScript, document.write() can be used to write directly to the HTML output stream
+        // However, it is generally not recommended to use document.write() in modern web development
+        // because it can overwrite the entire document if used after the document has finished loading
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

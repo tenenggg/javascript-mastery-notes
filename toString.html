@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    <h1>JavaScript toString() Method</h1>
+
+
+    
+        
+      
+    <script>
+
+
+    
+            
+      
+        // Converts value to STRING
+        // built -in method of many data types
+        // useful for coverting data to readable format
+        // ensuring type compatibility when string is required
+        // customizing objects for display and debugging
+
+
+
+        // Number to string ----------
+        let num = 123;
+        num.toString();             // "123"
+
+        (100).toString();           // "100"
+
+        // Boolean to string ---------
+        true.toString();            // "true"
+        false.toString();           // "false"
+
+        // Array to string -----------
+        let arr = [1, 2, 3];
+        arr.toString();             // "1,2,3"     returns array elements joined by commas
+
+        // Object to string ----------
+        let obj = {a:1};
+        obj.toString();             // "[object Object]"
+
+        // Date to string ------------
+        let d = new Date();
+        d.toString();               //  "Sun Jan 25 2026 15:33:31 GMT+0800 (Malaysia Time)" (current time u run)       return Readable date and time string 
+        console.log(d.toString());    
+
+        // Radix (base) usage --------
+        let n = 15;
+        n.toString(2);              // "1111" (binary)              using base 2
+        n.toString(4);              // "33" (base 4)
+        n.toString(8);              // "17" (octal)
+        n.toString(16);             // "f" (hex)
+
+
+        // function to string -----------
+        function greet() {
+            return "Hello";
+        }
+        greet.toString();           // "function greet() { return "Hello"; }"      returns function source code as string
+        console.log(greet.toString());
+
+
+        // object with custom toString() -----
+        let person = {
+            firstname: "John",
+             lastname: "Doe",
+        };
+
+        person.toString();                          //  returns [object Object]
+        console.log(person.toString());
+        
+
+
+
+        // NOTE:
+        // toString() does NOT work on null or undefined
+        // String(value) is safer
+       
+
+
+
+</script>
+
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>

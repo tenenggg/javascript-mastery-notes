@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  
+
+    <p id="1"> </p>
+
+
+
+
+    <script>
+
+        let x, y, z, k;                                                      //declaration of variables
+        let _lastName = "Johnson"
+
+        x = 5;
+        y = 6;
+        z = x + y;
+        k = z + 10;   
+
+        document.getElementById("1").innerHTML = 
+        "The value of z is: " + z; 
+
+        document.getElementById("1").innerHTML +=
+        "<br>The value of k is: " + k; 
+
+        document.getElementById("1").innerHTML +=
+        "<br>Last Name is: " + _lastName;
+
+
+    </script>
+
+
+<body>
+</html>
+
+<!--
+
+     so what happen here is at html we create an empty paragraph with id 1 and then we use javascript to assign a value to that paragraph 
+     we could also use "var" or "const" instead of "let" to declare variables but "let" is more modern and recommended
+     the value we create in script is called literal value because we directly assign a value to the variable
+     names that we use for variables are called identifiers and they must follow certain rules 
+    
+     what happen at second output is when you use += for innerHTML :
+     innerHTML = innerHTML + "<br>The value of k is: " + k;
+     so nothing happens since we are just adding more content to the existing innerHTML
+     but if its a number it will add the two numbers together
+     
+     you also need to use += when you want to add more content to innerHTML 
+     if not it will just overwrite the previous content
+
+
+     Rules for identifiers:
+     Must start with a letter, _, or $
+     Can contain digits after the first character
+     Numbers are not allowed as the first character in names.
+     Cannot be a reserved keyword (let, const, if, etc.)
+     Are case-sensitive (myVar and myvar are different)
+     Strings are text written inside quotes.
+     Numbers are written without quotes.
+
+     A convention among professional programmers is to start a name with underscore for "private" variables.
+     Using the $ is not very common in JavaScript, but professional programmers often use it as an alias for the main function in JavaScript libraries.
+
+     let for changable variables
+     const for unchangable variables (constants)
+     var is outdated but still works
+
+     When to Use var, let, or const?
+        1. Always declare variables
+
+        2. Always use const if the value should not be changed
+
+        3. Always use const if the type should not be changed (Arrays and Objects)
+
+        4. Only use let if you cannot use const
+
+        5. Never use var if you can use let or const.
+
+    -->

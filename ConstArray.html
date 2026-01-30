@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    <h1>javascrript array const</h1>
+    <h2> It has become a common practice to declare arrays using const:</h2>
+
+
+
+
+
+
+    <script>
+
+
+        const cars = ["Saab", "Volvo", "BMW"];
+        // cars = ["Toyota", "Volvo", "Audi"];    // TYPE ERROR if u uncomment this line
+
+        cars[0] = "Toyota";                      // This will work
+        console.log(cars);                       
+        cars.push("Audi");                     // This will also work
+        console.log(cars);
+
+        // u can't change the reference of the const array but u can change the elements of the array
+        // meanin u can't reassign the array but u can reassign the elements of the array
+
+
+
+        // const cars2;
+        // cars = ["Saab", "Volvo", "BMW"];    // TYPE ERROR: Missing initializer in const declaration
+        // using const without initializing is syntax error
+        // an array declared with const must be initialized when it is declared
+
+        // const also has block scope like let
+        // while var doesn't have block scope
+
+        // Redeclaring or reassigning an array to const, in the same scope, or in the same block, is not allowed
+        // same for let but not for var
+        // var can be redeclared and reassigned in the same scope or block
+
+        // but redeclaring an array to const in a different scope or block is allowed
+        // same for let and var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

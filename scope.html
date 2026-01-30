@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+            // 1. Scope
+            // Scope determines the accessibility (visibility) of variables
+            // JavaScript has 3 main scopes:
+            // 1) Global Scope
+            // 2) Function Scope
+            // 3) Block Scope
+
+            // ALSO the many of the example below, i didnt return it so, to see the output, is at console only.
+    
+
+
+
+
+            // 2. Global Scope
+            let globalLet = "I am global";        // Declared outside any function or block
+            var globalVar = "Also global";        // var in global scope
+
+            function accessGlobal() {
+            console.log(globalLet);              // Accessible inside function
+            console.log(globalVar);
+            }
+            accessGlobal();
+            console.log(globalLet);                // Accessible outside function
+            console.log(globalVar);
+
+
+
+            // In browser:
+            // var → becomes property of window object
+            // let/const → does NOT become property of window object
+            // All scripts and functions in the same web page can access a variable with global scope.
+            // example:
+
+            console.log(window.globalVar);        // ✅ Works
+            console.log(window.globalLet);        // ❌ Undefined
+
+
+
+
+
+
+
+            // 3. Function Scope
+            function functionScopeExample() {
+            var functionVar = 10;                // Variables defined inside a function are not accessible (visible) from outside the function.
+            let functionLet = 20;                // Variables declared with var, let and const are quite similar when declared inside a function.
+            const functionConst = 30;            // They all have Function Scope
+
+            console.log(functionVar);
+            console.log(functionLet);
+            console.log(functionConst);
+            }
+            functionScopeExample();
+
+            // console.log(functionVar);            // ❌ Error: not accessible outside function
+            // console.log(functionLet);            // ❌ Error
+            // console.log(functionConst);          // ❌ Error
+
+
+            
+            /*
+
+                 Local Variables has Function Scope :
+                    They can only be accessed from within the function
+                    No scripts or functions outside the function can access them
+                    Variables with the same name can be used outside the function
+                    Variables with the same name can be used in different functions
+                    Local variables are created when a function starts
+                    Local variables are deleted when the function is completed
+                    Arguments (parameters) work as local variables inside functions
+
+
+            */
+
+
+
+
+
+
+
+
+
+            // 4. Block Scope (ES6)
+            // Block = anything inside { }, a code block or curly braces
+            // anything inside { }(curly braces) is called code block and it creates a block scope
+
+            {
+            let blockLet = "block let";          // Block-scoped
+            const blockConst = "block const";    // Block-scoped
+            var blockVar = "block var";          // NOT block-scoped
+            }
+
+            // console.log(blockLet);               // ❌ Error
+            // console.log(blockConst);             // ❌ Error
+            console.log(blockVar);                  // ✅ var ignores block scope
+
+      
+
+
+
+
+
+
+
+
+            // 5. var vs let vs const (Scope behavior)
+            function compareScope() {
+            if (true) {
+                var a = 1;                          // Function scope
+                let b = 2;                          // Block scope
+                const c = 3;                        // Block scope
+            }
+
+            console.log(a);                       // ✅ Works
+            // console.log(b);                    // ❌ Error
+            // console.log(c);                    // ❌ Error
+            }
+            compareScope();
+
+
+
+
+
+
+
+
+
+            // 6. Local Scope
+            function localScope() {
+                let localVar = "local value";        // Local to this function only
+                console.log(localVar);
+            }
+            localScope();
+
+            // console.log(localVar);               // ❌ Error
+
+        
+
+
+
+
+
+
+
+            // 7. Scope Chain
+            // JavaScript looks for variables from inner → outer → global
+
+            let x = "global x";
+
+            function outerFunction() {
+                let y = "outer y";
+
+                function innerFunction() {
+                    let z = "inner z";
+                    console.log(x);                     // Found in global scope
+                    console.log(y);                     // Found in outer function
+                    console.log(z);                     // Found in local scope
+                }
+
+                innerFunction();
+            }
+
+            outerFunction();
+            // it calls outerFunction, which in turn calls innerFunction, which has access to variables in all three scopes,
+            // so the result will be:
+            // global x
+            // outer y
+            // inner z
+            // since 
+       
+
+
+
+
+
+
+
+            // 8. Lexical Scope
+            // Scope is determined by where the function is written in code
+
+            function lexicalParent() {
+            let parentVar = "parent";
+
+            function lexicalChild() {
+                console.log(parentVar);             // Remembers parent scope
+            }
+
+            lexicalChild();
+            }
+            lexicalParent();
+
+
+
+
+
+
+
+            // 9. Shadowing
+            // When a variable in inner scope has same name as outer scope
+
+            let value = 100;
+
+            function shadowingExample() {
+                let value = 200;                      // Shadows outer value
+                console.log(value);                   // 200
+            }
+            shadowingExample();
+            console.log(value);                     // 100
+
+
+
+
+
+
+            // 10. Illegal Shadowing
+            // let/const CANNOT be shadowed by var
+
+            // let num = 10;
+            // if (true) {
+            //   var num = 20;                      // ❌ SyntaxError
+            // }
+
+            // var CAN be shadowed by let/const
+            var count = 5;
+            if (true) {
+            let count = 10;                       // ✅ Allowed
+            console.log(count);                   // 10
+            }
+            console.log(count);                     // 5
+
+    
+
+
+
+
+
+            // 11. Temporal Dead Zone (TDZ)
+            // Time between entering scope and variable declaration
+
+            // console.log(tdz);                    // ❌ ReferenceError
+            let tdz = "TDZ example";               // TDZ ends here
+            console.log(tdz);
+
+            // var does NOT have TDZ
+            console.log(noTDZ);                     // undefined
+            var noTDZ = "var example";
+
+  
+
+
+
+            // 12. Automatically Global (Bad Practice)
+            // assigning a value to an undeclared variable creates a global variable
+            function badPractice() {
+                accidentalGlobal = 999;              // ❌ Becomes global variable
+            }
+
+            badPractice();
+            console.log(accidentalGlobal);          // Accessible globally
+
+
+
+
+
+            // 13. Strict Mode and Scope
+            // In strict mode, undeclared variables cause errors
+            'use strict';
+
+            function strictExample() {
+            // strictVar = 10;                    // ❌ Error in strict mode
+            }
+
+            
+
+
+
+
+
+            // --------------------------------------------
+            // QUICK SUMMARY (W3Schools Style)
+            // Global Scope   → variables declared outside functions
+            // Function Scope → var inside functions
+            // Block Scope    → let & const inside {}
+            // Scope Chain    → JS searches outward for variables
+            // Lexical Scope  → scope decided by code position
+            // Shadowing      → inner variable hides outer one
+            // TDZ            → let/const before declaration
+            // Avoid var      → use let & const
+            // ============================================
+
+
+
+            
+
+    </script>
+</body>
+</html>

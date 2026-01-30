@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <h1> HTML DOM (HTML Document Object Model)  </h1>
+    <h2> HTML DOM is an Object Model for HTML Documents</h2>
+
+
+    <p> The HTML DOM can be used to access and manipulate HTML elements, the  most common way is to use id of the element</p>
+    <p id ="1"></p>
+    <p id ="2"></p>
+    <p id ="3"></p>
+
+
+    <script>
+
+    /*      The DOM Tree
+            When a web page loads, the browser creates a tree-like representation of the HTML document.
+            Each part of the document are nodes in the tree:
+
+            Node	       | Description
+            ---------------|----------------------------------- 
+            Document	   | Owner of all nodes in the document
+            <html>	       | Element Node
+            <head>	       | Element Node
+            <body>	       | Element Node
+            <a>	           | Element Node
+            href	       | Attribute Node
+            <h1>	       | Element Node
+            My Header	   | Text Node
+
+    */
+
+
+            const paragraph = document.getElementById("1");
+            paragraph.innerHTML = " This paragraph is added using DOM ";
+            
+            document.getElementById("2").innerHTML = " This paragraph is also added using DOM ";
+
+            const paragraph2 = "This is another paragraph added using DOM";
+            document.getElementById("3").innerHTML = paragraph2;
+
+            // you can use many ways to access an element in DOM
+            // id='example' is an html element
+            // document.getElementById("example") is a DOM method to access that element
+            // innerHTML is a DOM property to change the content of that element 
+
+ 
+    </script>
+
+
+</body>
+</html>

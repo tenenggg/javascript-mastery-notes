@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    <h1>Arrays in JavaScript</h1>
+
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+
+
+
+
+
+    <script>
+
+
+        // it is acommon practice to use to declare arrays with const keyword to prevent reassignment
+        
+        const cars = ["Saab", "Volvo", "BMW"];          // Array declaration
+        console.log(cars);                              // u can access array by calling its name
+        document.getElementById("1").innerHTML = cars;   // same like displaying array in HTML 
+
+        const cars2 = [                             // space and line breaks are not important
+        "Saab",                                     // since declaration can span multiple lines
+        "Volvo",
+        "BMW"
+        ];
+
+
+        const cars3 = [];                      // u can also create an empty array and add elements later
+        cars3[0]= "Saab";
+        cars3[1]= "Volvo";
+        cars3[2]= "BMW";
+
+
+        const cars4 = new Array("Saab", "Volvo", "BMW");   // or use the Array constructor
+        // but there;s no need to use this way, because the above literal way is simpler and faster
+
+
+        let car = cars4[0];                     // access array elements using index (starting from 0)
+        console.log(car);                       // Output: Saab
+
+        cars4[0] = "Opel";                          // modify array element, now the array's first element is changed to Opel
+        console.log(cars4);                    // Output: [ 'Opel', 'Volvo', 'BMW' ]
+
+
+        document.getElementById("2").innerHTML = cars4.toString();   // display array as string in HTML element with id "2"
+
+
+        //  arrays are special types of objects in JavaScript, the 'typeof' operator returns "object" for arrays
+        //  the difference is that arrays use numbers to access its elements, while objects use names to access its properties
+
+        // you can have objects, functions, and arrays inside an array
+
+
+        
+
+        const myObj = {
+            name: "John",
+            age: 30,
+            cars: [
+                {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},   // object inside array
+                {name:"BMW", models:["320", "X3", "X5"]},
+                {name:"Fiat", models:["500", "Panda"]}
+            ]
+        }
+
+
+
+
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        let fLen = fruits.length;                          // .length is built-in property to get the number of elements in an array                    
+
+        let text = "<ul>";
+        for (let i = 0; i < fLen; i++) {
+            text += "<li>" + fruits[i] + "</li>";
+        }
+        text += "</ul>";
+
+
+        // the result will be :
+
+        // <ul>
+        //   <li>Banana</li>
+        //   <li>Orange</li>
+        //   <li>Apple</li>
+        //   <li>Mango</li>
+        // </ul>
+
+        // because its like " <ul> " + " <li>Banana</li> " + " <li>Orange</li> " + " <li>Apple</li> " + " <li>Mango</li> " + " </ul> "
+        
+
+
+        fruits.push("Kiwi");                     // .push() method adds a new element to the end of an array
+        console.log(fruits);                     // Output: [ 'Banana', 'Orange', 'Apple', 'Mango', 'Kiwi' ]
+
+        fruits[fruits.length] = "Pineapple";      // another way to add a new element at the end of an array
+        console.log(fruits);                     // Output: [ 'Banana', 'Orange', 'Apple', 'Mango', 'Kiwi', 'Pineapple' ]
+
+        fruits[7] = "Lemon";                 // adding element at specific index, if the index is greater than the array length, it creates undefined elements in between
+        console.log(fruits);                // Output: [ 'Banana', 'Orange', 'Apple', 'Mango', 'Kiwi', 'Pineapple', undefined, 'Lemon' ] (undefined at html, but empty space in console)
+
+        fruits.pop();                          // .pop() method removes the last element from an array
+        fruits.pop();                          // removes another last element
+        console.log(fruits);                   // Output: [ 'Banana', 'Orange', 'Apple', 'Mango', 'Kiwi', 'Pineapple' ]
+
+        // javascript does not support arrays with named indexes like in other programming languages
+        // in javascript, arrays always use numbered indexes
+
+        const person = [];
+        person["Name"] = "John";
+        person["age"] = 46; 
+
+        document.getElementById("3").innerHTML =person[0] + " " + person.length;
+        // Output: undefined 0
+        // because person is treated as an array, and arrays use numbered indexes only
+        // but u can still called it as an object like person["Name"] or person.Name to get the value "John"
+        document.getElementById("3").innerHTML += "<br>" + person["Name"] + " " + person.Name + " " + Object.keys(person).length;
+
+
+        // so when to use object or array?
+        // use an object when you need named properties
+        // use an array when you need numbered indexes
+        // and just use [] instead of new Array(), its better 99% of the time
+        // because the new keyword complicates the code and can produce unexpected results
+        // and there's 2 solutions to know a variable is an array :
+
+        Array.isArray(fruits);               // solution 1: use Array.isArray() method
+        console.log(Array.isArray(fruits));  // Output: true
+        console.log(fruits instanceof Array); // solution 2: use instanceof operator, checks if fruits is an instance of Array
+        console.log(fruits instanceof Object); // Output: true, because arrays are objects too
+
+
+    </script>
+</body>
+</html>

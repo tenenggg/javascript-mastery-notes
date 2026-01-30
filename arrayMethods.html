@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    
+
+
+
+    <h1>Array Methods in JavaScript</h1>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+        
+        let size = fruits.length;               // .length property to get the number of elements in an array
+        console.log(size);                     // Output: 4
+        fruits[fruits.length] = "Kiwi";        // adding a new element to the end of the array using length property
+        console.log(fruits);                   // Output: [ 'Banana', 'Orange', 'Apple', 'Mango', 'Kiwi' ]
+
+        fruits.length = 2;                     // setting length property to a smaller number truncates the array   
+        console.log(fruits);                   // Output: [ 'Banana', 'Orange' ]
+        fruits.length = 4;                     // setting length property to a larger number adds undefined elements to the array
+        console.log(fruits);                   // Output: [ 'Banana', 'Orange', <2 empty items> ] because we set length to 4, and other 2 were removed earlier
+
+        let myList = fruits.toString();               // .toString() method converts an array to a string of (comma separated) array values
+        console.log(myList);                         // Output: Banana,Orange,,
+        
+
+
+
+
+
+
+        
+        fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+
+        let fruitat = fruits2.at(2);                     // .at() method takes an integer value and returns the item at that index, supports negative integers too
+        console.log(fruitat);                           // Output: Apple
+        let fruitat2 = fruits2[2];                    // same as above but without using .at() method
+        console.log(fruitat2);                     // Output: Apple             
+        
+
+        fruits.join(" - ");                        // .join() method also joins all array elements into a string, but you can specify the separator
+        console.log(fruits2.join(" + "));          // Output: Banana + Orange + Apple + Mango
+
+        fruits2.pop();                             // .pop() method removes the last element from an array and returns that element
+        console.log(fruits2);                      // Output: [ 'Banana', 'Orange', 'Apple' ]
+        fruits2.push("Kiwi");                      // .push() method adds a new element to the end of an array, and returns the new length
+        console.log(fruits2);                      // Output: [ 'Banana', 'Orange', 'Apple', 'Kiwi' ]
+
+        fruits2.shift();                           // .shift() method removes the first array element and returns that removed element
+        console.log(fruits2);                      // Output: [ 'Orange', 'Apple', 'Kiwi' ]
+        fruits2.unshift("Lemon");                  // .unshift() method adds a new element to the beginning of an array, and returns the new length
+        console.log(fruits2);                      // Output: [ 'Lemon', 'Orange', 'Apple', 'Kiwi' ]
+
+        fruits2[0] = "Pineapple";                  // changing the first element of the array
+        console.log(fruits2);                      // Output: [ 'Pineapple', 'Orange', 'Apple', 'Kiwi' ]
+
+        console.log(Array.isArray(fruits2));       // .isArray() method checks if a variable is an array, returns true or false
+        console.log(Array.isArray("Hello"));       // Output: false
+        
+        delete fruits2[1];                        // delete operator removes the element at index 1, but does not change the length of the array (Using delete() leaves undefined holes in the array. Use pop() or shift() instead)
+        console.log(fruits2);                     // Output: [ 'Pineapple', <1 empty item>, 'Apple', 'Kiwi' ] (undefined at html, but empty space in console)
+
+
+        
+
+
+
+
+
+        const arr1 = ["Cecilie", "Lone"];
+        const arr2 = ["Emil", "Tobias", "Linus"];
+        const arr3 = ["Robin", "Morgan"];
+
+        const myChildren = arr1.concat(arr2, arr3);  // the format is array1.concat(array2, array3, ...)
+        console.log(myChildren);                    // .concat() method merges two or more arrays, returns a new array
+
+        // The concat() method does not change the existing arrays. It always returns a new array.
+        // The concat() method can take any number of array arguments.
+
+        const arr4 = ["Emil", "Tobias", "Linus"];
+        const myChildren2 = arr4.concat("Peter"); 
+        console.log(myChildren2);                 // can also concat values to an array, not just arrays
+
+        const fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits3.copyWithin(2, 0);
+        console.log(fruits3);                     // .copyWithin() method copies array elements to another position in the array, overwriting the existing values
+                                                 // format: array.copyWithin(target, start, end)
+                                                 // target: pasting starting at this index
+                                                 // start: index to start copying elements from (default 0)
+                                                 // end: index to end copying elements (default array.length)
+                                                 // in this example, it copies from index 0 to index 2, so Banana and Orange are copied and pasted to index 2 and 3, overwriting Apple and Mango
+                                                 // if the copied items run out, it stops and leaves the remaining elements unchanged
+                                                 // Output: [ 'Banana', 'Orange', 'Banana', 'Orange' ]
+        
+                                                 const fruits4 = ["Banana", "Orange", "Apple", "Mango", "Kiwi"];
+        fruits4.copyWithin(2, 0, 2);
+        console.log(fruits4);                     // Output: [ 'Banana', 'Orange', 'Banana', 'Orange', 'Kiwi' ]
+
+        
+
+
+
+
+        const arr5 = [[1, 2], [3, 4], [5, 6], [7, 8]];
+        const flatArr = arr5.flat();               // remove the nested arrays and returns a single array
+        console.log(flatArr);                     // Output: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+        
+        // converting multidimensional array to single dimensional array (flattening)
+        // which multidimensional array is an array inside another array
+        // if there more levels of nesting, you can specify the depth level as an argument to flat() method
+        //flat() = same as flat(1)
+        //flat(2) = flatten 2 levels
+        //flat(Infinity) = flatten everything
+
+
+        const newarr2 = flatArr.flatMap(x => [x, x * 10]);
+        console.log(newarr2);                     // .flatMap() method first maps each element using a mapping function, then flattens the result into a new array
+                                                 // Output: [ 1, 10, 2, 20, 3, 30, 4, 40, 5, 50, 6, 60, 7, 70, 8, 80 ]
+
+            // if you can see the arrow function syntax here, here the normal function version :
+            /*
+            
+            const newarr2 = flatArr.flatMap(function(x) {
+                return [x, x * 10];
+            });
+
+            */
+        // which the arrow function return x and x*10 as an array for each element x in flatArr, then flatMap flattens the resulting arrays into a single array
+        // 1 becomes [1, 10], 2 becomes [2, 20], and so on, then all these arrays are flattened into one single array
+
+        
+        
+
+        const fruits5 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits5.splice(2, 0, "Lemon", "Kiwi");
+        console.log(fruits5);                       // .splice() method adds new items to an array, at a specified index
+
+                                                    // format: array.splice(index, how many, item1, item2,...)
+                                                    // index: index at where new elements should be added.
+                                                    // how many: number of items to be removed (0 means no removal)
+                                                    // item1, item2, ...: new items to be added
+
+                                                    // in this example, at index 2, 0 items are removed, and no new items are added, so the array remains unchanged
+                                                    // Output: [ 'Banana', 'Orange', 'Apple', 'Mango' ]
+        
+        fruits5.splice(0,1);
+        console.log(fruits5);                     // removing elements without leaving holes in the array using splice()
+                                                 // in this example, at index 0, 1 item is removed (Banana)
+                                                 // Output: [ 'Orange', 'Apple', 'Mango' ]
+                     
+                                                 
+
+        const spliced = fruits5.toSpliced(0,1);  // .toSpliced() method works like splice(), but it does not modify the original array, instead it returns a new array with the modifications
+                                                 // in this example, at index 0, 1 item is removed (Orange), and a new array is returned
+                                                 // Output: [ 'Apple', 'Mango' ]
+        console.log(spliced);                     
+        console.log(fruits5);                     // original array remains unchanged
+                                                 // Output: [ 'Orange', 'Apple', 'Mango' ]
+
+
+        
+
+
+        const fruits6 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        const citrus = fruits6.slice(1);
+        console.log(citrus);                      // .slice() method returns a new array containing a portion of the original array
+                                                  // the slice method does not modify the original array
+
+                                                  // format: array.slice(start, end)
+                                                  // start: index to start slicing (inclusive)
+                                                  // end: index to end slicing (exclusive, optional)
+                                                  // if not end is provided, it slices to the end of the array
+
+                                                  // in this example, it slices from index 1 to the end of the array
+                                                  // Output: [ 'Orange', 'Lemon', 'Apple', 'Mango' ]
+        
+        const citrus2 = fruits6.slice(1, 3);
+        console.log(citrus2);                     // slices from index 1 to index 3 (excluding index 3)
+                                                  // Output: [ 'Orange', 'Lemon' ]
+
+
+
+
+
+        // u might be wondering hows the flow if there's method and function together
+        // so heres an example with example of "points.sort(function(a,b))" method:
+        /*
+
+        1. You give sort() a function (not a value).
+
+        2. sort() picks two items from the array (which the method itself is picking 2 elements on array not yet using function).
+
+        3. It calls your function and pass those two elements to functions.
+
+        4. Your function runs with those 2 elements received and  returns a number.
+
+        5. sort() uses that returned number to decide their order.
+
+        6. Steps 2–5 repeat until the array is sorted.
+        
+        */
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

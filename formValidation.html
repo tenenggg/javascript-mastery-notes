@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+
+<script>
+function validateForm() {                               
+  let x = document.forms["myForm"]["fname"].value;     // accessing the form named "myForm" and the input field named "fname"
+  if (x == "") {
+    alert("Name must be filled out");            // if the input field is empty, show an alert, method alert() displays an alert box with a specified message and an OK button
+    return false;
+  }
+}
+
+// this function is called when the form is submitted
+// it checks if the input field is empty
+// if it is empty, it shows an alert and returns false to prevent form submission
+
+// document.forms is a collection of all the forms in the document
+// ["myForm"] accesses the form with the name "myForm" and ["fname"] accesses the input field with the name "fname"
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+    
+
+
+<h2>JavaScript Validation</h2>
+
+
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post"> 
+  Name: <input type="text" name="fname">
+  <input type="submit" value="Submit">
+</form>
+
+<!--name="myForm" allows JavaScript to access this form-->
+<!--action specifies where to send the form-data when the form is submitted-->
+<!--action="/action_page.php" specifies the URL where the form data will be sent, and its just an example, u can change it to your own URL-->
+<!--onsubmit runs when the submit button is clicked-->
+<!--return validateForm() calls the validateForm function and returns its value-->
+<!--if validateForm returns false, the form submission is prevented-->
+<!--method="post" specifies how to send form-data (the form-data is sent to the page specified in the action attribute)-->
+
+
+<!-- Name input field allows the user to enter their name -->
+<!-- The input field has the name "fname" which is used in the JavaScript validation function to access its value -->
+<!-- The submit button allows the user to submit the form -->
+<!-- the submit isn't the same as name because the submit button does not have a name attribute -->
+
+
+
+
+<!--here's another way to do form with simpler ways, without JavaScript validation and name-->
+
+
+
+<form action="/action_page.php" method="post">
+  <input type="text" name="fname" required>
+  <input type="submit" value="Submit">
+</form>
+
+
+
+
+
+
+<!--
+
+
+        Validation can be done in many different methods, and deployed in many different ways
+        1. using HTML5 built-in validation (like the "required" attribute in the second form above)
+        2. using JavaScript validation (like the first form above)
+        3. using third-party libraries or frameworks (like jQuery Validation, Parsley.js, etc.)
+        4. using server-side validation (like PHP, Node.js, etc.) 
+        5. using a combination of the above methods
+
+        there's also server-side validation which is done on the server after the form is submitted
+        and also client-side validation which is done on the user's browser before the form is submitted
+        but client-side validation can be bypassed by the user, so it's always recommended to do server-side validation as well
+        to ensure the data is valid and secure
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

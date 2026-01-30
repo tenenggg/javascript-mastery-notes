@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+
+
+    <script>
+
+        let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        console.log("The length of the text string is: " + text.length);           // returns the length of the string
+
+
+        let answer2 = "He is called 'Johnny'";                                     // can use single quotes or double quotes as long as they dont matches the surrounding quotes
+        let answer3 = 'He is called "Johnny"';                                     
+        let text2 = `He's often called "Johnny"`;                                  // using backticks to allow single and double quotes inside a string
+        let text3 =
+                    `The quick
+                    brown fox
+                    jumps over
+                    the lazy dog`;                                             // template strings(backticks) allow multi-line strings
+
+
+        console.log(answer2);
+        console.log(answer3);
+        console.log(text2);
+        console.log(text3);
+
+        // if you want to use double quotes inside a double-quoted string, or single quotes inside a single-quoted string, you need to use the backslash escape character (\).
+
+        let answer4 = "He is called \"Johnny\"";                                   // using backslash to escape double quotes
+        let answer5 = 'It\'s a beautiful day';                                     // using backslash to escape single quote
+        let answer6 = "The character \\ is called backslash.";                     // using backslash to escape backslas
+
+        console.log(answer4);
+        console.log(answer5);
+        console.log(answer6);
+
+
+        document.getElementById("1").innerHTML =                                    // safe way to break up long strings is after an operator
+        "Hello Dolly!";
+
+        document.getElementById("2").innerHTML = "Hello " +                         // another safe way to break up long strings is by using string addition
+        "Dolly!";
+
+
+
+
+
+        // x is a string
+        let x = "John";
+
+        // y is an object                                                                   
+        let y = new String("John");                                                 // strings can also be defined as objects with the keyword new:
+
+        document.getElementById("3").innerHTML =
+        typeof x + "<br>" + typeof y;
+
+        // But Do not create String objects.
+        // The new keyword complicates the code and slows down execution speed.
+        // String objects can produce unexpected results:
+        // Comparing two JavaScript objects always returns false.
+
+
+    </script>
+
+
+
+</body>
+</html>

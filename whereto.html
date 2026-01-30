@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  
+    <h2>JavaScript function in action</h2>
+
+    <p id="1">this is the original text</p>
+
+    <button onclick="function1()">Click Me</button>                                        <!-- call the function when button is clicked, dont need script tag  -->             
+
+
+
+
+  <script>
+
+    function function1() {                                                                  // define the function can only be write in script tag                        
+        
+      document.getElementById("1").innerHTML = "HTML content changed by function!";         // and of course since in script tag we can use javascript method directly
+    }
+
+
+  </script>
+
+
+
+
+  <p id="2"> This text is an example of changing text using a function with an external JavaScript file</p>
+  <p> the function is at myScript.js </p>
+
+
+  <button onclick="function2()">Click Me1</button>                                                          <!-- call the function when button is clicked -->                   
+    <script src="myScript1.js"></script>                                                                    <!-- calling external JavaScript file (and need to be in <script> tag) -->
+
+  <button onclick="function3()">Click Me2</button>                                                          <!-- call the function when button is clicked -->                   
+    <script src="myScript2.js"></script>                                                                    <!-- calling external JavaScript file (and need to be in <script> tag) -->
+
+ 
+
+</body>
+</html>

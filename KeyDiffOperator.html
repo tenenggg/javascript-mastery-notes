@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1> && and || vs < > </h1>
+
+<script>
+
+
+
+// && and || CAN RETURN VALUES (not just true/false)
+console.log("--- && and || RETURN VALUES ---");
+
+let a = 0 && "hello";                                                    // Returns 0 (not false!)
+let b = 5 && "hello";                                                    // Returns "hello" (not true!)
+let c = "" || "default";                                                 // Returns "default"
+let d = "Alice" || "Guest";                                              // Returns "Alice"
+
+console.log("0 && 'hello' =", a);                                        // 0
+console.log("5 && 'hello' =", b);                                        // "hello"  
+console.log("'' || 'default' =", c);                                     // "default"
+console.log("'Alice' || 'Guest' =", d);                                  // "Alice"
+
+
+
+
+
+
+// < and > ALWAYS RETURN TRUE/FALSE ONLY
+console.log("\n--- < and > RETURN BOOLEAN ONLY ---");
+
+let e = 5 < 10;                                                           // Returns true (not 5, not 10)
+let f = 10 > 5;                                                           // Returns true
+let g = 5 > 10;                                                           // Returns false
+
+console.log("5 < 10 =", e);                                               // true
+console.log("10 > 5 =", f);                                               // true  
+console.log("5 > 10 =", g);                                               // false
+
+
+
+
+// KEY DIFFERENCE
+console.log("\n--- KEY DIFFERENCE ---");
+console.log("&& and ||: Can return ANY value (string, number, etc.)");
+console.log("< and >: Always return ONLY true or false");
+console.log("===: Always return ONLY true or false");
+
+
+
+
+
+
+// Practical example
+console.log("\n--- PRACTICAL EXAMPLE ---");
+let age = 18;
+let name = "";
+
+let message1 = age >= 18 && "Adult";                                      // Returns "Adult" (value!)    
+let message2 = age < 18 && "Child";                                       // Returns false (value!)         the second operand is not evaluated because the first is false therefore it returns boolean
+let message3 = name || "Anonymous";                                       // Returns "Anonymous" (value!)
+let isAdult = age >= 18;                                                  // Returns true (boolean!)        >,<,<=,>=,=== always return boolean
+
+console.log("age >= 18 && 'Adult' =", message1);                          // "Adult"
+console.log("age < 18 && 'Child' =", message2);                           // false
+console.log("name || 'Anonymous' =", message3);                           // "Anonymous"
+console.log("age >= 18 =", isAdult);                                      // true
+
+
+
+// SO && and || is both intepret as logical operators and value returning operators 
+// which logical means whether it needs to be both true or one true to return a value
+// and value returning means it can return any value based on the condition
+// and whether it returns true/false or other values depends on the context of usage (statement or comparison)
+
+
+
+</script>
+
+</body>
+</html>

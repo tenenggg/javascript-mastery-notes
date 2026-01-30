@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <h1> Comparison Operators in JavaScript </h1><br>
+    <h2> comparison operators are used to compare two values and return a boolean result </h2>
+    <h2> so comparison operators always return either true or false </h2>
+    <br>
+
+    <h2> Examples of Comparison Strings</h2>
+    <p id="1"></p>
+    <h2> Examples of Comparison Different Data Types</h2>
+    <p id="2"></p>
+
+
+
+
+    <script>
+
+            //              Comparison Operators  
+            
+            //      >	    Greater than	            x > y
+            //      <	    Less than	                x < y
+            //      >=	    Greater than or equal to	x >= y
+            //      <=	    Less than or equal to	    x <= y
+            //      ==	    Equal to	                x == y
+            //      ===	    Equal value and type	    x === y
+            //      !=	    Not equal	                x != y
+            //      !==	    Not equal value or type	    x !== y
+
+            
+
+
+
+
+
+            //      comparing strings
+            //      when comparing strings, JavaScript compares them based on their Unicode values
+            //      and remember javascript dont have character data type
+
+            //      for example, 'A' is less than 'B' because the Unicode value of 'A' (65) is less than that of 'B' (66)
+            //      similarly, lowercase letters have higher Unicode values than uppercase letters, so 'a' is greater than 'Z'
+            //      also, longer strings are considered greater than shorter strings if the shorter string is a prefix of the longer one
+            //      for example, 'apple' is greater than 'app' because 'app' is a prefix of 'apple'
+            //      and if both are long stringss, just remember that non empty strings are true
+
+                let str1 = "A";
+                let str2 = "B";       
+                let str3 = "app";
+                let str4 = "apple";
+                let str5 = "A";
+                let str6 = "a";
+
+
+                document.getElementById("1").innerHTML = 
+                    (str1 < str2) + "<br>" +                 // true, because 'A' (65) is less than 'B' (66)
+                    (str3 < str4) + "<br>" +                 // true, because 'app' is a shorter than 'apple' and is a prefix of 'apple'
+                    (str5 < str6);                           // true, because 'A' (65) is less than 'a' (97) 
+
+            
+
+
+
+
+
+
+
+            //      comparing different data types
+            //      When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. 
+            //      An empty string converts to 0. A non-numeric string converts to NaN which is always false.
+            //      for strings that mix numbers and letter like "5abc", it converts to NaN too
+
+            {
+                let val1 = "5";
+                let val2 = 10;
+                let val3 = "";
+                let val4 = "hello";
+
+
+                document.getElementById("2").innerHTML = 
+                    (val1 < val2) + "<br>" +                       // true, because "5" is converted to 5 and 5 < 10
+                    (val3 == 0) + "<br>" +                         // true, because "" is converted to 0 and 0 == 0
+                    (val4 == NaN);                                 // false, because "hello" is converted to NaN and NaN is not equal to anything, including itself
+
+
+            }
+
+
+            // by the way () is used to group expressions and change the default precedence of operators
+            // and you dont need to use () in single comparisons like above examples
+
+    </script>
+
+
+</body>
+</html>

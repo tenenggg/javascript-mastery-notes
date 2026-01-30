@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript HTML DOM EventListener Examples</title>
+    <style>
+        #myDiv1, #myDiv2, #myDIV {
+            background-color: coral;
+            padding: 50px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 18px;
+        }
+        #myP1, #myP2 {
+            background-color: white; 
+            color: black;
+            font-size: 20px;
+            border: 1px solid;
+            padding: 20px;
+            margin-top: 10px;
+        }
+        button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript HTML DOM EventListener Examples</h1>
+
+    <!-- ======================================================
+         Example 1: Basic addEventListener with anonymous function
+         NOTE:
+         - Attach event using addEventListener
+         - Anonymous function directly inside event
+    ======================================================= -->
+    <h2>Example 1: Basic addEventListener with anonymous function</h2>
+    <button id="btn1">Try it</button>
+
+    <script>
+        document.getElementById("btn1").addEventListener("click", function() {
+            alert("Hello World!");
+        });
+
+
+        // as u can see, the function is defined directly inside the event listener
+        // we can also assign btn1 to a variable first,
+        // then use that variable to add the event listener
+
+        // like const myButton = document.getElementById("btn1");
+        // myButton.addEventListener("click", function() { ... });
+    </script>
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 2: addEventListener with named function
+         NOTE:
+         - Named function is separate
+         - Cleaner and reusable
+    ======================================================= -->
+    <h2>Example 2: Named function</h2>
+    <button id="btn2">Try it</button>
+
+    <script>
+        document.getElementById("btn2").addEventListener("click", sayHello);
+
+        function sayHello() {
+            alert("Hello World!");
+        }
+    </script>
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 3: Multiple event listeners on same element
+         NOTE:
+         - Two separate click functions on same button
+         - Both executed in order
+    ======================================================= -->
+    <h2>Example 3: Multiple click listeners</h2>
+    <button id="btn3">Try it</button>
+
+    <script>
+        var btn3 = document.getElementById("btn3");
+        btn3.addEventListener("click", firstFunc);
+        btn3.addEventListener("click", secondFunc);
+
+        function firstFunc() {
+            alert("Hello World!");
+        }
+        function secondFunc() {
+            alert("This function was also executed!");
+        }
+
+        // when btn3 is clicked, both firstFunc and secondFunc will run in order
+    </script>
+
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 4: Multiple event types on one element
+         NOTE:
+         - Mouseover, click, mouseout
+         - Updates demo paragraph
+    ======================================================= -->
+    <h2>Example 4: Multiple event types</h2>
+    <button id="btn4">Try it</button>
+    <p id="demo4"></p>
+
+    <script>
+        var btn4 = document.getElementById("btn4");
+        btn4.addEventListener("mouseover", funcMouseOver);
+        btn4.addEventListener("click", funcClick);
+        btn4.addEventListener("mouseout", funcMouseOut);
+
+        function funcMouseOver() {
+            document.getElementById("demo4").innerHTML += "Moused over!<br>";
+        }
+        function funcClick() {
+            document.getElementById("demo4").innerHTML += "Clicked!<br>";
+        }
+        function funcMouseOut() {
+            document.getElementById("demo4").innerHTML += "Moused out!<br>";
+        }
+
+        // when btn4 is interacted with, different functions run based on event type
+        // and display messages in demo4 paragraph
+
+        // in this case we use event types: mouseover, click, mouseout
+        // which is when u hover, click, and move mouse away respectively
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 5: Event on window object
+         NOTE:
+         - Event can be attached to window, not only elements
+         - Resize event triggers function
+    ======================================================= -->
+    <h2>Example 5: Window resize event</h2>
+    <p>Resize your browser window to see effect:</p>
+    <p id="demo5"></p>
+
+    <script>
+        window.addEventListener("resize", function() {
+            document.getElementById("demo5").innerHTML = Math.random();
+        });
+
+        // when window is resized, a random number is displayed in demo5 paragraph
+        // this shows that events can be attached to the window object itself
+        // and also the number is random on each resize, not based on size
+        // but it just to show that the event is triggered based on resize action
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 6: Passing parameters to event functions
+         NOTE:
+         - Wrap function call inside anonymous function to pass parameters
+    ======================================================= -->
+    <h2>Example 6: Passing parameters</h2>
+    <button id="btn6">Try it</button>
+    <p id="demo6"></p>
+
+    <script>
+        let a = 5;
+        let b = 7;
+        document.getElementById("btn6").addEventListener("click", function() {
+            multiply(a, b);
+        });
+
+        function multiply(x, y) {
+            document.getElementById("demo6").innerHTML = x * y;
+        }
+
+
+        // so a and b are defined outside the event listener
+        // and its values are passed to function in the event listener first
+        // then call the multiply function to pass those values and do the multiplication
+        // then the multiply function updates demo6 paragraph with the result
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 7: Event propagation (bubbling vs capturing)
+         NOTE:
+         - Bubbling: false
+         - Capturing: true
+         - Clicking white box triggers parent based on mode
+    ======================================================= -->
+    <h2>Example 7: Event propagation</h2>
+
+    <div id="myDiv1">
+        <h3>Bubbling:</h3>
+        <p id="myP1">Click me!</p>
+    </div>
+
+    <div id="myDiv2">
+        <h3>Capturing:</h3>
+        <p id="myP2">Click me!</p>
+    </div>
+
+    <script>
+        document.getElementById("myP1").addEventListener("click", function() {
+            alert("White element clicked!");
+        }, false);
+        document.getElementById("myDiv1").addEventListener("click", function() {
+            alert("Orange element clicked!");
+        }, false);
+
+
+
+
+        document.getElementById("myP2").addEventListener("click", function() {
+            alert("White element clicked!");
+        }, true);
+        document.getElementById("myDiv2").addEventListener("click", function() {
+            alert("Orange element clicked!");
+        }, true);
+
+
+        // in the first case (bubbling), clicking the white box triggers its own event first
+        // then the event of the orange parent box
+
+        // in the second case (capturing), clicking the white box triggers the orange parent box event first
+        // then the event of the white box itself
+
+        // the difference is due to the third parameter in addEventListener
+        // which is false for bubbling and true for capturing
+        // and the result is the order in which the events are triggered
+
+        // so bubbling goes from inner element to outer element
+        // while capturing goes from outer element to inner element
+
+        // so resulting in different alert orders when clicking the white boxes
+        // for bubling: "White element clicked!" then "Orange element clicked!"
+        // for capturing: "Orange element clicked!" then "White element clicked!"
+
+        // because white box is inside orange box in both cases
+        // so white box is the inner element and orange box is the outer element
+    </script>
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 8: removeEventListener
+         NOTE:
+         - Remove event after it's attached
+         - Only works with named function
+    ======================================================= -->
+    <h2>Example 8: removeEventListener</h2>
+
+    <div id="myDIV">
+        <p>Move mouse inside this box to generate a random number.</p>
+        <button id="btn8">Remove Event</button>
+    </div>
+    <p id="demo8"></p>
+
+    <script>
+        var box = document.getElementById("myDIV");
+        box.addEventListener("mousemove", randomNum);
+
+        function randomNum() {
+            document.getElementById("demo8").innerHTML = Math.random();
+        }
+
+        document.getElementById("btn8").addEventListener("click", function() {
+            box.removeEventListener("mousemove", randomNum);
+            alert("Event removed!");
+        });
+
+
+        // so initially there is a mousemove event on the box
+        // which generates a random number in demo8 paragraph when mouse moves inside the box
+
+        // but when the "Remove Event" button is clicked
+        // the mousemove event is removed from the box
+        // so moving the mouse inside the box no longer generates random numbers
+        
+        // note that removeEventListener only works with named functions
+
+    </script>
+
+
+
+
+</body>
+</html>

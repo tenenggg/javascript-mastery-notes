@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+    <h1> Hoisting is JavaScript's default behavior of moving declarations to the top.</h1>
+    
+    <ul>
+        <li><h3>In JavaScript, a variable can be declared after it has been used.</h3></li>
+<li><h3>This is called hoisting and it applies to all keywords: var, let, and const.</h3></li>
+<li><h3>Hoisting moves declarations to the top of their scope before code execution.</h3></li>
+<li><h3>But the differences between var, let, and const are important.</h3></li>
+<li><h3>Only var is initialized with undefined during hoisting, while let and const are not initialized (they're in the Temporal Dead Zone).</h3></li>
+<li><h3>So if you access a var variable before its initialization line, it will have the value undefined (no error).</h3></li>
+<li><h3>But if you access let or const before their initialization line, it will cause a ReferenceError: Cannot access before initialization.</h3></li>
+<li><h3>If a variable is never declared anywhere in the code, accessing it will cause a ReferenceError: variable is not defined (for all three keywords).</h3></li>
+<li><h3>Additionally, declaring const without initializing it (const x;) causes a SyntaxError, while let can be declared without initialization (let x; is valid and x becomes undefined).</h3></li>
+
+    </ul>
+
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+    <p id="4"></p>
+    <p id="5"></p>
+    <p id="6"></p>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <tr>
+    <th>Keyword</th>
+    <th>Hoisted?</th>
+    <th>Initialized?</th>
+    <th>Access Before Initialized</th>
+    <th>Declare Without Initialization</th>
+  </tr>
+  <tr>
+    <td>var</td>
+    <td>Yes</td>
+    <td>undefined</td>
+    <td>undefined (no error)</td>
+    <td>✓ Valid</td>
+  </tr>
+  <tr>
+    <td>let</td>
+    <td>Yes</td>
+    <td>No (TDZ)</td>
+    <td>ReferenceError</td>
+    <td>✓ Valid</td>
+  </tr>
+  <tr>
+    <td>const</td>
+    <td>Yes</td>
+    <td>No (TDZ)</td>
+    <td>ReferenceError</td>
+    <td>✗ SyntaxError</td>
+  </tr>
+</table>
+
+
+
+
+
+  <script>
+
+    // Example 1: var - normal declaration then assignment
+    var x;
+    x = 5;
+    document.getElementById("1").innerHTML = x;      
+    
+
+
+
+
+    // Example 2: var - assignment before declaration (hoisting)
+    x2 = 5;
+    document.getElementById("2").innerHTML = x2;      
+    var x2;
+
+    // in the second example, the declaration is hoisted to the top
+    // so the code is the same as the first example
+    // so the value can be called like normal
+
+
+
+
+
+    // Example 3: var - accessing before assignment (undefined)
+    document.getElementById("3").innerHTML = x3;      
+    var x3;
+
+    // in this example, x3 is declared but not assigned a value
+    // for var it's both hoisted to the top and initialized with undefined
+    // so the output is undefined, when there's no assignment
+
+
+
+
+
+    // Example 4: let and const - accessing before declaration (ReferenceError)
+    try {
+        document.getElementById("4").innerHTML = x4;
+        let x4 = 10;
+    } catch(error) {
+        document.getElementById("4").innerHTML = "ReferenceError: " + error.message;
+    }
+
+    
+    // let and const are hoisted but NOT initialized (Temporal Dead Zone)
+    // accessing them before the declaration line causes ReferenceError
+
+
+
+
+    
+    // Example 5: let - declare without initialization (Valid)
+    let x5;
+    x5 = 15;
+    document.getElementById("5").innerHTML = x5;
+    // let can be declared without initialization
+    // it becomes undefined until assigned
+
+
+    // Example 6: const - must be initialized
+    const x6 = 20;
+    document.getElementById("6").innerHTML = x6;
+    // const MUST have a value when declared
+    // Uncommenting below would cause SyntaxError:
+    // const x7;
+
+
+
+
+
+    // key words : before(arrangement), without(existence), access(using or calling)
+</script>
+
+
+
+</body>
+</html>

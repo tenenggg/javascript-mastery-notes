@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Strict Mode Notes</title>
+</head>
+
+<body>
+
+
+
+
+
+
+    <script>
+
+            // ====================================================
+            // JAVASCRIPT STRICT MODE (Based on W3Schools)
+            // ====================================================
+
+            // Strict mode makes JavaScript code run in a stricter way
+            // It helps you:
+            // - write cleaner code
+            // - avoid silent errors
+            // - catch mistakes early
+            // - prevent unsafe actions
+
+
+
+
+
+
+            // 1. Enabling Strict Mode
+            // Strict mode is declared by writing "use strict";
+            // It can be used:
+            // 1) Globally
+            // 2) Inside a function
+
+
+
+
+
+            // 1.1 Global Strict Mode
+            "use strict";
+
+            // Now the whole script runs in strict mode
+
+
+
+
+
+
+            // 1.2 Function Strict Mode
+            function strictFunction() {
+                "use strict";
+                // Strict mode only applies inside this function
+            }
+
+
+
+
+
+
+            // 2. Strict Mode Prevents Undeclared Variables
+            // In normal JS, assigning to an undeclared variable creates a global variable
+            // In strict mode, this causes an error
+
+
+
+
+
+            // normal JS (not strict)
+            // x = 10;                      // ❌ Creates global variable silently
+
+            // strict mode
+            // y = 20;                      // ❌ ReferenceError
+
+
+
+
+
+
+            // 3. Strict Mode Prevents Deleting Variables
+            // Deleting variables or functions is not allowed
+
+
+
+
+
+            let a = 5;
+            // delete a;                   // ❌ SyntaxError
+
+            function testDelete() {}
+            // delete testDelete;          // ❌ SyntaxError
+            // try uncommenting above lines to see errors
+
+
+
+
+
+            // 4. Strict Mode Prevents Duplicate Parameter Names
+            // Function parameters must be unique
+
+
+
+
+
+            // normal JS (allowed)
+            // function sum(x, x) { return x + x; }
+
+            // strict mode
+            // function sum(x, x) {         // ❌ SyntaxError (try uncommenting)
+            //     return x + x;
+            // }
+
+
+
+
+
+
+            // 5. Strict Mode Disallows Octal Literals
+            // Numbers starting with 0 are not allowed
+            // javascript numbers that start with 0 are considered octal (base 8) numbers
+
+
+
+
+            // normal JS
+            // let num = 010;              // 8 (octal)
+
+            // strict mode
+            // let num = 010;              // ❌ SyntaxError
+
+
+
+
+
+
+            // 6. Strict Mode Disallows Octal Escape Characters
+            // octal escape is a way to represent characters inside strings using octal numbers
+            // starting with a backslash \ followed by one, two, or three octal digits (0-7)
+
+
+
+
+            // normal JS
+            // let text = "\010";           // octal escape
+            // \010 supposed to represent "A" character but in strict mode its not allowed
+
+            // strict mode
+            // let text = "\010";           // ❌ SyntaxError
+
+
+
+
+
+
+            // 7. Strict Mode Disallows Writing to Read-Only Properties
+
+
+
+
+
+            const obj = {};
+            Object.defineProperty(obj, "x", {
+                value: 10,
+                writable: false
+            });
+
+            // obj.x = 20;                 // ❌ TypeError
+
+
+
+
+
+
+            // 8. Strict Mode Disallows Deleting Undeletable Properties
+
+
+
+
+
+            // delete Object.prototype;    // ❌ TypeError
+
+
+
+
+
+
+            // 9. Strict Mode Disallows Using Reserved Keywords
+            // Future reserved keywords cannot be used as variable names
+
+
+
+
+
+            // let public = 10;            // ❌ SyntaxError
+            // let private = 20;           // ❌ SyntaxError
+            // let interface = 30;         // ❌ SyntaxError
+
+
+
+
+
+
+            // 10. Strict Mode Changes "this" Behavior
+            // In normal JS, "this" refers to the global object (window)
+            // In strict mode, "this" is undefined in functions
+
+
+
+
+
+            function normalThis() {
+                console.log(this);        // undefined in strict mode
+            }
+            normalThis();
+
+
+
+
+
+
+            // 11. Strict Mode in Objects
+            // Strict mode does NOT apply automatically inside object methods, means it works normally
+
+
+
+
+
+            const person = {
+                name: "Ali",
+                sayHi: function () {
+                    console.log(this.name);   // Works normally
+                }
+            };
+
+            person.sayHi();
+
+
+
+
+
+
+            // 12. Strict Mode is NOT Allowed in Older Browsers
+            // Browsers that do not support strict mode will ignore it
+            // This makes it safe to use
+
+
+
+
+
+
+            // 13. Why Use Strict Mode?
+            // ✔ Prevents common coding mistakes
+            // ✔ Makes debugging easier
+            // ✔ Improves code quality
+            // ✔ Prepares code for future JavaScript versions
+
+
+
+
+
+
+            // --------------------------------------------
+            // QUICK SUMMARY (W3Schools Style)
+            // --------------------------------------------
+            // "use strict";           → enables strict mode
+            // No undeclared variables → must use let/const/var
+            // No duplicate params     → function(a, a) ❌
+            // No octal numbers        → 010 ❌
+            // No deleting variables   → delete x ❌
+            // this in functions       → undefined
+            // Safer & cleaner code
+            // ============================================
+
+
+
+
+
+    </script>
+</body>
+</html>

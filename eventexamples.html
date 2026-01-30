@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Event Handling Examples</title>
+</head>
+
+<body>
+
+    <h1>JavaScript HTML DOM Events Examples</h1>
+
+
+
+
+    <!-- ======================================================
+         Example 1: inline event handler (inline JS in HTML)
+         NOTE:
+         - JavaScript code is written directly in HTML
+         - No function involved
+         - Old-style, not recommended for large projects
+    ======================================================= -->
+    <h2 onclick="this.innerHTML='Ooops!'">Click on this text!</h2>
+
+
+
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 2: inline event handler calling a JS function
+         NOTE:
+         - Event is attached in HTML
+         - Logic is separated into JavaScript
+         - Still mixes HTML and JS
+    ======================================================= -->
+    <h2 onclick="changeText(this)">Click on this text!</h2>
+
+    <script>
+        function changeText(el) {
+            el.innerHTML = "Ooops!";
+        }
+
+
+        // el is the element that triggered the event, why we dont use event here
+        // because in inline event handlers, "this" refers to the element itself
+        // so we pass "this" to the function to get that element
+        // then we can manipulate it inside the function
+
+
+        // if we use event instead, it would refer to the event object
+        // which contains info about the event, but not the element directly
+        // therefore we need to use event.taget to get the element, and not just event
+        // el is not the default way, but it works fine here, u can name it anything : e, obj, element, etc, juse other than event
+    </script>
+
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 3: inline event handler + DOM manipulation
+         NOTE:
+         - Event still attached using HTML attribute
+         - Function uses DOM API (getElementById)
+         - Not addEventListener yet
+    ======================================================= -->
+    <p id="demo1">Click the button to display the date.</p>
+
+    <button onclick="displayDate1()">The time is?</button>
+
+    <script>
+        function displayDate1() {
+            document.getElementById("demo1").innerHTML = Date();
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 4: DOM Level 0 event handler (element.onclick)
+         NOTE:
+         - Event attached using JavaScript
+         - Only one handler allowed per event
+         - Older JS method (before addEventListener)
+    ======================================================= -->
+    <p>Click "Try it" to execute the displayDate() function.</p>
+    <button id="myBtn">Try it</button>
+
+    <p id="demo2"></p>
+
+    <script>
+        document.getElementById("myBtn").onclick = displayDate2;
+
+        function displayDate2() {
+            document.getElementById("demo2").innerHTML = Date();
+        }
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+        Example 5: JavaScript function used as an event handler
+        NOTE:
+        - The function itself is just a normal JavaScript function
+        - It becomes an event handler when attached to an event
+        - In this example, it is attached via the button's onclick attribute
+        - It runs only when the button is clicked
+        ======================================================= -->
+    <p id="demo3"></p>
+
+    <button onclick="checkCookies()">Check Cookies</button>
+
+    <script>
+        function checkCookies() {
+            let text = "";
+
+            if (navigator.cookieEnabled == true) {
+                text = "Cookies are enabled.";
+            } else {
+                text = "Cookies are not enabled.";
+            }
+
+            document.getElementById("demo3").innerHTML = text;
+        }
+
+
+        // navigator.cookieEnabled is a method that checks if cookies are enabled in the browser
+        // it returns true or false
+        // its a default property of the navigator object in JavaScript, and can be used directly
+        // no need to define it ourselves
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 6: inline oninput event handler
+         NOTE:
+         - Fires every time the input value changes
+         - Good for live updates
+         - Event attached in HTML
+    ======================================================= -->
+    <br><br>
+    Enter your name:
+    <input type="text" id="fname1" oninput="upperCase1()">
+
+    <p>Transforms input to uppercase while typing.</p>
+
+    <script>
+        function upperCase1() {
+            const x = document.getElementById("fname1");
+            x.value = x.value.toUpperCase();
+        }
+
+
+        // oninput method event is used to trigger the function every time the user types or changes the input field
+        // so as the user types, the function runs and transforms the input to uppercase in real-time
+
+        // also u can see we assign x to the input id element
+        // then we use x.value to get and set the value of the input field
+        // x.value gets the current value, and we set it to the uppercase version using toUpperCase() method
+    </script>
+
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 7: inline onchange event handler
+         NOTE:
+         - Fires only when input loses focus
+         - Different from oninput
+         - Still inline event handling
+    ======================================================= -->
+    <br><br>
+    Enter your name:
+    <input type="text" id="fname2" onchange="upperCase2()">
+
+    <p>Transforms input to uppercase when leaving the field.</p>
+
+    <script>
+        function upperCase2() {
+            const x = document.getElementById("fname2");
+            x.value = x.value.toUpperCase();
+        }
+
+
+        // here we have the same function as before
+        // but this time we use onchange event instead of oninput
+        // so the function only runs when the user leaves the input field (loses focus)
+        // not while typing like oninput
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 8: inline mouseover and mouseout handlers
+         NOTE:
+         - Mouse hover events
+         - "this" passes the current element
+         - Inline HTML events
+    ======================================================= -->
+    <div onmouseover="mOver(this)" onmouseout="mOut(this)"
+         style="background-color:#D94A38;width:120px;height:20px;padding:40px;">
+        Mouse Over Me
+    </div>
+
+    <script>
+        function mOver(el) {
+            el.innerHTML = "Thank You";
+        }
+
+        function mOut(el) {
+            el.innerHTML = "Mouse Over Me";
+        }
+
+
+        // here we use onmouseover and onmouseout events
+        // onmouseover triggers when the mouse pointer enters the element
+        // onmouseout triggers when the mouse pointer leaves the element
+        // "this" keyword refers to the current element that triggered the event
+
+        // and el is the parameter that receives that element
+        // so we can manipulate the element inside the functions
+        // like example before, we dont use event here because "this" already gives us the element directly
+        // if we used event, we would need to do event.target to get the element
+        // but using "this" is more straightforward in inline event handlers
+    </script>
+
+
+
+
+
+
+    <!-- ======================================================
+         Example 9: inline mousedown and mouseup handlers
+         NOTE:
+         - Detects mouse press vs release
+         - Often used for press effects
+         - Inline event handling
+    ======================================================= -->
+    <div onmousedown="mDown(this)" onmouseup="mUp(this)"
+         style="background-color:#D94A38;width:90px;height:20px;padding:40px;">
+        Click Me
+    </div>
+
+    <script>
+        function mDown(el) {
+            el.style.backgroundColor = "#1ec5e5";
+            el.innerHTML = "Release Me";
+        }
+
+        function mUp(el) {
+            el.style.backgroundColor = "#D94A38";
+            el.innerHTML = "Thank You";
+        }
+
+
+        // similar to the previous example
+        // we have same functionality but with mousedown and mouseup events and extra style change
+        // mousedown triggers when the mouse button is pressed down on the element
+        // mouseup triggers when the mouse button is released over the element
+        // we change the background color and text accordingly to give visual feedback on press and release
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+
+
+    <div>
+
+            <h1> Keyboard Events happen when the user presses a key on the keyboard</h1>
+            <ul>
+                <li>keydown (key is pressed down)</li>
+                <li>keyup (key is released)</li>
+                <li>keypress (key is pressed down and held, deprecated, use keydown instead
+                    Still works for now, but you should NOT use it anymore because 
+                    it will be removed or replaced in the future)</li>
+            </ul>
+
+            <p>keypress only fires for character keys (a or 5), not for control keys(alst or backspace). 
+                Developers are advised to use keydown or keyup instead.</p>
+
+    </div>
+s
+
+
+    <div>
+
+        <input id="k" type="text" placeholder="Press a key here!">
+        <!-- input is creating a text input box-->
+        <!-- type="text" is specifying that the input field is for text input, if there's no type attribute, the default is text -->
+        <!-- placeholder is providing a gray hint text that describes the expected value of the input field, and dissapear when you start typing -->
+        <p id="1"></p>   
+
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+
+        const k = document.getElementById("k");
+
+        k.addEventListener("keydown", function(event){  // when key is pressed down event is triggered
+
+            document.getElementById("1").innerHTML = 
+            "you pressed " + event.key ;   // event.key returns the value of the key pressed
+
+
+            
+            if (event.code === "Enter") {
+                 document.getElementById("demo").innerHTML = "Enter was pressed!";  //displays message when enter key is pressed
+            }
+
+            // event.code returns the physical key on the keyboard, regardless of the keyboard layout or language settings
+            // So even if you are using a different keyboard layout, pressing the same physical key will always return the same code value.
+
+        });
+
+
+        /*
+         
+            Property	        Description	                                       When pressing Z
+            ------------------- -------------------------------------------------- ----------------------
+            event.key	        Returns the value of the key.                      Returns z
+                                Can vary based on language settings.	           (or Z if shift is held)
+                                                                        
+            event.code	        Returns the key code.                              Always returns "KeyZ"
+                                 Constant, regardless of language settings.	
+    
+        */
+    </script>
+
+    
+
+
+    
+</body>     
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    
+    <h1>JavaScript String Templates</h1>
+    
+    
+    <p id="1"></p>
+
+
+
+
+
+
+
+    <script>
+
+
+
+
+        {
+
+
+            // Template Strings allow variables in strings and provide an easy way to interpolate variables in strings   ${variable}
+
+            let firstName = "John";
+            let lastName = "Doe";
+            let text = `Welcome ${firstName}, ${lastName}!`;       
+        
+
+
+            // Template Strings allow interpolation of expressions in strings:
+            
+            let price = 10;
+            let vat = 0.25;
+            let total = `Total: ${(price * (1 + vat)).toFixed(2)}`;   // we can't ${} only the variable, because it's an expression
+
+
+
+            // HTML Templates
+        
+            let header = "Template Strings";
+            let tags = ["template strings", "javascript", "es6"];
+
+            let html = `<h2>${header}</h2><ul>`;   // ul for the wrapping list starts here
+
+            for (const x of tags) {                // Loop directly over array items kinda like tags.length
+            html += `<li>${x}</li>`;
+            }
+
+            html += `</ul>`;                       // ul ends here
+
+
+
+
+            document.getElementById("1").innerHTML = text;         
+            document.getElementById("1").innerHTML += "<br>" + total;     
+            document.getElementById("1").innerHTML += "<br>" + html;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

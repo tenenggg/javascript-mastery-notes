@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    
+
+    <h1>Javascript Array search</h1>
+
+
+
+
+
+    <script>
+
+
+
+    const fruits = ["Apple", "Orange", "Apple", "Mango"];
+
+    console.log(fruits.indexOf("Apple"));         // returns 0, first occurrence of "Apple"
+    console.log(fruits.indexOf("Apple", 1));      // returns 2, searching from index
+    console.log(fruits.lastIndexOf("Apple"));     // returns 2, last occurrence of "Apple"
+    console.log(fruits.lastIndexOf("Apple", 1));  // returns 0, searching backwards  from index 1
+
+    //  if the element is not found, both indexOf() and lastIndexOf() return -1
+    // the format of both methods is : array.indexOf(item, start) and array.lastIndexOf(item, start)
+    // where item is the element to search for, and start is optional index to start the search (for lastIndexOf, it searches backwards from that index)
+
+
+
+
+
+    console.log(fruits.includes("Mango"));        // returns true
+    console.log(fruits.includes("Banana"));       // returns false
+    console.log(fruits.includes("Apple", 1));    // returns true, searching from index 1
+    // .includes() method checks if an array contains a certain element, returns true or false
+    // format: array.includes(item, start)
+
+
+
+
+
+
+
+    const numbers = [1, 2, 3, 4, 5];
+    let first = numbers.find(myFunction);
+
+    function myFunction(value, index, array) {
+     return value > 18;                               // checks each element until it finds one greater than 18
+    }                         
+
+    console.log(first);
+
+    // .find() method returns the value of the first element that passes a test function
+    // format: array.find(function(element, index, array){ ... })
+
+
+
+
+    // same as normal loop :
+    let first2;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] > 18) {
+            first2 = numbers[i];
+            break;
+        }
+    }
+
+    console.log(first2);
+    // both will return undefined because no element is greater than 18
+    // you can also use normal function instead of find method, but find is more concise and easier to read
+
+    function finding18(numberss){
+        for ( i=0 ;i< numberss.length; i++){
+
+            if (numberss[i] > 18){
+                return numberss[i];
+            }
+        }
+    }
+    console.log(finding18(numbers)); // undefined too
+
+
+    // so as you can see this search methods are basically the same, its just different way of writing it
+    // which method u will use it like (variable).methodName() 
+    // while the normal function is like functionName(variable)
+    // or u can use loops directly without any method or function
+
+
+
+
+
+
+
+
+
+
+    const numbers2 = [4, 9, 16, 25, 29];
+
+    function myFunction(value, index, array) {
+        return value > 18;
+    }
+
+    console.log(numbers2.findIndex(myFunction)); 
+    // .findIndex() method returns the index of the first element that passes a test function
+    // format: array.findIndex(function(element, index, array){ ... })
+
+    // or to be more short u can use arrow function :
+
+    const numbers3 = [4, 9, 16, 25, 29];
+    let firstMore18  = (x) => x > 18;          // arrow function to check if value is greater than 18
+    console.log(numbers3.findIndex(firstMore18));     
+    //MORE SHORT VERSION
+
+    console.log(numbers3.findIndex(x => x > 18));   // just one line arrow function inside findIndex method
+
+
+
+
+    const temp = [27, 28, 30, 40, 42, 35, 30];
+    let high = temp.findLast(x => x > 40);
+    console.log(high);                     
+    // .findLast() method returns the value of the last element that passes a test function
+    // format: array.findLast(function(element, index, array){ ... })
+
+    let pos = temp.findLastIndex(x => x > 40);
+    console.log(pos);                       
+    // .findLastIndex() method returns the index of the last element that passes a test function
+    // format: array.findLastIndex(function(element, index, array){ ... })
+
+
+
+
+
+
+    // maybe u having problems to differentiate and doesnt see the method working, and only see the normal function working
+    // so here is examples of same function but different results using different methods :
+
+    // SAME function, DIFFERENT results depending on the method
+
+    // Array:
+    // const numbers = [4, 9, 16, 25, 29];
+
+    // Condition function (rule):
+    // x => x > 18
+    // returns true if number is greater than 18
+
+    // find()
+    // → returns the FIRST VALUE that matches the condition
+    // numbers.find(x => x > 18);
+    // Result: 25
+
+    // findIndex()
+    // → returns the INDEX of the first matching value
+    // numbers.findIndex(x => x > 18);
+    // Result: 3
+
+    // findLast()
+    // → returns the LAST VALUE that matches the condition
+    // numbers.findLast(x => x > 18);
+    // Result: 29
+
+    // findLastIndex()
+    // → returns the INDEX of the last matching value
+    // numbers.findLastIndex(x => x > 18);
+    // Result: 4
+
+    // KEY IDEA:
+    // function = decides true / false (the condition)
+    // method   = decides WHAT is returned and FROM WHERE
+
+
+
+
+
+
+    
+
+    // and btw u might be weird about function parameters like  myFunction(value, index, array)
+    // those names, actually doesnt matter, u can name it anything but we do that for better understanding
+    // the important part is the order of the parameters
+    // and this format are usually used in array methods like :
+    
+    /*
+    - forEach()
+    - map()
+    - filter()
+    - find()
+    - findIndex()
+    - some()
+    - every()
+    - reduce()  // special case: (accumulator, value, index, array)
+    */
+
+    
+    /*
+    1️⃣ Use ONLY value
+    - When you only care about the element itself
+    - Most common case
+
+    2️⃣ Use value + index
+    - When you need the position of the element
+
+    3️⃣ Use value + index + array
+    - When you need info about the whole array
+    (length, last item check, comparison, etc.)
+    */
+
+
+
+    // EXAMPLES :
+
+
+        const nums = [10, 20, 30];
+
+
+        /* ---------- 1 PARAMETER ---------- */
+        // Only need the value
+        nums.forEach(function(value) {
+        console.log(value);
+        });
+
+
+        /* ---------- 2 PARAMETERS ---------- */
+        // Need value AND position
+        nums.forEach(function(value, index) {
+        console.log(index, value);
+        });
+
+
+        /* ---------- 3 PARAMETERS ---------- */
+        // Need value, position, AND array info
+        nums.forEach(function(value, index, array) {
+        if (index === array.length - 1) {
+            console.log(value, "is the last item");
+        }
+        });
+
+
+        // you also can just put 3 parameters eventhough u only need 1 or 2 parameters
+        // just leave the unused parameters as it is
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

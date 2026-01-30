@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+        <h1> Conditional Statements allow us to perform different actions for different conditions. </h1>
+        <h1> Conditional statements run different code depending on true or false conditions.</h1>
+        <h1> Conditional statements include: </h1>
+            <h2> if </h2>
+            <h2> if...else </h2>
+            <h2> if...else if...else </h2>
+            <h2> switch </h2>
+            <h2> ternary (? :) </h2>
+
+
+            <h1 id="1"></h1>
+            <h1 id="2"></h1>
+
+            <script>
+
+
+
+                // Use if to specify a code block to be executed, if a specified condition is true.
+                // Use else to specify a code block to be executed, if the same condition is false.
+                // Use else if to specify a new condition to test, if the first condition is false.
+
+                {
+                let age = 17;
+                let country = "USA";
+                let hasLicense = true;
+
+
+                if (age >= 0)  {                                                     // basic if
+                    if (age >= 18) {                                                 // nested if
+                    console.log("You are an adult");                                 // statement
+                    } 
+                    else if (age >= 13) {                                            // else if
+                        if (country === "USA") {                                     // nested if
+                            if (age >= 16 && hasLicense) {                           // nested if with logical AND (&&) and && in statement means both conditions must be true
+                                console.log("You can drive in the USA");             // statement
+                            } 
+                            else {                                                   // nested else
+                                console.log("You cannot drive in the USA");          // statement
+                            }
+                        }   
+                        else   {                                                     // nested else
+                            console.log("Driving rules depend on country");          // statement
+                            }
+                    }   
+                    else   {                                                         // else
+                        console.log("You are a child");                              // statement
+                        }
+                } 
+
+                else {                                                               // basic else
+                    console.log("Invalid age");                                      // statement
+                }
+
+ 
+            }    // or you can just use logical operators && or || directly in the conditions without nesting ifs
+                 // example  if (country == "USA" && age >= 16)  instead of if (country === "USA") { if (age >= 16) { ... } }
+
+            
+
+
+
+
+
+
+
+
+
+
+            /* 
+
+            Use switch to specify many alternative code blocks to be executed.
+            Based on a condition, switch selects one or more code blocks to be executed.
+            switch executes the code blocks that matches an expression.
+            switch is often used as a more readable alternative to many if...else if...else statements, 
+            especially when dealing with multiple possible values.
+
+            */
+             
+            {
+
+                let day = 3;
+
+                switch (day) {                                       // switch statement
+                    case 1:                                          // case
+                        console.log("Monday");                       // statement
+                        break;                                       // break means stop the execution in the switch block
+                    case 2:                                          
+                        console.log("Tuesday");                      
+                        break;                                       // without break, it will continue to execute the next case even if it doesn't match
+                    case 3:                                          
+                        console.log("Wednesday");                    
+                        break;                                       
+                    case 4:                                          
+                        console.log("Thursday");                     
+                        break;                                       
+                    case 5:                                         
+                        console.log("Friday");                       
+                        break;                                       
+                    default:                                         // default case if none of the cases match like 'else' in if else
+                        console.log("Invalid day");                  // not necessary to put break in the last case
+                }
+            }
+
+            // default  doesn't have to be at the end, it can be anywhere but remember to put break if default is not the last case
+
+            /*  0 → Sunday
+                1 → Monday
+                2 → Tuesday
+                3 → Wednesday
+                4 → Thursday
+                5 → Friday
+                6 → Saturday                so the number represents the day 0-6 of the week
+            */
+
+            {
+                let text;
+
+                switch (new Date().getDay()) {
+                    case 4:
+                    case 5:
+                        text = "Soon it is Weekend";               // different switch cases to use the same code/statement 
+                        break;                                     // means different requirements, same output
+                    case 0:
+                    case 6:
+                        text = "It is Weekend";
+                        break;
+                    default:
+                        text = "Looking forward to the Weekend";
+                }
+            }
+
+            {
+                let x = "0";                                        // x is a string "0"
+
+                switch (x) {
+                    case 0:                                           // case 0 is number 0                             
+                        text = "Off";                            
+                        break;
+                    case 1:                                          // case 1 is number 1
+                        text = "On";
+                        break;
+                    default:                                        // this is executed because x is a string "0" not number 0
+                        text = "No value found";                    // switch uses strict comparison (===) so the type must also match
+                }
+            }
+
+
+
+
+
+
+
+
+            // Use (? :) (ternary) as a shorthand for if...else.
+            // The condition is placed before the question mark (?),
+            // the code to be executed if the condition is true comes after the question mark (?),
+            // and the code to be executed if the condition is false comes after the colon (:).
+            // (condition) ? expression1 : expression2
+            // which expression 1 is when true, expression 2 is when false
+
+
+
+            /* Parameter	                    Description
+              
+               condition	                    Required.
+                                                The condition to be tested.
+                                                An expression that evaluates to true or false.
+        
+                ?	                            Required.
+                                                The operator separating the condition from the expressions.
+                expression1	                    Required.
+                                                The value to return if the 'condition' is 'true'.
+                
+                :	                            Required.
+                                                The operator separating the expressions.
+                
+                expression2	                    Required.
+                                                The value to return if the 'condition' is 'false'.
+            */
+
+
+            {
+                let price = 10;
+                let isMember = false;
+                
+                let discount = isMember ? 0.2 : 0;
+                let total = 10 - (price * discount)
+
+                console.log("Total price:", total);               // statement
+
+
+                /*  
+    
+                // first it checks the condition isMember
+                // if isMember is true, it returns 0.2 (20% discount)
+                // if isMember is false, it returns 0 (no discount)
+                // then it calculates the total price by subtracting the discount from the original price
+
+                
+                */  
+
+            }
+
+            
+
+
+
+
+
+
+
+
+
+            // some notes :
+            // const hour = new Date().getHours(); 
+            // what happened here is we creating a new Date object and immediately calling the getHours() method on it to get the current hour in 24-hour format (0-23)
+            // why we can't directly call getHours() without new Date() is because getHours() is a method of the Date object, not a standalone function
+            // so we need to create an instance of the Date object first using new Date() and then call getHours() on that instance to retrieve the current hour
+
+            // theres'a also other method like getMinutes(), getSeconds(), getDate(), getMonth(), getFullYear() etc to get different parts of the date and time
+            // and u can pair it with switch or if else 
+
+            const hour = new Date().getHours(); 
+            let greeting;
+
+            if (hour < 18) {
+            greeting = "Good day";
+            } else {
+            greeting = "Good evening";
+            }
+            document.getElementById("1").innerHTML = greeting;
+
+
+
+
+
+
+
+
+
+
+
+            // some notes :
+            // Math.random() is a method that returns a random floating-point number between 0 (inclusive) and 1 (exclusive).
+            // so the output is random, u can refresh page to see different results
+
+            let text;
+            if (Math.random() < 0.5) {
+            text = "<a href='https://w3schools.com'>Visit W3Schools</a>";
+            } else {
+            text = "<a href='https://wwf.org'>Visit WWF</a>";
+            }
+            document.getElementById("2").innerHTML = text;
+
+
+
+            </script>
+
+
+            <!--
+
+                an if or else scope can be only one statement without curly braces 
+                that one statement is count after the if else condition and ends with a semicolon ;
+
+                EXAMPLE : 
+                
+                if (i === 5) break;                ends at the first line;
+                console.log(i);
+
+
+                if (i === 5)                       ends at the second line;
+                break; 
+                console.log(i);
+            ->
+ 
+</body>
+</html>

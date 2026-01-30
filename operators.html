@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    <h1 id="1"></h1>
+    <h1 id="2"></h1>
+    <h2 id="3"></h2>
+    <h2 id="4"></h2>
+    <h2 id="5"></h2>
+    <h2 id="6"></h2>
+    <h2 id="7"></h2>
+    <h2 id="8"></h2>
+    <h2 id="9"></h2>
+    <h2 id="10"></h2>
+
+    <script>
+
+            let text1 = 'Police : Ben Dover'
+            let text2 = "Phat"
+            let text3 = 'Nikker'
+
+            let text4 = "The Nigger : what the"
+                text4 += " fack"
+        
+
+            document.getElementById("1").innerText = text1 + " " + text2 + " " + text3;
+            document.getElementById("2").innerText  = text4;
+
+            // '+' is basically an action to call the literal value of a variable
+
+            // the += which is adding the before value is applied to all +=*/% and ** 
+            // eg x+=y is x=x+y
+
+            // by the way ** is power, like 5**4 is 5x5x5x5
+            // same goes to Math.pow(5,4) 
+            // and these methods can applied to identifiers too no just literal value
+
+
+    </script>
+
+            
+
+    <script>
+
+            let x = 5;
+            
+            document.getElementById("3").innerHTML = (x > 8);
+            document.getElementById("4").innerHTML = (x < 8);
+            document.getElementById("5").innerHTML = (x == 8);                // equal to
+            document.getElementById("6").innerHTML = (x === 8);               // equal to value and type
+            document.getElementById("7").innerHTML = (x != 8);                // not equal to
+            document.getElementById("8").innerHTML = (x !== 8);               // not equal to value or not equal to type
+            document.getElementById("9").innerHTML = (x >= 8);                
+            document.getElementById("10").innerHTML = (x <= 8);               
+
+            // x=8 is assignment operator but x==8 adn x===8 is comparison operator
+    </script>
+
+
+
+
+
+
+
+
+
+    <script>
+
+        // The ?? operator returns the right operand when the left operand is nullish (null or undefined), 
+        // otherwise it returns the left operand.
+
+        
+        let name = null;
+        let text = "missing";
+        let result = name ?? text;
+
+        console.log("The name is " + result);  // The name is missing
+
+        
+        // When programming, a lot of values can be falsey (like 0, empty strings, false, undefined, null, NaN).
+
+        // However, sometimes you want to check if a variable is nullish (either undefined or null), 
+        // like when it is okay for a variable to be an empty string, or a false value. Then you can use the nullish coalescing operator.
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

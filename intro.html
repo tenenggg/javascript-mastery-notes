@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <h1>Welcome to My Website</h1>
+  <p>This is a simple HTML document.</p>
+
+
+  <p id="1"> Javascript can change HTML content </p>                                                              <!--assign id into the html paragraph-->
+
+  <button onclick='document.getElementById("1").innerHTML = "HTML content changed!"'>Click Me</button>            <!--call the id from html paragraph and change its content using javascript but still in html file -->                            
+  <button onclick='document.getElementById("1").style.fontSize = "25px"'>Change Font Size</button>                <!-- there's multiple style you can change such as font size, color, display etc -->
+  <button onclick='document.getElementById("1").style.color = "red"'>Change Text Color</button>
+  <button onclick='document.getElementById("1").style.display = "none"'>Hide Text</button>
+  <button onclick='document.getElementById("1").style.display = "block"'>Show Text</button>
+
+
+  <br><br><br>
+
+  <p> Javascript can show hide HTML </p>
+  <p id="2" style="display:none">This text is actually hidden.</p>
+
+  <button onclick='document.getElementById("2").style.display = "block"'>Show </button>                           <!-- to show the hidden text -->
+  <button onclick='document.getElementById("2").style.display = "none"'>Hide </button>                           <!-- to hide the text again -->                
+
+  <br><br><br>                                                                                                    <!-- just to add space between sections -->
+
+  <p id="3"></p>
+
+    <script>
+
+     document.getElementById("3").innerHTML = "the text you seeing is from javascript method that writes html content not from html itself";    // because we in script tag so we can use javascript method directly without button click   
+    
+    </script>
+
+
+
+</body>
+</html>
+

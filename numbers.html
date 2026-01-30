@@ -1,0 +1,220 @@
+/*************************************************
+ * JAVASCRIPT NUMBERS (W3SCHOOLS)
+ *************************************************/
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+    <H1>JavaScript Numbers</H1>
+
+    <P id="1"></P>
+
+
+    <script>
+
+
+
+
+        // ---- Creating Numbers ----
+        let x = 10;                             // number literal
+        let y = 10.5;                           // decimal number
+        let z = 1e5;                            // exponential (100000)
+
+
+
+        // ---- JavaScript Numbers are ONE type ----
+        let a = 10;
+        let b = 10.00;                          // both are number type
+
+
+        
+        // ---- Floating Point Precision ----
+        let sum = 0.1 + 0.2;                    // result is NOT exactly 0.3
+        let sum2 = (0.2*10 + 0.1*10) / 10;  // fixes precision issue
+
+        console.log(sum);                       // 0.30000000000000004
+        console.log(sum2);                      // 0.3 because of we need to turn to integer first then back to float for precise calculation, thats how javascript works
+
+
+        // ---- Numbers as Strings ----
+        let num = "10";
+        let num2 = "100";
+        let add1 = num + 5;                     // string concatenation -> "105"
+        let add2 = Number(num) + 5;             // converts to number -> 15 , object Number() returns a number from string, this is called conversion function
+ 
+        console.log(add1);                      // "105"
+        console.log(add2);                      // 15
+        console.log(num*num2);                  // strings and strings if it in numbers, it can be multiplied 
+        // same for -, /, % strings will be converted to numbers automatically but not for + operator
+        // because + operator is also used for string concatenation
+        // so if there EVEN ONLY ONE string involved in + operation, javascript will treat it as string concatenation
+
+
+
+        // ---- NaN (Not a Number) ----
+        let notNum = 100 / "apple";              // results in NaN
+        let checkNaN = isNaN(notNum);            // checks if value is NaN, returns true
+        let notNum2 = NaN + 5;                     // if use NaN in any operation, the result will be NaN
+        let notNum3 = NaN + "5";                   // NaN concatenated with string is NaN5
+        // Nan is a number type but it is not a valid number, typeof NaN is number
+
+        console.log(notNum);                    // NaN
+        console.log(checkNaN);                  // true
+        console.log(notNum2);                   // NaN
+        console.log(notNum3);                   // NaN5
+
+
+
+        // ---- Infinity ----
+        let inf = 2 / 0;                        // Infinity
+        let negInf = -2 / 0;                    // -Infinaity
+       
+        let myNumber = 2; 
+        let txt = "";
+        while (myNumber != Infinity) {
+        myNumber = myNumber * myNumber;
+        txt = txt + myNumber + "<br>";
+        }
+        document.getElementById("1").innerHTML = txt;
+
+        console.log(inf);                       // Infinity
+        console.log(negInf);                    // -Infinity
+
+        // infinity is a number type too, typeof Infinity is number
+
+        let x1 = 0xFF;                       // JavaScript interprets numeric constants as hexadecimal if they are preceded by 0x.
+        console.log(x1);                     // 255
+
+        // Do not create Number objects.
+        // The new keyword complicates the code and slows down execution speed.
+        // Number Objects can produce unexpected results:
+        // Comparing two JavaScript objects always returns false.
+
+
+
+
+
+
+
+
+
+        // ---- Number Methods ----
+        let n = 123.456;
+        let fixed = n.toFixed(2);               // rounds to 2 decimal places
+        let precision = n.toPrecision(4);       // total digits formatting to 4 significant digits, can be used for other number too
+        let strNum = n.toString();              // converts number to string
+        let value = n.valueOf();                // returns primitive value, no real use in normal code, no reason to use it
+        
+
+        console.log(fixed);                     // "123.46"
+        console.log(n.toFixed(4));               // returns string with 4 decimal places "123.4560"
+        console.log(n.toFixed(0));               // returns string with 0 decimal places "123"
+        console.log(precision);                 // "123.5"
+        console.log(strNum);                    // "123.456"
+        console.log(value);                     // 123.456
+        console.log(n.toExponential(4));        // returns string in exponential notation with 4 digits after decimal
+        console.log(n.toExponential(6));        // returns string in exponential notation with 6 digits after decimal
+
+        /*
+
+
+        Method	                    Description
+        Number.isInteger()	        Returns true if the argument is an integer
+        Number.isNaN()	            Returns true if the argument is NaN (Not a Number), You cannot test for equality with NaN using == or ===.
+        Number.isFinite()	        Returns true if the argument is not Infinity, -Infinity nor NaN
+        Number.isSafeInteger()	    Returns true if the argument is a safe integer (between -(2^53 -1) and 2^53 -1)
+        Number.parseFloat()     	Converts a string to a number, same as the global parseFloat() function
+        Number.parseInt()	        Converts a string to a whole number. same as the global parseInt() function
+
+        
+        These object methods belong to the Number object
+        The number methods above belong to the JavaScript Number Object.
+        These methods can only be accessed like Number.isInteger().
+        Using X.isInteger() where X is a variable, will result in an error:
+        TypeError X.isInteger is not a function.
+        
+        */
+
+        // ---- Converting Variables to Numbers ----
+        let x3 = new Date("2017-09-30");
+
+        console.log(Number("10"));              // The Number() method can be used to convert JavaScript variables to numbers:
+        console.log(Number("10.33"));           // 10.33    
+        console.log(Number("10,33"));           // NaN , because of the comma
+        console.log(Number("10 years"));        // NaN , because of the text
+        console.log(parseInt("10 years"));      // 10 , parseInt stops reading at first invalid character
+        console.log(parseFloat("10.33 years")); // 10.33 , parseFloat stops reading at first invalid character
+        // Both parseInt() and parseFloat() ignore leading spaces, stop at the first invalid character, and return only the first number found in the string (or NaN if no valid number exists at the start).
+        console.log(Number(x3));                // 1506729600000 , converts date to number of milliseconds since January 1, 1970
+
+
+        // ---- Number Properties ----
+        // These properties belong to the Number Object.
+        // they can only be accessed as Number.EPSILON, Number.MAX_VALUE, etc.
+        // Using X.EPSILON, where X is a variable, will result in undefined.
+        Number.EPSILON;                         // smallest difference between 1 and the smallest floating point number greater than 1
+        Number.MAX_VALUE;                       // largest possible number
+        Number.MIN_VALUE;                       // smallest possible number
+        Number.MIN_SAFE_INTEGER;                // smallest safe integer -(2^53 -1)
+        Number.MAX_SAFE_INTEGER;                // largest safe integer (2^53 -1)
+        Number.POSITIVE_INFINITY;               // positive infinity, also returned on overflow
+        Number.NEGATIVE_INFINITY;               // negative infinity, also returned on overflow
+        Number.NaN;                             // Not a legal Number value, also achieved by non-numeric calculations
+
+        console.log(Number.EPSILON);             // 2.220446049250313e-16       
+        console.log(Number.MAX_VALUE);           // 1.7976931348623157e+308
+        console.log(Number.MIN_VALUE);           // 5e-324
+        console.log(Number.MIN_SAFE_INTEGER);   // -9007199254740991
+        console.log(Number.MAX_SAFE_INTEGER);   // 9007199254740991
+        console.log(Number.POSITIVE_INFINITY);   // Infinity
+        console.log(Number.NEGATIVE_INFINITY);   // -Infinity
+        console.log(Number.NaN);                 // NaN
+
+
+
+        // ---- Bitwise Operators ----
+        let bit1 = 5 & 1;                       // AND
+        let bit2 = 5 | 1;                       // OR
+        let bit3 = 5 ^ 1;                       // XOR
+        let bit4 = ~5;                          // NOT
+        let bit5 = 5 << 1;                      // left shift
+        let bit6 = 5 >> 1;                      // right shift
+
+        /* 
+
+        Operator	Name        	                Description
+        &	        AND	                            Sets each bit to 1 if both bits are 1
+        |	        OR	                            Sets each bit to 1 if one of two bits is 1
+        ^	        XOR	                            Sets each bit to 1 if only one of two bits is 1
+        ~	        NOT	                            Inverts all the bits
+        <<	        Zero fill left shift	        Shifts left by pushing zeros in from the right and let the leftmost bits fall off
+        >>	        Signed right shift	            Shifts right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
+        >>>	        Zero fill right shift	        Shifts right by pushing zeros in from the left, and let the rightmost bits fall off
+        
+        
+        */
+
+        
+
+        // ---- BigInt ----
+        let big = 12345678901234567890n;         // BigInt literal (ends with n)
+        let bigSum = big + 10n;                  // BigInt math (must be BigInt)
+        
+
+
+
+
+
+    </script>
+
+</body>
+</html>

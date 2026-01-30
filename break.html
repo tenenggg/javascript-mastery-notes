@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1> Break Statement in JavaScript </h1>
+
+
+
+
+
+
+
+    <script>
+
+        // BREAK STATEMENT NOTES - JavaScript
+
+        for (let i = 0; i < 10; i++) {  
+            if (i === 5) break;             // stops the loop when i equals 5  
+            console.log(i);                 // prints 0 to 4  
+        }
+
+        let j = 0;  
+        while (j < 10) {  
+            if (j === 3) break;             // exits while loop when j equals 3  
+            console.log(j);                 // prints 0 to 2  
+            j++;  
+        }
+
+        let fruits = ["apple", "banana", "cherry"];  
+        for (let fruit of fruits) {  
+            if (fruit === "banana") break;  // stops loop when fruit is banana  
+            console.log(fruit);             // prints apple  
+        }
+
+
+
+
+
+        
+        // BREAK WITH LABEL
+
+        outerLoop:  for (let x = 0; x < 3; x++) {  
+        insideLoop:    for (let y = 0; y < 3; y++) {  
+                            if (x === 1 && y === 1) break insideLoop;          // breaks outer loop  when x=1 and y=1
+                            console.log(x, y);                                // prints x and y until x=1 and y=1
+                        }  
+                     }
+        
+        // so you can use break with label to break any loop you want even if it's nested inside other loops break 
+        // if u cahnge it to insideLoop it will only break the inner loop not the outer loop, so output will be longer
+
+
+
+    {
+        const cars = ["BMW", "Volvo", "Saab", "Ford"];
+        let text = "";
+
+        list: {
+        text += cars[0] + "\n"; 
+        text += cars[1] + "\n"; 
+        break list;                                             // Break out of the block after the second car:
+        text += cars[2] + "\n"; 
+        text += cars[3] + "\n"; 
+        }
+
+        console.log(text);   // only prints BMW and Volvo because of the break statement
+    }
+    </script>
+    
+</body>
+</html>
+
+
+

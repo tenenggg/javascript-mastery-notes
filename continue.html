@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+
+   
+
+
+
+    <script>
+
+            // CONTINUE STATEMENT NOTES - JavaScript
+
+            for (let i = 0; i < 10; i++) {
+                if (i === 5) continue;          // skips the current loop when i is 5
+                console.log(i);                 // prints all except 5
+            }
+
+            let j = 0;
+                while (j < 5) {
+                    j++;
+                    if (j === 3) continue;          // skips when j is 3
+                    console.log(j);                 // prints 1, 2, 4, 5
+                }
+
+            let numbers = [1, 2, 3, 4, 5];
+                for (let num of numbers) {           
+                    if (num % 2 === 0) continue;    // skips even numbers
+                    console.log(num);               // prints only odd numbers
+                }
+            
+                // 'let num' is declaration of variable to hold each array item
+                // 'of numbers' means from the array numbers
+                // this is use if u want to loop through every item in an array
+
+                // with this no need to use index to access each item
+                // other examples : 
+                // for (let fruit of fruits) { }
+                // for (let car of cars) { }
+
+
+            // CONTINUE WITH LABEL
+            
+            outerLoop: for (let x = 0; x < 3; x++) {
+           insideLoop:      for (let y = 0; y < 3; y++) {
+                                if (y === 1) continue outerLoop; // skips to next outer loop iteration
+                                console.log(x, y);               // skips whole loop when y is 1 
+                            }                                    // and continues with next x value outerloop
+                        }                                        // meaning the y doesnt pass 1 at all
+
+            outerLoop: for (let x = 0; x < 3; x++) {
+           insideLoop:      for (let y = 0; y < 3; y++) {
+                                if (y === 1) continue insideLoop; // skips to next inside loop iteration
+                                console.log(x, y);                // skips only when y is 1 and continues with next y value
+                            }                                     // meaning the x continues normally
+                        }                                         // this is similar to just using continue without label
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
