@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Async Notes: Callback, Promise, Async/Await</title>
+</head>
+
+<body>
+
+<h1>JavaScript Asynchronous Programming</h1>
+<h3>Callbacks, Promises, Async / Await</h3>
+
+<!-- ======================================================
+     IMPORTANT BACKGROUND
+     ------------------------------------------------------
+     JavaScript is SINGLE-THREADED
+     - It can only do ONE thing at a time
+     - If JavaScript waits, the whole page freezes
+     ------------------------------------------------------
+     So JavaScript uses ASYNCHRONOUS behavior
+     ------------------------------------------------------
+     Asynchronous = "Do this later, when ready"
+====================================================== -->
+
+
+
+<!-- ======================================================
+     WHY NOT JUST USE IF / ELSE?
+     ------------------------------------------------------
+     if / else ONLY works when data already exists
+     ------------------------------------------------------
+     Async data DOES NOT exist yet when code runs
+
+     its like ordering food at a restaurant:
+     - u place order (request data)
+     - u wait for food to be prepared (data loading)
+     - u eat when food arrives (data ready)
+     - u CANNOT eat before food arrives
+    
+     while if else is like:
+     - u look at empty plate
+     - if plate has food, u eat
+     - else u say "no food"
+
+     so the difference is timing:
+        - if/else checks IMMEDIATELY
+        - async data comes LATER
+
+     and their purposes:
+        - if/else needs data RIGHT NOW
+        - async code gets data WHEN READY
+
+    even if u put if/else inside a function that runs later,
+    it STILL checks IMMEDIATELY when that function runs,
+    NOT when data is ready
+    but if u use callbacks/promises/async-await,
+    u can handle data WHEN IT IS READY 
+    
+====================================================== -->
+
+<script>
+    let data;
+
+    setTimeout(() => {
+        data = "Hello World";
+    }, 2000);
+
+    // ❌ WRONG: if/else runs immediately
+    if (data) {
+        console.log(data);
+    } else {
+        console.log("Data not ready yet");
+    }
+</script>
+
+<!--
+    OUTPUT:
+    Data not ready yet
+
+    WHY?
+    - setTimeout is asynchronous, meaning it runs LATER
+    - if/else runs BEFORE data is ready
+    - JavaScript does NOT wait
+    if u want to handle async data, u need:
+    - Callbacks
+    - Promises
+    if u still use if/else, u will get WRONG results
+
+
+    also u use these async and promises when fetching data from APIs, not just setTimeout
+    other examples include:
+    - fetch()
+    - reading files
+    - database queries
+
+    
+-->
+
+
+
+<!-- ======================================================
+     1️⃣ CALLBACKS
+====================================================== -->
+
+<h2>1️⃣ Callbacks</h2>
+
+<!--
+    WHAT IS A CALLBACK?
+    ------------------------------------------------------
+    A callback is:
+    - a FUNCTION
+    - passed as an ARGUMENT
+    - to be executed LATER
+    ------------------------------------------------------
+    Meaning:
+    "When you are done, CALL ME BACK"
+-->
+
+<script>
+    function cookFood(callback) {   // This function takes a CALLBACK as parameter
+        setTimeout(() => {
+            callback("Food is ready 🍳");
+        }, 2000);
+    }
+
+    cookFood(function (result) {    // This is the CALLBACK function
+        console.log(result);
+    });
+</script>
+
+<!--
+    STEP BY STEP:
+    1. cookFood starts
+    2. JavaScript continues running other code, not yet executing callback 
+    3. After 2 seconds, callback is executed
+
+    so the CALLBACK function runs LATER, when cookFood is done
+
+    it doesnt wait for any conditions, it wait for 2 sec and boom
+    and any other codes will also run in that 2 second, making it  runs simulaneously
+
+    that is the essence of ASYNCHRONOUS programming
+    which the setTimeout with a callback is already demonstrating asynchronous behavior
+    and this is how JavaScript handles async tasks without blocking the main thread
+    javascript can continue executing other code while waiting for the timeout to complete
+
+-->
+
+
+
+<!-- ======================================================
+     CALLBACK PROBLEM: CALLBACK HELL
+====================================================== -->
+
+<!--
+    When callbacks are nested too deeply,
+    code becomes:
+    - hard to read
+    - hard to debug
+    - hard to maintain
+-->
+
+<script>
+    login(function () {    // This is the CALLBACK function
+        getProfile(function () {    // This is the CALLBACK function
+            getPosts(function () {    // This is the CALLBACK function
+                getComments(function () {    // This is the CALLBACK function
+                    console.log("Done");
+                });
+            });
+        });
+    });
+</script>
+
+<!--
+    This shape is called:
+    ❌ CALLBACK HELL / PYRAMID OF DOOM
+-->
+
+
+
+<!-- ======================================================
+     2️⃣ PROMISES
+====================================================== -->
+
+<h2>2️⃣ Promises</h2>
+
+<!--
+    WHAT IS A PROMISE?
+    ------------------------------------------------------
+    A Promise is an OBJECT that represents:
+    - a value that will exist in the FUTURE
+    ------------------------------------------------------
+    Promise states:
+    - pending   (waiting)
+    - fulfilled (success)
+    - rejected  (failed)
+-->
+
+<script>
+    function cookFoodPromise() {
+        return new Promise(function (resolve, reject) {     // callback function for Promise, with resolve and reject parameters
+
+            setTimeout(() => {                             // setTimeout function to simulate async operation
+                let success = true;                    
+
+                if (success) {                          // operation succeeded
+                    resolve("Food is ready 🍳");       // call the resolve function
+                } else {                               // operation failed
+                    reject("Food burned ❌");          // call the reject function
+                }
+            }, 2000);
+
+        });
+    }
+
+    cookFoodPromise()                    // call the function that returns a Promise    
+        .then(function (result) {         // result is the value passed to resolve, which result could be any data type and name, its just a variable that represents the resolved value
+            console.log(result);
+        })
+        .catch(function (error) {        // error is the value passed to reject, which error could be any data type and name, its just a variable that represents the rejected value
+            console.log(error);
+        });
+</script>
+
+<!--
+    IMPORTANT:
+    - resolve() → success
+    - reject()  → error
+    - .then()   → handles success
+    - .catch()  → handles failure
+
+    and the way .then and .catch works is as follows, illustrating
+    the chaining behavior of promises:
+
+    cookFoodPromise()  // ← returns a Promise
+    .then(step1)   // ← runs if previous step succeeded, the return value goes to step1 and becomes its parameter
+    .then(step2)   // ← runs if step1 succeeded, and the same for step2
+    .then(step3)   // ← runs if step2 succeeded
+    .catch(error)  // ← runs if ANY step failed whether in promises or .then, and pass the reject value to error and becomes its parameter
+
+
+
+    the flows :
+
+  
+    cookFoodPromise() called
+            ↓
+    Promise created (resolve & reject given to you)
+            ↓
+    setTimeout starts (2 seconds)
+            ↓
+    [Other code runs here...]
+            ↓
+    2 seconds pass
+            ↓
+    success = true? 
+        YES → resolve("Food is ready 🍳") 
+                ↓
+            .then(result) runs ← result = "Food is ready 🍳"
+                
+        NO → reject("Food burned ❌")
+                ↓
+            .catch(error) runs ← error = "Food burned ❌"
+
+
+    the conditions of success or failure runs after 2 seconds, and the same for .then and .catch
+    and during those 2 seconds, other codes can run without blocking
+
+    its the same concept as the callback example, but with a cleaner syntax and better error handling
+    
+    - callback function INTO result
+    - promises resolve and reject INTO result of .then and .catch
+    
+    
+    - also the promise didnt have to be in a function, u can create a promise directly like this:
+    let myPromise = new Promise(function(resolve, reject) {
+        // async operation here
+    });
+
+    myPromise
+        .then(function(result) {
+            // handle success
+        })
+        .catch(function(error) {
+            // handle error
+        });
+-->
+
+
+
+
+<!-- ======================================================
+     WHY PROMISES ARE BETTER THAN CALLBACKS
+====================================================== -->
+
+<!--
+    CALLBACKS:
+    - deeply nested 
+    - messy
+    - hard to read
+
+    PROMISES:
+    - flat structure
+    - chainable
+    - cleaner logic
+-->
+
+<script>
+    doSomething()
+        .then(doNext)
+        .then(doLast)
+        .catch(handleError);
+</script>
+
+
+
+<!-- ======================================================
+     3️⃣ ASYNC / AWAIT
+====================================================== -->
+
+<h2>3️⃣ Async / Await</h2>
+
+<!--
+    IMPORTANT:
+    ------------------------------------------------------
+    async / await is NOT new behavior
+    ------------------------------------------------------
+    It is just:
+    - a BETTER SYNTAX
+    - built on TOP of Promises
+-->
+
+<script>
+
+    /*
+
+        function cookFoodPromise() {
+            return new Promise(function (resolve, reject) {     
+
+                setTimeout(() => {                             
+                    let success = true;                    
+
+                    if (success) {                          
+                        resolve("Food is ready 🍳");       
+                    } else {                               
+                        reject("Food burned ❌");         
+                    }
+                }, 2000);
+
+            });
+        }
+    */
+
+    async function eatFood() {
+        try {
+        const result = await cookFoodPromise();      // the resolve value goes to result
+        console.log(result);
+        } catch (error) {                           // the reject value goes to error
+            console.log(error);
+        }
+    }
+
+    eatFood();
+</script>
+
+<!--
+    WHAT DOES "await" DO?
+    ------------------------------------------------------
+    - Pauses THIS function
+    - Waits for the Promise to finish
+    - JavaScript itself is NOT blocked
+
+    the main diference with await and promises is in the second part of the function, since the first part stays the same:
+    - with promises, u use .then() and catch to handle the resolved value and turn into result and rejected value into error
+    - with await, u use try/catch to handle the resolved value and turn into result and rejected value into error
+
+    - also for promise, u call the function that returns the promise, and then chain .then() and .catch()
+    - for await, u create another async function that calls the function that returns the promise, and use try/catch to handle both resolved value and rejected value, and call the async function
+    - await can only be used inside async functions : "    async function functionName() {      "
+-->
+
+
+
+<!-- ======================================================
+     another example of ASYNC / AWAIT and promises
+====================================================== -->
+<script>
+
+
+
+// PROMISE VERSION
+
+function orderPizza() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let pizzaReady = true;
+            
+            if (pizzaReady) {
+                resolve("🍕 Pizza delivered!");
+            } else {
+                reject("❌ Pizza burned!");
+            }
+        }, 2000);
+    });
+}
+
+// CALL IT
+console.log("Ordering pizza...");
+
+orderPizza()
+    .then(function(result) {
+        console.log(result);        // 🍕 Pizza delivered!
+        console.log("Eating pizza!");
+    })
+    .catch(function(error) {
+        console.log(error);         // ❌ Pizza burned! (if failed)
+    });
+
+console.log("Waiting for pizza...");
+
+// OUTPUT:
+// Ordering pizza...
+// Waiting for pizza...
+// (2 seconds pass...)
+// 🍕 Pizza delivered!
+// Eating pizza!
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ASYNC / AWAIT VERSION
+
+
+function orderPizza() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let pizzaReady = true;
+            
+            if (pizzaReady) {
+                resolve("🍕 Pizza delivered!");
+            } else {
+                reject("❌ Pizza burned!");
+            }
+        }, 2000);
+    });
+}
+
+// CALL IT
+async function eatDinner() {
+    console.log("Ordering pizza...");
+    
+    try {
+        const result = await orderPizza();  // WAIT 2 seconds for pizza
+        console.log(result);                 // 🍕 Pizza delivered!
+        console.log("Eating pizza!");
+    } catch (error) {
+        console.log(error);                  // ❌ Pizza burned! (if failed)
+    }
+}
+
+eatDinner();
+console.log("Waiting for pizza...");
+
+// OUTPUT:
+// Ordering pizza...
+// Waiting for pizza...
+// (2 seconds pass...)
+// 🍕 Pizza delivered!
+// Eating pizza!
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ======================================================
+     COMPARISON SUMMARY
+====================================================== -->
+
+<h2>Summary Comparison</h2>
+
+<!--
+    CALLBACK
+    - Function passed into another function
+    - Runs later
+    - Can cause callback hell
+
+    PROMISE
+    - Object representing future value
+    - Uses .then() and .catch()
+    - Cleaner than callbacks
+
+    ASYNC / AWAIT
+    - Syntax sugar for promises
+    - Looks synchronous
+    - Easiest to read
+-->
+
+
+
+<!-- ======================================================
+     FINAL ANSWER: WHY NOT IF / ELSE?
+====================================================== -->
+
+<!--
+    if / else:
+    - Checks IMMEDIATELY
+    - Needs data RIGHT NOW
+
+    Async code:
+    - Data comes LATER
+    - JavaScript does NOT wait
+
+    Therefore:
+    ❌ if / else alone CANNOT handle async operations
+-->
+
+
+
+<!-- ======================================================
+     ONE-LINE EXAM DEFINITIONS
+====================================================== -->
+
+<!--
+    Callback:
+    A function passed as an argument to be executed later.
+
+    Promise:
+    An object representing the eventual completion or failure
+    of an asynchronous operation.
+
+    async / await:
+    Syntax that allows writing asynchronous code in a
+    synchronous-looking way.
+-->
+
+</body>
+</html>

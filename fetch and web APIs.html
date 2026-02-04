@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Fetch & Web API Notes</title>
+</head>
+
+<body>
+
+<h1>JavaScript Fetch & Web APIs</h1>
+<h3>How JavaScript gets data from the Internet</h3>
+
+<!-- ======================================================
+     WHAT IS A WEB API?
+     ------------------------------------------------------
+     API = Application Programming Interface
+     ------------------------------------------------------
+     A WEB API is:
+     - a server on the internet
+     - that sends data when requested
+     ------------------------------------------------------
+     Most Web APIs send data in JSON format
+====================================================== -->
+
+
+
+<!-- ======================================================
+     WHAT IS JSON?
+     ------------------------------------------------------
+     JSON = JavaScript Object Notation
+     ------------------------------------------------------
+     Looks like JavaScript objects
+     ------------------------------------------------------
+     Example JSON from a server:
+====================================================== -->
+
+<script>
+    /*
+    {
+        "id": 1,
+        "title": "Hello",
+        "completed": false
+    }
+    */
+</script>
+
+
+
+<!-- ======================================================
+     WHAT IS fetch()?
+     ------------------------------------------------------
+     fetch() is a JavaScript function used to:
+     - request data from a server
+     - receive a response
+     ------------------------------------------------------
+     IMPORTANT:
+     - fetch() is ASYNCHRONOUS
+     - fetch() RETURNS A PROMISE
+====================================================== -->
+
+
+
+<!-- ======================================================
+     SIMPLE FETCH EXAMPLE
+====================================================== -->
+
+<h2>1️⃣ Basic fetch()</h2>
+
+<script>
+    fetch("https://jsonplaceholder.typicode.com/todos/1")           
+        .then(function (response) {
+            return response.json(); // convert response to JSON
+        })
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+</script>
+
+<!--
+    STEP BY STEP:
+    ------------------------------------------------------
+    1. fetch() sends request to the URL
+    2. Server responds (still not usable yet)
+    3. response.json() converts response into JS object
+    4. the response is pass to .then as data
+    5. data is logged to console
+    6. .catch() handles any errors whether in fetch or json conversion, or in the .then blocks, any kind of error before this point
+
+    .catch() in fetch() is the same as promise, the only difference is .catch in fetch() doesnt take any value from API, it only takes error that happens in the process
+    like promise, if u see the example before, the .catch() will take the reject value and turn into the parameter of error function and also take any error that happens in the .then blocks
+-->
+
+
+
+<!-- ======================================================
+     WHY response.json()?
+====================================================== -->
+
+<!--
+    fetch() DOES NOT directly give data, it gives a Response object, so we need to convert it
+    ------------------------------------------------------
+    fetch() → Response object
+    response.json() → another Promise
+    ------------------------------------------------------
+    This is why .then() is used TWICE
+-->
+
+
+
+<!-- ======================================================
+     FETCH WITH ASYNC / AWAIT (RECOMMENDED)
+====================================================== -->
+
+<h2>2️⃣ fetch() with async / await</h2>
+
+<script>
+    async function getTodo() {
+
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/todos/2"
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+    }
+
+    getTodo();
+</script>
+
+<!--
+    WHY THIS IS BETTER:
+    ------------------------------------------------------
+    - Looks like normal code
+    - No chaining confusion
+    - Easier to read & debug
+-->
+
+
+
+<!-- ======================================================
+     ERROR HANDLING IN FETCH
+====================================================== -->
+
+<h2>3️⃣ Error handling</h2>
+
+<script>
+    async function getTodoSafe() {
+        try {
+            const response = await fetch(
+                "https://jsonplaceholder.typicode.com/todos/9999"
+            );
+
+            if (!response.ok) {                   // if the server response is NOT ok (status code is not in the range 200-299), example 404 or 500
+                throw new Error("HTTP error");    // throw will stop the execution and jump to catch block, and pass the Error message to the Error in catch block
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.log("Error:", error);
+        }
+    }
+
+    getTodoSafe();
+</script>
+
+<!--
+    IMPORTANT:
+    ------------------------------------------------------
+    fetch() ONLY rejects on network error
+    ------------------------------------------------------
+    HTTP errors (404, 500) are NOT rejected automatically
+    ------------------------------------------------------
+    You must check:
+    response.ok
+-->
+
+
+
+<!-- ======================================================
+     DISPLAY FETCH DATA IN HTML
+====================================================== -->
+
+<h2>4️⃣ Using fetched data in the page</h2>
+
+<p id="output"></p>
+
+<script>
+    async function showTodo() {
+        const res = await fetch(
+            "https://jsonplaceholder.typicode.com/todos/3"
+        );
+
+        const todo = await res.json();
+
+        document.getElementById("output").innerHTML =
+            "Title: " + todo.title;
+    }
+
+    showTodo();
+</script>
+
+
+
+<!-- ======================================================
+     COMMON FREE PUBLIC APIs (FOR PRACTICE)
+====================================================== -->
+
+<!--
+    JSONPlaceholder (fake data):
+    https://jsonplaceholder.typicode.com/
+
+    Random User:
+    https://randomuser.me/api/
+
+    Cat Facts:
+    https://catfact.ninja/fact
+
+    Dog Images:
+    https://dog.ceo/api/breeds/image/random
+-->
+
+
+
+<!-- ======================================================
+     FETCH + BUTTON CLICK (REALISTIC USE)
+====================================================== -->
+
+<h2>5️⃣ Fetch triggered by user action</h2>
+
+<button onclick="loadCat()">Load Cat Fact</button>
+<p id="cat"></p>
+
+<script>
+    async function loadCat() {
+        const res = await fetch("https://catfact.ninja/fact");
+        const data = await res.json();
+
+        document.getElementById("cat").innerHTML = data.fact;
+    }
+</script>
+
+
+
+<!-- or u can use addEventListener  method for more easy code -->
+
+<h2>6️⃣ Using addEventListener for fetch</h2>
+
+<button id="btn1"> Load Cat Fact 2</button>
+<p id="cat2"></p>
+
+<script>
+
+    const btn1 = document.getElementById("btn1");                       // assign button to variable
+    const cat2 = document.getElementById("cat2");                     // assign paragraph to variable       
+
+    async function loadCat2(){
+
+        const res = await fetch("https://catfact.ninja/fact");
+        const data = await res.json();
+        cat2.innerHTML = data.fact;                                     // display data in the paragraph using variable
+
+    }
+    btn1.addEventListener("click", loadCat2 );                        // add event listener to the button variable, when clicked, it will run the loadCat2 function              
+
+</script>
+
+<!--
+    IMPORTANT:
+    ------------------------------------------------------
+    fetch() is OFTEN triggered by:
+    - click
+    - submit
+    - page load
+-->
+
+
+
+<!-- ======================================================
+     WHY FETCH NEEDS PROMISE / ASYNC?
+====================================================== -->
+
+<!--
+    Fetch needs time:
+    ------------------------------------------------------
+    - Internet delay
+    - Server processing
+    - Data transfer
+    ------------------------------------------------------
+    JavaScript CANNOT wait
+    ------------------------------------------------------
+    So fetch() returns a Promise
+-->
+
+
+
+<!-- ======================================================
+     WHY NOT USE IF / ELSE WITH FETCH?
+====================================================== -->
+
+<script>
+    let apiData;
+
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then(res => res.json())
+        .then(data => {
+            apiData = data;
+        });
+
+    // ❌ WRONG
+    if (apiData) {
+        console.log(apiData);
+    }
+</script>
+
+<!--
+    WHY THIS FAILS:
+    ------------------------------------------------------
+    - fetch() is async
+    - if/else runs immediately
+    - apiData is still undefined
+-->
+
+
+
+<!-- ======================================================
+     CORRECT WAY
+====================================================== -->
+
+<script>
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then(res => res.json())
+        .then(data => {
+            if (data.completed) {
+                console.log("Task completed");
+            } else {
+                console.log("Task not completed");
+            }
+        });
+</script>
+
+<!--
+    RULE:
+    ------------------------------------------------------
+    if / else MUST be INSIDE async logic
+-->
+
+
+
+<!-- ======================================================
+     FULL FLOW SUMMARY
+====================================================== -->
+
+<!--
+    1. fetch() → Promise
+    2. wait for response
+    3. convert to JSON
+    4. use data
+-->
+
+
+
+<!-- ======================================================
+     ONE-LINE EXAM DEFINITIONS
+====================================================== -->
+
+<!--
+    fetch():
+    A JavaScript function used to make HTTP requests
+    and retrieve data from a server.
+
+    Web API:
+    An interface that allows communication between
+    client and server over the internet.
+
+    JSON:
+    A text-based data format used to exchange data.
+-->
+
+</body>
+</html>
