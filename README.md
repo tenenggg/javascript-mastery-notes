@@ -57,7 +57,26 @@ All the topics and learning materials are based on [W3Schools Javascript Tutoria
 ### 8. Web Forms
 - **Validation**: validating user input (`formValidation.html`).
 
-### 9. Advanced Concepts
+### 9. Asynchronous Programming
+- **Callbacks**: Functions passed as arguments to be executed later (`callback,promises, async.html`).
+- **Promises**: Objects representing eventual completion or failure of async operations.
+    - **States**: pending, fulfilled, rejected.
+    - **Methods**: `.then()`, `.catch()`.
+- **Async/Await**: Cleaner syntax built on top of Promises.
+    - **async** functions and **await** keyword.
+    - **Try/Catch** error handling for async operations.
+
+### 10. Web APIs & Fetch
+- **Web APIs**: How to request data from servers on the internet (`fetch and web APIs.html`).
+- **JSON**: JavaScript Object Notation for data exchange.
+- **fetch()**: Making HTTP requests.
+    - **Basic fetch with .then() and .catch()**.
+    - **Async/await approach (recommended)**.
+    - **Error handling**: Checking `response.ok`.
+    - **Displaying fetched data in HTML**.
+- **Real-world usage**: Fetching triggered by user actions (clicks, form submissions, page loads).
+
+### 11. Advanced Concepts
 - **Scope**: Global, Function, and Block scope (`scope.html`).
 - **Hoisting**: Variable and function hoisting behaviors (`scopeHoisting.html`).
 - **Strict Mode**: `"use strict"` directive (`strictmodeScope.html`).
