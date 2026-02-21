@@ -5,19 +5,19 @@ These are my personal way of studying javascript, by writing codes and notes as 
 ![Javascript Mind Map](mindmap.png)
 
 ## Overview
-All the topics and learning materials are based on [W3Schools Javascript Tutorial](https://www.w3schools.com/js/), so strictly following their excellent syllabus. You can also check them out for more detailed explanations. Eventhough I actually think mine is more detailed explaination haha.
+All the topics and learning materials are based on [W3Schools Javascript Tutorial](https://www.w3schools.com/js/), so this project follows their excellent syllabus closely. You can also check their site for more detailed explanations.
 
 ## Syllabus & Learned Topics
 
 ### 1. Fundamentals
-- **Introduction**: Basic output, syntax, and linking scripts (`intro.html`, `whereto.html`).
-- **Variables**: Declaring variables using `var`, `let`, and `const`. Understanding block scope vs function scope (`variables.html`, `let.html`, `const.html`).
-- **Data Types**: String, Number, Boolean, Object, Array, Undefined. Using `typeof` (`types.js`, `DataTypes.html`).
-- **Type Conversion**: Converting between strings, numbers, and booleans (`TypeConversion.html`).
+- **Introduction**: Basic output, syntax, and linking scripts (`intro.html`, `output.html`, `syntax.html`, `whereto.html`).
+- **Variables**: Declaring variables using `var`, `let`, and `const`. Understanding block scope vs function scope (`variables.html`, `variables2.html`, `variables3.html`, `let.html`, `const.html`).
+- **Data Types**: String, Number, Boolean, Object, Array, Undefined. Using `typeof` (`types.js`, `DataTypes.html`, `boolean.js`, `typeOf.html`).
+- **Type Conversion**: Converting between strings, numbers, and booleans (`TypeConversion.html`, `toString.html`).
 
 ### 2. Operators & Logic
-- **Arithmetic & Assignment**: Basic math and value assignment (`arithmetic.html`, `assignment.html`).
-- **Comparison & Logical**: Understanding `>`, `<`, `==`, `===` and Logical `&&`, `||`.
+- **Arithmetic & Assignment**: Basic math and value assignment (`arithmetic.html`, `assignment.html`, `operators.html`).
+- **Comparison & Logical**: Understanding `>`, `<`, `==`, `===` and Logical `&&`, `||` (`comparisons.html`).
 - **Short-circuit Evaluation**: How `&&` and `||` handle non-boolean values (`KeyDiffOperator.html`).
 
 ### 3. Control Flow
@@ -26,27 +26,30 @@ All the topics and learning materials are based on [W3Schools Javascript Tutoria
 - **Flow Control**: Using `break` and `continue` (`break.html`, `continue.html`).
 
 ### 4. Data Structures
-- **Arrays**: Creating arrays, accessing elements.
+- **Arrays**: Creating arrays, accessing elements (`arrays.html`, `ConstArray.html`).
     - **Methods**: `push`, `pop`, `shift`, `unshift`, `splice`, `slice` (`ReferenceArray.js`).
+    - **More Methods**: Extended array method examples (`arrayMethods.html`).
     - **Sorting & Searching**: `sort`, `reverse`, `find`, `filter` (`sortArray.html`, `searchArray.html`).
     - **Iteration**: Looping through arrays (`IterationsArray.html`).
-- **Objects**: specialized file (`objects.html`).
-- **Strings**: Manipulation, methods (slice, substring), and Template Literals (`strings.html`, `stringtemplates.html`).
-- **Numbers**: Properties and methods (`numbers.html`).
+- **Objects**: Working with object literals and destructuring (`objects.html`, `object&array_destructuring.html`).
+- **Strings**: Manipulation, methods (slice, substring), and Template Literals (`strings.html`, `stringtemplates.html`, `stringsMethods.js`, `stringReference.js`).
+- **Numbers**: Properties and methods (`numbers.html`, `numberReference.js`).
 
 ### 5. Functions
 - **Basics**: Declaration and invocation (`functions.html`).
 - **Advanced**: Arrow functions vs Traditional functions (`3FunctionComparison.html`).
 
 ### 6. The DOM (Document Object Model)
-- **DOM API**: Understanding the DOM tree (`HTMLDomAPI.html`).
+- **DOM Basics**: Understanding DOM concepts and structure (`HTML DOM.html`, `HTMLDomAPI.html`).
 - **Selectors**: Finding elements by ID, Class, Tag, QuerySelector (`SelectingDOMElements.html`).
 - **Manipulation**:
     - **Content**: `innerHTML`, `textContent` (`ChangingHTML.html`).
     - **Styles**: `style` property, CSS classes (`ChangingCSS.html`).
-    - **Animation**: Basic DOM animation (`HTMLDomAnimation.html`).
+    - **Animation**: Basic DOM animation (`HTMLDomAnimation.html`, `domanimation.css`).
+- **References**: Element and document method references (`ElementReference.js`, `DocumentReference.js`).
 
 ### 7. Events
+- **Event Basics**: Intro and event management patterns (`introEvents.html`, `eventexamples.html`, `manageEvents.html`, `OtherEventExamples.html`).
 - **Event Listeners**: `addEventListener`, bubbling vs capturing (`JavaScript HTML DOM EventListener.html`).
 - **Types**:
     - Mouse: `click`, `mouseover`, `mouseout` (`mouseEvent.html`).
