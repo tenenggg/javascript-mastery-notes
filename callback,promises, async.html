@@ -632,10 +632,15 @@ console.log("Waiting for pizza...");
 | Aspect                 | Callbacks                                                              | Promises (.then)                                   | Async/Await                                                                  |
 | ---------------------- | ---------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------- |
 | **How it works**       | Pass anonymous function as argument; it becomes the callback variable  | Returns a Promise object, chains with `.then()`    | Returns a Promise object but uses `await` to pause                           |
+|                        |                                                                        |                                                    |                                                                              |
 | **Getting the result** | Result is passed from function into the anonymous function's parameter | Result is passed into `.then((result) => {})`      | Result is assigned directly to a variable: `const result = await cookFood()` |
+|                        |                                                                        |                                                    |                                                                              |                 
 | **Error handling**     | Need another parameter in callback                                     | `.catch()` chaining                                | `try { } catch { }` block                                                    |
+|                        |                                                                        |                                                    |                                                                              |                 
 | **Readability**        | Messy — need 2 parameters, one for data and one for callback function  | Medium — cleaner than callbacks but still chaining | Cleanest — reads like normal top-to-bottom code                              |
+|                        |                                                                        |                                                    |                                                                              |       
 | **Nesting problem**    | Callback hell when multiple steps                                      | Chains `.then().then().then()` which can get long  | No nesting, just `await` each step one by one                                |
+|                        |                                                                        |                                                    |                                                                              |
 | **Under the hood**     | Just a function being passed around                                    | Promise object                                     | Promise object (async/await is just cleaner Promise syntax)                  |
 
 -->
