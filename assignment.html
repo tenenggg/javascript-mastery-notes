@@ -118,12 +118,12 @@
                 let wrongmin = Math.min(text);
                 let wrongmax = Math.max(text);
 
-                // spread operator ... is used to spread the string into individual characters which is "1", "2", "3", "4", "5"
+                // spread operator ... is used to spread the string into individual characters which is "1", "2", "3", "4", "5" and also result in Math.min(1, 2, 3, 4, 5) 
                 // then Math.min() and Math.max() functions are used to find the minimum and maximum numeric values among those characters
                 // so  ... operator are used so math min can treat them as individual numeric values
                 // because if we dont use ... operator then the result will be the string "12345" itself 
-                // but ... is used for string of course, if its an array of numbers then we can directly use Math.min() and Math.max() without using spread operator
-                // and also .. cant be used for non-iterable objects like numbers or booleans
+                // and also spread operator cant be used for non-iterable objects like numbers or booleans, but can be used for arrays, strings, sets, maps, etc.
+    
 
 
                 document.getElementById("8").innerHTML = "Minimum is: " + min +  "<br> Maximum is: " + max + 

@@ -65,6 +65,18 @@
     // if you try to use forEach() instead of map(), it will not work as forEach() does not return a new array eventhough the function returns a value
     // as its the method itself that does not return anything
 
+    // but if u insist on using other ways to make a new variable that use original array without changing the original array, u can use for loop with push() method to a the new"empty" array, 
+    // but it is not recommended as it is more verbose and less efficient than using map() method
+
+    // example :
+
+    // const numbers3 = [];
+    // for (let i = 0; i < numbers1.length; i++) {
+    //   numbers3.push(myFunction(numbers1[i]));
+    // }
+    // console.log(numbers3);
+
+
     const numbers3 = numbers1.forEach(myFunction);         // returns undefined
     console.log(numbers3);                                  // Output: undefined
     console.log(numbers1);                                  // original array remains unchanged
@@ -97,6 +109,27 @@
 
     const overr18 = myFunction(numbers2)                // this will not work as myFunction is not designed to handle arrays
     console.log(overr18);                                // value > 18  makes no sense when applied to an array as a whole, therefore it will return NaN or error depending on the context
+
+
+
+    // and then u might be thinking, whats the difference between filter() and map()? 
+    // because both go through each element of the array and dont change the original array, 
+    // so the difference is map() will return back all the elements, while filter() will only return the elements that pass the test
+
+    /* example :
+
+      const numbers = [1, 2, 3, 4, 5, 6];
+
+      const mapped   = numbers.map((num) => num > 3);
+      const filtered = numbers.filter((num) => num > 3);
+
+      console.log(mapped);   // [false, false, false, true, true, true]
+      console.log(filtered); // [4, 5, 6]
+    
+
+
+      as you can see map doesnt return number, but true false instead, map doesn't know what to do with a condition, it just applies the function to each element and returns the result
+    */
 
 
     

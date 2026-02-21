@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Destructuring Notes (Array & Object)</title>
+</head>
+
+<body>
+
+<h1>JavaScript Destructuring</h1>
+<h3>Array Destructuring & Object Destructuring</h3>
+
+<!-- ======================================================
+     IMPORTANT BACKGROUND
+     ------------------------------------------------------
+     Destructuring is a JavaScript feature that allows you
+     to EXTRACT values from arrays or objects
+     and store them into variables easily.
+
+     so basically means to call object or array properties and assign them to variables.
+     
+     Instead of writing many lines:
+     
+        const name = user.name;
+        const age = user.age;
+     
+     You can write:
+     
+        const { name, age } = user;
+     
+     Shorter, cleaner, easier to read.
+
+
+                                        basically means assigning the array or properties of an object to a variable in a more clean and shorter ways
+
+
+
+====================================================== -->
+
+
+
+<!-- ======================================================
+     TWO TYPES OF DESTRUCTURING
+====================================================== -->
+
+<!--
+    1) Array Destructuring   -> uses [ ]
+    2) Object Destructuring  -> uses { }
+-->
+
+
+
+<!-- ======================================================
+     1️⃣ ARRAY DESTRUCTURING
+====================================================== -->
+
+<h2>1️⃣ Array Destructuring</h2>
+
+<!--
+    Array destructuring is POSITION BASED
+
+    Meaning:
+    First variable -> first value
+    Second variable -> second value
+    etc...
+-->
+
+<script>
+
+    const numbers = [10, 20, 30];
+
+    // normal way
+    const a1 = numbers[0];
+    const b1 = numbers[1];
+    const c1 = numbers[2];
+
+    console.log(a1, b1, c1);
+
+    // destructuring way
+    const [a, b, c] = numbers;              // const [variable1, variable2, variable3] = array;    and the variable will automatically assigned to the value in the array based on their position
+
+    console.log(a); // 10
+    console.log(b); // 20
+    console.log(c); // 30
+
+
+    // the reason we do these destructuring is to make our code shorter, cleaner, and easier to read, and this is very common in modern JavaScript and React
+
+</script>
+
+<!--
+    Meaning behind the scenes:
+
+    a = numbers[0]
+    b = numbers[1]
+    c = numbers[2]
+-->
+
+
+
+<!-- ======================================================
+     SKIPPING VALUES
+====================================================== -->
+
+<script>
+
+    const nums = [1, 2, 3, 4];
+
+    const [first, , third] = nums;              // leave a space but still need the comma to skip the value
+
+    console.log(first); // 1
+    console.log(third); // 3
+
+</script>
+
+<!--
+    The empty comma skips index 1
+-->
+
+
+
+<!-- ======================================================
+     DEFAULT VALUES
+====================================================== -->
+
+<script>
+
+    const arr = [5];
+
+    const [x, y = 100] = arr;               // if arr[1] is undefined, y will be assigned to 100, and if y ONLY the output is undefined
+
+    console.log(x); // 5
+    console.log(y); // 100                  // so you can add value to the array using the destructuring  method also, without modifying the original array
+
+</script>
+
+<!--
+    If value is undefined,
+    default value is used
+-->
+
+
+
+<!-- ======================================================
+     SWAP VARIABLES
+====================================================== -->
+
+<script>
+
+    let m = 1;
+    let n = 2;
+
+    [m, n] = [n, m];            // left side: assigning value to array                            right side: moving value of array to variable, and the value will be assigned based on their position
+        
+
+    console.log(m); // 2
+    console.log(n); // 1
+
+    // if you  only put [m , n] only or [n , m] only, the output will stay the same, because this is just normal array assignment
+
+
+
+</script>
+
+<!--
+    No temporary variable needed
+-->
+
+
+
+<!-- ======================================================
+     REST OPERATOR WITH ARRAY
+====================================================== -->
+
+<script>
+
+    const list = [1, 2, 3, 4, 5];
+
+    const [firstNum, secondNum, ...restNums] = list;
+
+    console.log(firstNum);   // 1
+    console.log(secondNum);  // 2
+    console.log(restNums);   // [3,4,5]
+
+</script>
+
+<!--
+    ...rest collects remaining values
+-->
+
+
+
+<!-- ======================================================
+     ARRAY DESTRUCTURING IN FUNCTION PARAMETER
+====================================================== -->
+
+<script>
+
+    function printValues([p, q]) {   // the parameter is an array, and we are destructuring it into variables p and q
+        console.log(p);
+        console.log(q);
+    }
+
+    printValues([10, 20]);
+
+    // the values of 10 and 20 will be assigned to p and q based on their position in the array
+
+
+</script>
+
+
+
+<!-- ======================================================
+     2️⃣ OBJECT DESTRUCTURING
+====================================================== -->
+
+<h2>2️⃣ Object Destructuring</h2>
+
+<!--
+    Object destructuring is NAME BASED
+
+    Variable name MUST match property name
+
+    new variable = object.property
+-->
+
+<script>
+
+    const user = {
+        name: "Ali",
+        age: 22,
+        country: "Malaysia"
+    };
+
+    // normal way
+    const name1 = user.name;
+    const age1 = user.age;
+
+    console.log(name1, age1);
+
+
+
+
+    // destructuring way
+    const { name, age } = user;
+
+    console.log(name);
+    console.log(age);
+
+
+    // const { variable1, variable2 } = object;   and the value of the variable will be assigned to the property of the object based on their name, 
+    // so the variable name must match the property name in the object, otherwise it will be undefined
+
+    const { countryy } = user;
+    console.log(countryy);  // undefined, because there is no property named countryy in the user object, so the variable countryy will be assigned to undefined
+
+</script>
+
+
+
+<!-- ======================================================
+     VARIABLE NAME MUST MATCH
+====================================================== -->
+
+<script>
+
+    const person = { username: "din" };
+
+    const { username } = person; 
+    console.log(username); // din
+
+    const { fullname } = person;
+    console.log(fullname); // undefined 
+
+</script>
+
+
+
+<!-- ======================================================
+     RENAMING VARIABLES
+====================================================== -->
+
+<script>
+
+    const student = { name: "Imam" };
+
+    const { name: fullName } = student;             // so u can change the property name to a new variable name by using the sytax of propertyName : newVariableName,  ONLY the ":" needed
+
+    console.log(fullName);
+
+</script>
+
+
+
+
+
+<!-- ======================================================
+     DEFAULT VALUES
+====================================================== -->
+
+<script>
+
+    const player = { name: "John" };
+
+    const { name: playerName, score = 0 } = player;                 // same as array, u can add more properties to the object using the destructuring method, without modifying the original object
+
+    console.log(playerName);
+    console.log(score);                                             // by adding , and add new variables
+
+</script>
+
+
+
+<!-- ======================================================
+     NESTED OBJECT DESTRUCTURING
+====================================================== -->
+
+<script>
+
+    const userInfo = {
+        name: "Ali",
+        address: {
+            city: "Melaka",
+            postcode: 75450
+        }
+    };
+
+    const { address: { city } } = userInfo;   // use same syntax as original object, but only include the properties that you want
+
+    console.log(city);
+
+
+
+</script>
+
+
+
+<!-- ======================================================
+     REST OPERATOR WITH OBJECT
+====================================================== -->
+
+<script>
+
+    const account = {
+        email: "test@gmail.com",
+        password: "123456",
+        role: "admin"
+    };
+
+    const { email, ...others } = account;               // for rest operator, the variable name can be anything like array, but it will collect the remaining properties of the object
+
+    console.log(email);
+    console.log(others);
+
+</script>
+
+<!--
+    others = { password, role }
+-->
+
+
+
+<!-- ======================================================
+     OBJECT DESTRUCTURING IN FUNCTION PARAMETER
+====================================================== -->
+
+<script>
+
+    function showUser({ name, age }) {
+        console.log(name);
+        console.log(age);
+    }
+
+    showUser({ name: "Ali", age: 22 });
+
+</script>
+
+
+
+<!-- ======================================================
+     COMMON MISTAKES
+====================================================== -->
+
+<script>
+
+// ❌ WRONG
+    // const { a, b } = [1,2];
+    // const [ a, b ] = {a:1,b:2};
+
+// ✅ CORRECT
+    const [a11, b11] = [1,2];
+    const { a22, b22 } = {a:1,b:2};
+
+    console.log(a11, b11);
+    console.log(a22, b22);
+
+</script>
+
+
+
+<!-- ======================================================
+     EASY MEMORY TRICK
+====================================================== -->
+
+<!--
+    Array -> [ ] -> position based
+    Object -> { } -> name based
+-->
+
+
+
+<!-- ======================================================
+     ONE-LINE DEFINITIONS
+====================================================== -->
+
+<!--
+    Array Destructuring:
+    Extract values from array into variables by position.
+
+    Object Destructuring:
+    Extract properties from object into variables by name.
+-->
+
+
+
+<!-- ======================================================
+     FINAL SUMMARY
+====================================================== -->
+
+<!--
+    ✔ Makes code shorter
+    ✔ Cleaner
+    ✔ Easier to read
+    ✔ Very common in modern JavaScript & React
+
+    the only difference in method of destructuring between array and object is that array is position based, while object is name based, 
+    for array the variable can be any name but will be following the position of the value in the array,
+    while for object the variable name must match the property name in the object, otherwise it will be undefined, 
+    but you can change the variable name to a new variable name by using the sytax of propertyName : newVariableName,  ONLY the ":" needed
+
+    and to determine whether it si object/array or object/array destructuring, look at the sytanx:
+
+    const [a, b] = array;                               -> array destructuring
+    const { name, age } = object;                       -> object destructuring
+
+    const variableName = [ a, b ];                      -> array
+    const variableName = { name: "Ali", age: 22 };      -> object
+
+-->
+
+</body>
+</html>
